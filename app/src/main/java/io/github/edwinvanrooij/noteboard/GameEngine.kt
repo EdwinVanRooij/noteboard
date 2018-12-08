@@ -7,32 +7,11 @@ class GameEngine {
     println("Game has started.")
 
     // start timer
-    //
   }
 
-  private lateinit var onClockChangeListener: OnClockChangeListener
-  private lateinit var onScoreChangeListener: OnScoreChangeListener
-  private lateinit var onAccuracyChangeListener: OnAccuracyChangeListener
-  private lateinit var onGameStartedListener: OnGameStartedListener
-  private lateinit var onGameEndedListener: OnGameEndedListener
+  private lateinit var gameListener: GameListener
 
-  fun setOnClockChangeListener(onClockChangeListener: OnClockChangeListener) {
-    this.onClockChangeListener = onClockChangeListener
-  }
-
-  fun setOnScoreChangeListener(onScoreChangeListener: OnScoreChangeListener) {
-    this.onScoreChangeListener = onScoreChangeListener
-  }
-
-  fun setOnAccuracyChangeListener(onAccuracyChangeListener: OnAccuracyChangeListener) {
-    this.onAccuracyChangeListener = onAccuracyChangeListener
-  }
-
-  fun setOnGameStartedListener(onGameStartedListener: OnGameStartedListener) {
-    this.onGameStartedListener = onGameStartedListener
-  }
-
-  fun setOnGameEndedListener(onGameEndedListener: OnGameEndedListener) {
-    this.onGameEndedListener = onGameEndedListener
+  fun setGameListener(gameListener: GameListener) {
+    this.gameListener = gameListener
   }
 }
