@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <!--<color name="green1">#006400</color>-->
-  <!--<color name="green2">#008000</color>-->
-  <!--<color name="green3">#228B22</color>-->
-  <!--<color name="green4">#32CD32</color>-->
-  <!--<color name="green5">#00FF00</color>-->
-  <!--<color name="green6">#7FFF00</color>-->
-  <!--<color name="green7">#7CFC00</color>-->
-  <color name="green1">#fff</color>
-  <color name="green2">#fff</color>
-  <color name="green3">#fff</color>
-  <color name="green4">#fff</color>
-  <color name="green5">#fff</color>
-  <color name="green6">#fff</color>
-  <color name="green7">#fff</color>
+  <color name="green1">#006400</color>
+  <color name="green2">#008000</color>
+  <color name="green3">#228B22</color>
+  <color name="green4">#32CD32</color>
+  <color name="green5">#00FF00</color>
+  <color name="green6">#7FFF00</color>
+  <color name="green7">#7CFC00</color>
+  <!--<color name="green1">#fff</color>-->
+  <!--<color name="green2">#fff</color>-->
+  <!--<color name="green3">#fff</color>-->
+  <!--<color name="green4">#fff</color>-->
+  <!--<color name="green5">#fff</color>-->
+  <!--<color name="green6">#fff</color>-->
+  <!--<color name="green7">#fff</color>-->
   <color name="colorPrimary">#008577</color>
   <color name="colorPrimaryDark">#00574B</color>
   <color name="colorAccent">#D81B60</color>
