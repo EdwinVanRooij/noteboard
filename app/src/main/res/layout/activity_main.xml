@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/green1"
+    android:orientation="vertical"
+    android:padding="4dp"
+    >
+
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_weight="0.15"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:background="@color/green2"
+      android:orientation="horizontal"
+      android:padding="4dp"
+      >
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        />
+
+  </LinearLayout>
+
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="0.6"
+      android:background="@color/green2"
+      android:orientation="horizontal"
+      android:padding="4dp"
+      >
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/with"
+        />
+  </LinearLayout>
+
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="0.25"
+      android:background="@color/green2"
+      android:orientation="vertical"
+      android:padding="4dp"
+      >
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        />
+  </LinearLayout>
+</LinearLayout>
