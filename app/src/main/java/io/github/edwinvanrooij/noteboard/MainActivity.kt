@@ -19,6 +19,13 @@ class MainActivity : Activity(), GameListener {
     }
   }
 
+  override fun onNewNote(note: Note?) {
+    val str = "New note picked: $note"
+    println(str)
+    Toast.makeText(this, str, Toast.LENGTH_SHORT)
+        .show()
+  }
+
   override fun gameStarted() {
     val str = "Game started!"
     println(str)
