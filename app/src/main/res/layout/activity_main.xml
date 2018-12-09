@@ -140,391 +140,88 @@
         android:weightSum="6"
         >
       <!--start String little E-->
-      <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      <FrameLayout
+          android:id="@+id/stringE4"
           android:layout_width="match_parent"
           android:layout_height="0dp"
           android:layout_weight="1"
-          android:orientation="horizontal"
-          android:padding="4dp"
           >
-      </LinearLayout>
+        <include
+            layout="@layout/string"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            />
+      </FrameLayout>
       <!--end String little E-->
       <!--start String B-->
-      <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      <FrameLayout
+          android:id="@+id/stringB3"
           android:layout_width="match_parent"
           android:layout_height="0dp"
           android:layout_weight="1"
-          android:orientation="horizontal"
-          android:padding="4dp"
           >
-      </LinearLayout>
+        <include
+            layout="@layout/string"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            />
+      </FrameLayout>
       <!--end String B-->
       <!--start String G-->
-      <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      <FrameLayout
+          android:id="@+id/stringG3"
           android:layout_width="match_parent"
           android:layout_height="0dp"
           android:layout_weight="1"
-          android:orientation="horizontal"
-          android:padding="4dp"
           >
-      </LinearLayout>
+        <include
+            layout="@layout/string"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            />
+      </FrameLayout>
       <!--end String G-->
       <!--start String D-->
-      <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      <FrameLayout
+          android:id="@+id/stringD3"
           android:layout_width="match_parent"
           android:layout_height="0dp"
           android:layout_weight="1"
-          android:orientation="horizontal"
-          android:padding="4dp"
           >
-      </LinearLayout>
+        <include
+            layout="@layout/string"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            />
+      </FrameLayout>
       <!--end String D-->
       <!--start String A-->
-      <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      <FrameLayout
+          android:id="@+id/stringA2"
           android:layout_width="match_parent"
           android:layout_height="0dp"
           android:layout_weight="1"
-          android:orientation="horizontal"
           >
-
-        <TextView
-            android:id="@+id/A2String5"
-            android:layout_width="0dp"
+        <include
+            layout="@layout/string"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_weight="7"
-            android:text="E"
             />
-        <TextView
-            android:id="@+id/A2sharpString5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_weight="7.5"
-            android:text="F"
-            />
-        <TextView
-            android:id="@+id/B2String5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_weight="7.5"
-            android:text="F#"
-            />
-        <TextView
-            android:id="@+id/C3String5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_weight="7"
-            android:text="G"
-            />
-        <TextView
-            android:id="@+id/C3sharpString5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_weight="6.5"
-            android:text="G#"
-            />
-        <TextView
-            android:id="@+id/D3String5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_weight="7"
-            android:text="A"
-            />
-        <TextView
-            android:id="@+id/D3sharpString5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_weight="5"
-            android:text="A#"
-            />
-        <TextView
-            android:id="@+id/E3String5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_weight="5.5"
-            android:text="B"
-            />
-        <TextView
-            android:id="@+id/F3String5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_weight="5"
-            android:text="C"
-            />
-        <TextView
-            android:id="@+id/F3sharpString5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_weight="4.8"
-            android:text="C#"
-            />
-        <TextView
-            android:id="@+id/G3String5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_weight="4.6"
-            android:text="D"
-            />
-        <TextView
-            android:id="@+id/G3sharpString5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_weight="4.5"
-            android:text="D#"
-            />
-        <TextView
-            android:id="@+id/A3String5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_weight="4.2"
-            android:text="E"
-            />
-        <TextView
-            android:id="@+id/F3String5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_weight="4"
-            android:text="F"
-            />
-        <TextView
-            android:id="@+id/F3sharpString5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_weight="3.8"
-            android:text="F#"
-            />
-        <TextView
-            android:id="@+id/G3String5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_weight="3"
-            android:text="G"
-            />
-        <TextView
-            android:id="@+id/G3sharpString5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_weight="2.8"
-            android:text="G#"
-            />
-        <TextView
-            android:id="@+id/A3String5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_weight="2.7"
-            android:text="A"
-            />
-        <TextView
-            android:id="@+id/A3sharpString5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_weight="2.5"
-            android:text="A#"
-            />
-        <TextView
-            android:id="@+id/B3String5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_weight="2"
-            android:text="B"
-            />
-      </LinearLayout>
+      </FrameLayout>
       <!--end String A-->
       <!--start String big E-->
-
-      <!--<include-->
-   <!--android:layout_width="fill_parent"-->
-   <!--android:layout_height="wrap_content"-->
-   <!--layout="@layout/yourlayout" />-->
-
-      <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+      <FrameLayout
+          android:id="@+id/stringE2"
           android:layout_width="match_parent"
           android:layout_height="0dp"
           android:layout_weight="1"
-          android:orientation="horizontal"
-          android:padding="4dp"
-          android:weightSum="100"
           >
-        <TextView
-            android:id="@+id/E2String6"
-            android:layout_width="0dp"
+        <include
+            layout="@layout/string"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_weight="7"
-            android:text="E"
             />
-        <TextView
-            android:id="@+id/F2String6"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_weight="7.5"
-            android:text="F"
-            />
-        <TextView
-            android:id="@+id/F2sharpString6"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_weight="7.5"
-            android:text="F#"
-            />
-        <TextView
-            android:id="@+id/G2String6"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_weight="7"
-            android:text="G"
-            />
-        <TextView
-            android:id="@+id/G2sharpString6"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_weight="6.5"
-            android:text="G#"
-            />
-        <TextView
-            android:id="@+id/A2String6"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_weight="7"
-            android:text="A"
-            />
-        <TextView
-            android:id="@+id/A2sharpString6"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_weight="6"
-            android:text="A#"
-            />
-        <TextView
-            android:id="@+id/B2String6"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_weight="5.5"
-            android:text="B"
-            />
-        <TextView
-            android:id="@+id/C3String6"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_weight="5"
-            android:text="C"
-            />
-        <TextView
-            android:id="@+id/C3sharpString6"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_weight="4.8"
-            android:text="C#"
-            />
-        <TextView
-            android:id="@+id/D3String6"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_weight="4.6"
-            android:text="D"
-            />
-        <TextView
-            android:id="@+id/D3sharpString6"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_weight="4.5"
-            android:text="D#"
-            />
-        <TextView
-            android:id="@+id/E3String6"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_weight="4.2"
-            android:text="E"
-            />
-        <TextView
-            android:id="@+id/F3String6"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_weight="4"
-            android:text="F"
-            />
-        <TextView
-            android:id="@+id/F3sharpString6"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_weight="3.8"
-            android:text="F#"
-            />
-        <TextView
-            android:id="@+id/G3String6"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_weight="3"
-            android:text="G"
-            />
-        <TextView
-            android:id="@+id/G3sharpString6"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_weight="2.8"
-            android:text="G#"
-            />
-        <TextView
-            android:id="@+id/A3String6"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_weight="2.7"
-            android:text="A"
-            />
-        <TextView
-            android:id="@+id/A3sharpString6"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_weight="2.5"
-            android:text="A#"
-            />
-        <TextView
-            android:id="@+id/B3String6"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_weight="2"
-            android:text="B"
-            />
-      </LinearLayout>
+      </FrameLayout>
       <!--end String big E-->
     </LinearLayout>
     <!--end Fretboard Container-->
