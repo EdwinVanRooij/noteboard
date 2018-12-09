@@ -261,4 +261,108 @@ class GameEngine {
     throw InvalidParameterException("No recognized note name '${highestNote.name}'")
   }
 
+  /**
+   * Returns a list of locations where this note can be played on the guitar, using standard tuning.
+   */
+  fun getNoteLocationsOnGuitar(note: Note): List<GuitarLocation> {
+    val result = ArrayList<GuitarLocation>()
+
+    // Lowest notes playable are on the 2nd octave
+    if (note.octave == 2) {
+
+      when {
+      // The E2 (E in the 2nd octave) can be played only on the 6th string
+        note.name == "E" -> result.add(GuitarLocation(string = 6, fret = 0))
+
+      // The F2 (F in the 2nd octave) can be played only on the 6th string
+        note.name == "F" -> result.add(GuitarLocation(string = 6, fret = 1))
+
+      // The G2 (G in the 2nd octave) can be played only on the 6th string
+        note.name == "G" -> result.add(GuitarLocation(string = 6, fret = 3))
+
+      // The A2 (E in the 2nd octave) can be played on both the 6th and the 5th string
+        note.name == "A" -> {
+          result.add(GuitarLocation(string = 6, fret = 5))
+          result.add(GuitarLocation(string = 5, fret = 0))
+        }
+
+      // The B2 (E in the 2nd octave) can be played on both the 6th and the 5th string
+        note.name == "B" -> {
+          result.add(GuitarLocation(string = 6, fret = 7))
+          result.add(GuitarLocation(string = 5, fret = 2))
+        }
+      }
+    } else if (note.octave == 3) {
+      when {
+      // The C3 can be played on both the 6th and the 5th string
+        note.name == "C" -> {
+          result.add(GuitarLocation(string = 6, fret = 8))
+          result.add(GuitarLocation(string = 5, fret = 3))
+        }
+
+      // D3
+        note.name == "D" -> {
+          result.add(GuitarLocation(string = 6, fret = 10))
+          result.add(GuitarLocation(string = 5, fret = 5))
+          result.add(GuitarLocation(string = 4, fret = 0))
+        }
+
+      // E3
+        note.name == "E" -> {
+          result.add(GuitarLocation(string = 6, fret = 12))
+          result.add(GuitarLocation(string = 5, fret = 7))
+          result.add(GuitarLocation(string = 4, fret = 2))
+        }
+
+      // F3
+        note.name == "F" -> {
+          result.add(GuitarLocation(string = 6, fret = 13))
+          result.add(GuitarLocation(string = 5, fret = 8))
+          result.add(GuitarLocation(string = 4, fret = 3))
+        }
+
+      // G3
+        note.name == "G" -> {
+          result.add(GuitarLocation(string = 6, fret = 15))
+          result.add(GuitarLocation(string = 5, fret = 10))
+          result.add(GuitarLocation(string = 4, fret = 5))
+          result.add(GuitarLocation(string = 3, fret = 0))
+        }
+
+      // A3
+        note.name == "A" -> {
+          result.add(GuitarLocation(string = 6, fret = 17))
+          result.add(GuitarLocation(string = 5, fret = 12))
+          result.add(GuitarLocation(string = 4, fret = 7))
+          result.add(GuitarLocation(string = 3, fret = 2))
+        }
+
+      // B3
+        note.name == "B" -> {
+          result.add(GuitarLocation(string = 6, fret = 19))
+          result.add(GuitarLocation(string = 5, fret = 14))
+          result.add(GuitarLocation(string = 4, fret = 9))
+          result.add(GuitarLocation(string = 3, fret = 4))
+        }
+        // TODO: Vul in vanaf octaaf 3 --> noot B
+      }
+
+    } else if (note.octave == 4) {
+      when {
+      // The C3 can be played on both the 6th and the 5th string
+        note.name == "C" -> {
+          result.add(GuitarLocation(string = 6, fret = 8))
+          result.add(GuitarLocation(string = 5, fret = 3))
+        }
+      }
+    }
+
+    if (result.isEmpty()) {
+      throw Exception(
+          "Could not find any valid guitar positions for the note $note. Are you sure this is playable on a 20-fret standard-tuned guitar?"
+      )
+    }
+
+    return result
+  }
 }

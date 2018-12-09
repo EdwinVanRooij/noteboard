@@ -3,6 +3,8 @@ package io.github.edwinvanrooij.noteboard
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.os.Bundle
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.btnA
 import kotlinx.android.synthetic.main.activity_main.btnB
@@ -14,11 +16,12 @@ import kotlinx.android.synthetic.main.activity_main.btnG
 import kotlinx.android.synthetic.main.activity_main.btnPlay
 import kotlinx.android.synthetic.main.activity_main.txtAccuracy
 import kotlinx.android.synthetic.main.activity_main.txtScore
-import kotlin.math.round
 
 class MainActivity : Activity(), GameListener {
 
   private var gameEngine: GameEngine = GameEngine()
+
+  private var previousText: String = ""
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -97,6 +100,25 @@ class MainActivity : Activity(), GameListener {
     println(str)
     Toast.makeText(this, str, Toast.LENGTH_SHORT)
         .show()
+
+    // TODO: Check on which location(s) this note can be played on the guitar
+    val locations: List<GuitarLocation> =  gameEngine.getNoteLocationsOnGuitar(note)
+
+    // TODO: If more than one location, choose one of them at random
+
+    // TODO: Put a question mark on the location
+    showQuestionMark(string = 6, fret = 2)
+  }
+
+  private fun showQuestionMark(
+    string: Int,
+    fret: Int
+  ) {
+    // Find
+    val textView = findViewById<View>(R.id.stringE2).findViewById<TextView>(R.id.fret4)
+    previousText = textView.text.toString()
+    textView.text = "?"
+    textView.visibility = View.VISIBLE
   }
 
   override fun gameStarted() {
