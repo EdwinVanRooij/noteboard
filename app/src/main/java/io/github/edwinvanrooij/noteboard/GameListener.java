@@ -6,5 +6,5 @@ public interface GameListener {
   void onScoreChange(int newScore);
   void onNewNote(Note note);
   void onCorrectGuess(Note note);
-  void onIncorrectGuess(Note note);
+  void onIncorrectGuess(String guess, Note correct);
 }

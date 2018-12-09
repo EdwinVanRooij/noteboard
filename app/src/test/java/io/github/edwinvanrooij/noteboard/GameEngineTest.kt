@@ -20,11 +20,15 @@ class GameEngineTest {
   @Test
   fun randomNote() {
     gameEngine.setGameListener(object: GameListener {
+      override fun onIncorrectGuess(
+        guess: String?,
+        correct: Note?
+      ) {
+        println("Incorrectly guessed $correct")
+      }
+
       override fun onCorrectGuess(note: Note?) {
         println("Correctly guessed $note")
-      }
-      override fun onIncorrectGuess(note: Note?) {
-        println("Incorrectly guessed $note")
       }
       override fun gameStarted() {
         println("game started")

@@ -54,7 +54,7 @@ class GameEngine {
     } else {
 
       // Note was guessed incorrectly
-      gameListener.onIncorrectGuess(currentNote)
+      gameListener.onIncorrectGuess(guessedNote, currentNote)
       incorrectlyGuessedNotes.add(currentNote!!)
 
       recalculateScore()

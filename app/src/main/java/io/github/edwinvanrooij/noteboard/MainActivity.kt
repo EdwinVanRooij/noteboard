@@ -3,13 +3,13 @@ package io.github.edwinvanrooij.noteboard
 import android.app.Activity
 import android.os.Bundle
 import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_main.btnA
+import kotlinx.android.synthetic.main.activity_main.btnB
 import kotlinx.android.synthetic.main.activity_main.btnC
 import kotlinx.android.synthetic.main.activity_main.btnD
 import kotlinx.android.synthetic.main.activity_main.btnE
 import kotlinx.android.synthetic.main.activity_main.btnF
 import kotlinx.android.synthetic.main.activity_main.btnG
-import kotlinx.android.synthetic.main.activity_main.btnA
-import kotlinx.android.synthetic.main.activity_main.btnB
 import kotlinx.android.synthetic.main.activity_main.btnPlay
 
 class MainActivity : Activity(), GameListener {
@@ -49,9 +49,18 @@ class MainActivity : Activity(), GameListener {
   }
 
   override fun onCorrectGuess(note: Note?) {
+    val str = "Correctly guessed $note"
+    Toast.makeText(this, str, Toast.LENGTH_SHORT)
+        .show()
   }
 
-  override fun onIncorrectGuess(note: Note?) {
+  override fun onIncorrectGuess(
+    guess: String?,
+    note: Note?
+  ) {
+    val str = "Incorrectly guessed: Guessed $guess, but was $note"
+    Toast.makeText(this, str, Toast.LENGTH_SHORT)
+        .show()
   }
 
   override fun onNewNote(note: Note?) {
