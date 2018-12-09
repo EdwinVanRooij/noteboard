@@ -1,26 +1,94 @@
 package io.github.edwinvanrooij.noteboard
 
 import java.security.InvalidParameterException
+import java.util.LinkedList
+import java.util.Queue
 
 class GameEngine {
 
   private lateinit var gameListener: GameListener
 
-  private var unpickedNotes: List<Note> = ArrayList()
-  private var pickedNotes: List<Note> = ArrayList()
+  private var score: Int = 0
+  private var accuracy: Double = 0.00
+
+  private var unpickedNotes: Queue<Note>
+
+  private var correctlyGuessedNotes: ArrayList<Note>
+  private var incorrectlyGuessedNotes: ArrayList<Note>
 
   private var currentNote: Note? = null
+  private var guessedNote: String? = null
 
   init {
-    // TODO: Initialize unpicked notes
-    unpickedNotes = generateUnpickedNotes()
+    unpickedNotes = LinkedList() // create new queue
+    unpickedNotes.addAll(generateUnpickedNotes().shuffled()) // add all notes, shuffled
+    correctlyGuessedNotes = ArrayList()
+    incorrectlyGuessedNotes = ArrayList()
+  }
+
+  fun start() {
+    gameListener.gameStarted()
+
+    nextNote()
+  }
+
+  /**
+   * Called by the user: which note did the end user pick?
+   */
+  fun guess(noteName: String) {
+    guessedNote = noteName
+
+    handleGuess()
+  }
+
+  private fun handleGuess() {
+    // Check if the guessed note is equal to the current note name
+    if (guessedNote == currentNote!!.name) {
+
+      // Note was guessed correctly
+      gameListener.onCorrectGuess(currentNote)
+      correctlyGuessedNotes.add(currentNote!!)
+
+      recalculateScore()
+      recalculateAccuracy()
+    } else {
+
+      // Note was guessed incorrectly
+      gameListener.onIncorrectGuess(currentNote)
+      incorrectlyGuessedNotes.add(currentNote!!)
+
+      recalculateScore()
+      recalculateAccuracy()
+    }
+  }
+
+  private fun recalculateAccuracy() {
+    val amountOfNotesGuessed = correctlyGuessedNotes.size + incorrectlyGuessedNotes.size
+    accuracy = (correctlyGuessedNotes.size).toDouble() / (amountOfNotesGuessed).toDouble()
+    println("${correctlyGuessedNotes.size} / $amountOfNotesGuessed = $accuracy")
+    gameListener.onAccuracyChange((accuracy * 100).toInt())
+  }
+
+  private fun recalculateScore() {
+    score = correctlyGuessedNotes.size
+    gameListener.onScoreChange(score)
+  }
+
+  fun nextNote() {
+    currentNote = unpickedNotes.poll()
+    gameListener.onNewNote(currentNote)
+  }
+
+  fun setGameListener(gameListener: GameListener) {
+    this.gameListener = gameListener
   }
 
   fun generateUnpickedNotes(): List<Note> {
     val result = ArrayList<Note>()
 
-    val lowestNote = Note(name = "F", octave = 2)
-    val highestNote = Note(name = "D", octave = 6)
+    val lowestNote = Note(name = "E", octave = 2) // lowest note on a standard-tuned guitar
+    val highestNote =
+      Note(name = "D", octave = 6) // highest note on a standard-tuned 22 fret guitar
 
     result.addAll(generateNotesInclusiveBetween(lowestNote, highestNote))
 
@@ -33,16 +101,27 @@ class GameEngine {
   ): List<Note> {
     val result = ArrayList<Note>()
 
-    var allNoteNames = arrayOf("A", "B", "C", "D", "E", "F", "G")
-    // TODO: Add the lowest note + all notes above it in the current octave (if any)
+    // Add the lowest note + all notes above it in the current octave
     result.addAll(generateNotesInOctaveInclusiveAbove(lowestNote))
 
-    // TODO: Check if there are any whole octaves between the lowest & highest, if so --> add every note in that octave
+    // Check if there are any whole octaves between the lowest & highest, if so --> add every note in that octave
     val octaveNumbers: List<Int> = getOctaveNumbersBetween(highestNote.octave, lowestNote.octave)
+    octaveNumbers.forEach { i ->
+      result.addAll(generateAllNotesInOctave(i))
+    }
 
-    // TODO: Add the highest note and all notes below it in its octave (if any)
+    // Add the highest note and all notes below it in its octave (if any)
     result.addAll(generateNotesInOctaveInclusiveBelow(highestNote))
 
+    return result
+  }
+
+  fun generateAllNotesInOctave(octave: Int): Collection<Note> {
+    val result = ArrayList<Note>()
+    val allNoteNames = arrayOf("A", "B", "C", "D", "E", "F", "G")
+    allNoteNames.forEach { name ->
+      result.add(Note(name = name, octave = octave))
+    }
     return result
   }
 
@@ -166,20 +245,4 @@ class GameEngine {
     throw InvalidParameterException("No recognized note name '${highestNote.name}'")
   }
 
-  fun start() {
-    println("Game has started.")
-
-    // TODO: start timer
-    // TODO: (re)set score
-    // TODO: (re)set accuracy
-    // TODO: pick a random note which is on the guitar fretboard
-  }
-
-  fun setGameListener(gameListener: GameListener) {
-    this.gameListener = gameListener
-  }
-
-  fun getNextNote(): Note {
-    return Note(name = "F", octave = 2)
-  }
 }

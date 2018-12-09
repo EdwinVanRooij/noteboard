@@ -11,7 +11,6 @@ class GameEngineTest {
   @Before
   fun setUp() {
     this.gameEngine = GameEngine()
-    gameEngine.start()
   }
 
   @After
@@ -20,7 +19,29 @@ class GameEngineTest {
 
   @Test
   fun randomNote() {
-    val note = gameEngine.getNextNote()
+    gameEngine.setGameListener(object: GameListener {
+      override fun onCorrectGuess(note: Note?) {
+        println("Correctly guessed $note")
+      }
+      override fun onIncorrectGuess(note: Note?) {
+        println("Incorrectly guessed $note")
+      }
+      override fun gameStarted() {
+        println("game started")
+      }
+      override fun onAccuracyChange(accuracy: Int) {
+        println("accuracy change $accuracy")
+      }
+      override fun onScoreChange(newScore: Int) {
+        println("score change $newScore")
+      }
+      override fun onNewNote(note: Note?) {
+        println("new note $note")
+      }
+    })
+
+    gameEngine.start()
+    gameEngine.nextNote()
   }
 
   @Test
@@ -37,10 +58,29 @@ class GameEngineTest {
 
   @Test
   fun generateNotesInclusiveBetween() {
+    val lowestNote = Note(name = "A", octave = 3)
+    val highestNote = Note(name = "B", octave = 3)
+
+    val notes = gameEngine.generateNotesInclusiveBetween(lowestNote, highestNote)
+
+    println(notes.size)
+    notes.forEach { note ->
+      println(note)
+    }
   }
 
   @Test
   fun getOctaveNumbersBetween() {
+  }
+
+  @Test
+  fun generateAllNotesInOctave() {
+    val lowestNote = Note(name = "A", octave = 3)
+
+    val notes = gameEngine.generateAllNotesInOctave(lowestNote.octave)
+
+    println(notes.size)
+    println(notes)
   }
 
   @Test
