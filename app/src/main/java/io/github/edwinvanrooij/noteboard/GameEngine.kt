@@ -9,7 +9,7 @@ class GameEngine {
   private lateinit var gameListener: GameListener
 
   private var score: Int = 0
-  private var accuracy: Double = 0.00
+  private var accuracy: Double = 0.0
 
   private var unpickedNotes: Queue<Note>
 
@@ -17,7 +17,7 @@ class GameEngine {
   private var incorrectlyGuessedNotes: ArrayList<Note>
 
   private var currentNote: Note? = null
-  private var guessedNote: String? = null
+  private var guessedNote: String = ""
 
   init {
     unpickedNotes = LinkedList() // create new queue
@@ -29,7 +29,19 @@ class GameEngine {
   fun start() {
     gameListener.gameStarted()
 
+    resetScore()
+    resetAccuracy()
     nextNote()
+  }
+
+  private fun resetAccuracy() {
+    accuracy = 0.00
+    gameListener.onAccuracyChange(accuracy)
+  }
+
+  private fun resetScore() {
+    score = 0
+    gameListener.onScoreChange(score)
   }
 
   /**
@@ -42,11 +54,15 @@ class GameEngine {
   }
 
   private fun handleGuess() {
+    if (currentNote == null) {
+      throw Exception("No note was picked: currentNote is null")
+    }
+
     // Check if the guessed note is equal to the current note name
     if (guessedNote == currentNote!!.name) {
 
       // Note was guessed correctly
-      gameListener.onCorrectGuess(currentNote)
+      gameListener.onCorrectGuess(currentNote!!)
       correctlyGuessedNotes.add(currentNote!!)
 
       recalculateScore()
@@ -54,7 +70,7 @@ class GameEngine {
     } else {
 
       // Note was guessed incorrectly
-      gameListener.onIncorrectGuess(guessedNote, currentNote)
+      gameListener.onIncorrectGuess(guessedNote, currentNote!!)
       incorrectlyGuessedNotes.add(currentNote!!)
 
       recalculateScore()
@@ -65,8 +81,7 @@ class GameEngine {
   private fun recalculateAccuracy() {
     val amountOfNotesGuessed = correctlyGuessedNotes.size + incorrectlyGuessedNotes.size
     accuracy = (correctlyGuessedNotes.size).toDouble() / (amountOfNotesGuessed).toDouble()
-    println("${correctlyGuessedNotes.size} / $amountOfNotesGuessed = $accuracy")
-    gameListener.onAccuracyChange((accuracy * 100).toInt())
+    gameListener.onAccuracyChange(accuracy)
   }
 
   private fun recalculateScore() {
@@ -75,8 +90,9 @@ class GameEngine {
   }
 
   fun nextNote() {
-    currentNote = unpickedNotes.poll()
-    gameListener.onNewNote(currentNote)
+    val pickedNote = unpickedNotes.poll()
+    currentNote = pickedNote
+    gameListener.onNewNote(pickedNote)
   }
 
   fun setGameListener(gameListener: GameListener) {
