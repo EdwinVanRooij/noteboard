@@ -101,11 +101,16 @@ class GameEngine {
     }
 
     fun generateUnpickedNotes(): List<Note> {
+        // TODO: Bug in this method. Octaves start at C, NOT at A! Rewrite methods that lead to result of this method
         val result = ArrayList<Note>()
 
-        val lowestNote = Note(name = "E", octave = 2) // lowest note on a standard-tuned guitar
+        // TODO: Get correct notes below again, using lower range because of bug for now
+        val lowestNote = Note(name = "E", octave = 3) // lowest note on a standard-tuned guitar
         val highestNote =
-            Note(name = "D", octave = 6) // highest note on a standard-tuned 22 fret guitar
+            Note(name = "C", octave = 5) // highest note on a standard-tuned 22 fret guitar
+//        val lowestNote = Note(name = "E", octave = 2) // lowest note on a standard-tuned guitar
+//        val highestNote =
+//            Note(name = "C", octave = 6) // highest note on a standard-tuned 22 fret guitar
 
         result.addAll(generateNotesInclusiveBetween(lowestNote, highestNote))
 

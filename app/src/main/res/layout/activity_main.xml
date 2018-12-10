@@ -32,6 +32,7 @@
           android:layout_weight="1"
           android:background="@color/green5"
           android:text="Time"
+          android:textSize="10dp"
           android:textAlignment="center"
           />
       <TextView
@@ -40,7 +41,6 @@
           android:layout_height="0dp"
           android:layout_weight="1"
           android:background="@color/green5"
-          android:text="00:30"
           android:textAlignment="center"
           />
     </LinearLayout>
@@ -57,6 +57,7 @@
           android:layout_width="match_parent"
           android:layout_height="0dp"
           android:layout_weight="1"
+          android:textSize="10dp"
           android:background="@color/green5"
           android:text="Score"
           android:textAlignment="center"
@@ -66,6 +67,7 @@
           android:layout_width="match_parent"
           android:layout_height="0dp"
           android:layout_weight="1"
+          android:textSize="10dp"
           android:background="@color/green5"
           android:textAlignment="center"
           />
@@ -82,6 +84,7 @@
       <TextView
           android:layout_width="match_parent"
           android:layout_height="0dp"
+          android:textSize="10dp"
           android:layout_weight="1"
           android:background="@color/green5"
           android:text="Accuracy"
@@ -91,6 +94,7 @@
           android:id="@+id/txtAccuracy"
           android:layout_width="match_parent"
           android:layout_height="0dp"
+          android:textSize="10dp"
           android:layout_weight="1"
           android:background="@color/green5"
           android:textAlignment="center"
@@ -109,11 +113,13 @@
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_weight="1"
+          android:textSize="10dp"
           android:text="↻"
           />
       <Button
           android:id="@+id/btnPlay"
           android:layout_width="0dp"
+          android:textSize="10dp"
           android:layout_height="wrap_content"
           android:layout_weight="1"
           android:text="▷"
@@ -141,7 +147,7 @@
         >
       <!--start String little E-->
       <FrameLayout
-          android:id="@+id/stringE4"
+          android:id="@+id/string1"
           android:layout_width="match_parent"
           android:layout_height="0dp"
           android:layout_weight="1"
@@ -155,7 +161,7 @@
       <!--end String little E-->
       <!--start String B-->
       <FrameLayout
-          android:id="@+id/stringB3"
+          android:id="@+id/string2"
           android:layout_width="match_parent"
           android:layout_height="0dp"
           android:layout_weight="1"
@@ -169,7 +175,7 @@
       <!--end String B-->
       <!--start String G-->
       <FrameLayout
-          android:id="@+id/stringG3"
+          android:id="@+id/string3"
           android:layout_width="match_parent"
           android:layout_height="0dp"
           android:layout_weight="1"
@@ -183,7 +189,7 @@
       <!--end String G-->
       <!--start String D-->
       <FrameLayout
-          android:id="@+id/stringD3"
+          android:id="@+id/string4"
           android:layout_width="match_parent"
           android:layout_height="0dp"
           android:layout_weight="1"
@@ -197,7 +203,7 @@
       <!--end String D-->
       <!--start String A-->
       <FrameLayout
-          android:id="@+id/stringA2"
+          android:id="@+id/string5"
           android:layout_width="match_parent"
           android:layout_height="0dp"
           android:layout_weight="1"
@@ -211,7 +217,7 @@
       <!--end String A-->
       <!--start String big E-->
       <FrameLayout
-          android:id="@+id/stringE2"
+          android:id="@+id/string6"
           android:layout_width="match_parent"
           android:layout_height="0dp"
           android:layout_weight="1"
@@ -238,82 +244,82 @@
       android:padding="4dp"
       >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.50"
-        android:background="@color/green4"
-        android:orientation="horizontal"
-        android:weightSum="1"
-        >
-      <LinearLayout
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
-          android:background="@color/green5"
-          android:orientation="horizontal"
-          android:paddingEnd="16dp"
-          android:paddingStart="16dp"
-          android:weightSum="6"
-          >
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="0.50"-->
+        <!--android:background="@color/green4"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:weightSum="1"-->
+        <!--&gt;-->
+      <!--<LinearLayout-->
+          <!--android:layout_width="0dp"-->
+          <!--android:layout_height="wrap_content"-->
+          <!--android:layout_weight="1"-->
+          <!--android:background="@color/green5"-->
+          <!--android:orientation="horizontal"-->
+          <!--android:paddingEnd="16dp"-->
+          <!--android:paddingStart="16dp"-->
+          <!--android:weightSum="6"-->
+          <!--&gt;-->
 
-        <Button
-            android:id="@+id/btnCsharp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_weight="1"
-            android:text="C♯"
-            />
-        <Button
-            android:id="@+id/btnEflat"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_weight="1"
-            android:text="E♭"
-            />
-        <Button
-            android:id="@+id/btnNone"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text=""
-            android:visibility="invisible"
-            />
+        <!--<Button-->
+            <!--android:id="@+id/btnCsharp"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginEnd="16dp"-->
+            <!--android:layout_marginStart="16dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:text="C♯"-->
+            <!--/>-->
+        <!--<Button-->
+            <!--android:id="@+id/btnEflat"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginEnd="16dp"-->
+            <!--android:layout_marginStart="16dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:text="E♭"-->
+            <!--/>-->
+        <!--<Button-->
+            <!--android:id="@+id/btnNone"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:text=""-->
+            <!--android:visibility="invisible"-->
+            <!--/>-->
 
-        <Button
-            android:id="@+id/btnFsharp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_weight="1"
-            android:text="F♯"
-            />
-        <Button
-            android:id="@+id/btnAflat"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_weight="1"
-            android:text="A♭"
-            />
-        <Button
-            android:id="@+id/btnBflat"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_weight="1"
-            android:text="B♭"
-            />
-      </LinearLayout>
+        <!--<Button-->
+            <!--android:id="@+id/btnFsharp"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginEnd="16dp"-->
+            <!--android:layout_marginStart="16dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:text="F♯"-->
+            <!--/>-->
+        <!--<Button-->
+            <!--android:id="@+id/btnAflat"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginEnd="16dp"-->
+            <!--android:layout_marginStart="16dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:text="A♭"-->
+            <!--/>-->
+        <!--<Button-->
+            <!--android:id="@+id/btnBflat"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginEnd="16dp"-->
+            <!--android:layout_marginStart="16dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:text="B♭"-->
+            <!--/>-->
+      <!--</LinearLayout>-->
 
-    </LinearLayout>
+    <!--</LinearLayout>-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
