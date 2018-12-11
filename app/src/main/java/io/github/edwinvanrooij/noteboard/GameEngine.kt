@@ -101,16 +101,10 @@ class GameEngine {
     }
 
     fun generateUnpickedNotes(): List<Note> {
-        // TODO: Bug in this method. Octaves start at C, NOT at A! Rewrite methods that lead to result of this method
         val result = ArrayList<Note>()
 
-        // TODO: Get correct notes below again, using lower range because of bug for now
-        val lowestNote = Note(name = "E", octave = 3) // lowest note on a standard-tuned guitar
-        val highestNote =
-            Note(name = "C", octave = 5) // highest note on a standard-tuned 22 fret guitar
-//        val lowestNote = Note(name = "E", octave = 2) // lowest note on a standard-tuned guitar
-//        val highestNote =
-//            Note(name = "C", octave = 6) // highest note on a standard-tuned 22 fret guitar
+        val lowestNote = Note(name = "E", octave = 2) // lowest note on a standard-tuned guitar
+        val highestNote = Note(name = "C", octave = 6) // highest note on a standard-tuned 22 fret guitar
 
         result.addAll(generateNotesInclusiveBetween(lowestNote, highestNote))
 
@@ -140,7 +134,7 @@ class GameEngine {
 
     fun generateAllNotesInOctave(octave: Int): Collection<Note> {
         val result = ArrayList<Note>()
-        val allNoteNames = arrayOf("A", "B", "C", "D", "E", "F", "G")
+        val allNoteNames = arrayOf("C", "D", "E", "F", "G", "A", "B")
         allNoteNames.forEach { name ->
             result.add(Note(name = name, octave = octave))
         }
@@ -165,25 +159,40 @@ class GameEngine {
         val result = ArrayList<Note>()
         result.add(lowestNote)
 
-        // Highest possible note is G, return empty list if the lowest given note is G
-        if (lowestNote.name == "G") {
+        // Highest possible note is B, return empty list if the lowest given note is G
+        if (lowestNote.name == "B") {
             return result
         }
 
         // Check for each other character in the musical alphabet
+        if (lowestNote.name == "A") {
+            result.add(Note(name = "B", octave = lowestNote.octave))
+            return result
+        }
+        if (lowestNote.name == "G") {
+            result.add(Note(name = "A", octave = lowestNote.octave))
+            result.add(Note(name = "B", octave = lowestNote.octave))
+            return result
+        }
         if (lowestNote.name == "F") {
             result.add(Note(name = "G", octave = lowestNote.octave))
+            result.add(Note(name = "A", octave = lowestNote.octave))
+            result.add(Note(name = "B", octave = lowestNote.octave))
             return result
         }
         if (lowestNote.name == "E") {
             result.add(Note(name = "F", octave = lowestNote.octave))
             result.add(Note(name = "G", octave = lowestNote.octave))
+            result.add(Note(name = "A", octave = lowestNote.octave))
+            result.add(Note(name = "B", octave = lowestNote.octave))
             return result
         }
         if (lowestNote.name == "D") {
             result.add(Note(name = "E", octave = lowestNote.octave))
             result.add(Note(name = "F", octave = lowestNote.octave))
             result.add(Note(name = "G", octave = lowestNote.octave))
+            result.add(Note(name = "A", octave = lowestNote.octave))
+            result.add(Note(name = "B", octave = lowestNote.octave))
             return result
         }
         if (lowestNote.name == "C") {
@@ -191,23 +200,8 @@ class GameEngine {
             result.add(Note(name = "E", octave = lowestNote.octave))
             result.add(Note(name = "F", octave = lowestNote.octave))
             result.add(Note(name = "G", octave = lowestNote.octave))
-            return result
-        }
-        if (lowestNote.name == "B") {
-            result.add(Note(name = "C", octave = lowestNote.octave))
-            result.add(Note(name = "D", octave = lowestNote.octave))
-            result.add(Note(name = "E", octave = lowestNote.octave))
-            result.add(Note(name = "F", octave = lowestNote.octave))
-            result.add(Note(name = "G", octave = lowestNote.octave))
-            return result
-        }
-        if (lowestNote.name == "A") {
+            result.add(Note(name = "A", octave = lowestNote.octave))
             result.add(Note(name = "B", octave = lowestNote.octave))
-            result.add(Note(name = "C", octave = lowestNote.octave))
-            result.add(Note(name = "D", octave = lowestNote.octave))
-            result.add(Note(name = "E", octave = lowestNote.octave))
-            result.add(Note(name = "F", octave = lowestNote.octave))
-            result.add(Note(name = "G", octave = lowestNote.octave))
             return result
         }
 
@@ -218,40 +212,25 @@ class GameEngine {
         val result = ArrayList<Note>()
         result.add(highestNote)
 
-        // Lowest possible note is A, return empty list if the lowest given note is A
-        if (highestNote.name == "A") {
+        // Lowest possible note is C, return empty list if the lowest given note is A
+        if (highestNote.name == "C") {
             return result
         }
 
         // Check for each other character in the musical alphabet
-        if (highestNote.name == "B") {
-            result.add(Note(name = "A", octave = highestNote.octave))
-            return result
-        }
-        if (highestNote.name == "C") {
-            result.add(Note(name = "B", octave = highestNote.octave))
-            result.add(Note(name = "A", octave = highestNote.octave))
-            return result
-        }
         if (highestNote.name == "D") {
             result.add(Note(name = "C", octave = highestNote.octave))
-            result.add(Note(name = "B", octave = highestNote.octave))
-            result.add(Note(name = "A", octave = highestNote.octave))
             return result
         }
         if (highestNote.name == "E") {
             result.add(Note(name = "D", octave = highestNote.octave))
             result.add(Note(name = "C", octave = highestNote.octave))
-            result.add(Note(name = "B", octave = highestNote.octave))
-            result.add(Note(name = "A", octave = highestNote.octave))
             return result
         }
         if (highestNote.name == "F") {
             result.add(Note(name = "E", octave = highestNote.octave))
             result.add(Note(name = "D", octave = highestNote.octave))
             result.add(Note(name = "C", octave = highestNote.octave))
-            result.add(Note(name = "B", octave = highestNote.octave))
-            result.add(Note(name = "A", octave = highestNote.octave))
             return result
         }
         if (highestNote.name == "G") {
@@ -259,8 +238,23 @@ class GameEngine {
             result.add(Note(name = "E", octave = highestNote.octave))
             result.add(Note(name = "D", octave = highestNote.octave))
             result.add(Note(name = "C", octave = highestNote.octave))
-            result.add(Note(name = "B", octave = highestNote.octave))
+            return result
+        }
+        if (highestNote.name == "A") {
+            result.add(Note(name = "G", octave = highestNote.octave))
+            result.add(Note(name = "F", octave = highestNote.octave))
+            result.add(Note(name = "E", octave = highestNote.octave))
+            result.add(Note(name = "D", octave = highestNote.octave))
+            result.add(Note(name = "C", octave = highestNote.octave))
+            return result
+        }
+        if (highestNote.name == "B") {
             result.add(Note(name = "A", octave = highestNote.octave))
+            result.add(Note(name = "G", octave = highestNote.octave))
+            result.add(Note(name = "F", octave = highestNote.octave))
+            result.add(Note(name = "E", octave = highestNote.octave))
+            result.add(Note(name = "D", octave = highestNote.octave))
+            result.add(Note(name = "C", octave = highestNote.octave))
             return result
         }
 
