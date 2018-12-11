@@ -91,6 +91,9 @@ class GameEngine {
     }
 
     fun nextNote() {
+        if (unpickedNotes.size  == 0) {
+            unpickedNotes.addAll(generateUnpickedNotes().shuffled()) // add all notes, shuffled
+        }
         val pickedNote = unpickedNotes.poll()
         currentNote = pickedNote
         gameListener.onNewNote(pickedNote)

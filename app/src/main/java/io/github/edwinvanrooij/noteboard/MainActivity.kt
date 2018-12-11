@@ -102,8 +102,8 @@ class MainActivity : Activity(), GameListener {
 //        Toast.makeText(this, str, Toast.LENGTH_SHORT)
 //            .show()
 
-        val locations: List<GuitarLocation> = gameEngine.getNoteLocationsOnGuitar(note)
-        val locationToVisualize = locations[0] // TODO: Randomly pick one from the locations (if more than 0 locations)
+        val locations: List<GuitarLocation> = gameEngine.getNoteLocationsOnGuitar(note).shuffled()
+        val locationToVisualize = locations[0]
         println("To visualize: $locationToVisualize")
 
         showQuestionMark(locationToVisualize)
