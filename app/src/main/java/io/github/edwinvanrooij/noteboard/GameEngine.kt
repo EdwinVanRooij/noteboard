@@ -91,7 +91,7 @@ class GameEngine {
     }
 
     fun nextNote() {
-        if (unpickedNotes.size  == 0) {
+        if (unpickedNotes.size == 0) {
             unpickedNotes.addAll(generateUnpickedNotes().shuffled()) // add all notes, shuffled
         }
         val pickedNote = unpickedNotes.poll()
@@ -109,7 +109,13 @@ class GameEngine {
         val lowestNote = Note(name = "E", octave = 2) // lowest note on a standard-tuned guitar
         val highestNote = Note(name = "C", octave = 6) // highest note on a standard-tuned 22 fret guitar
 
-        result.addAll(generateNotesInclusiveBetween(lowestNote, highestNote))
+        val notes = generateNotesInclusiveBetween(lowestNote, highestNote)
+        for (n in notes) {
+            val amountOfLocations = getNoteLocationsOnGuitar(n).size
+            for (j in 0 until amountOfLocations) {
+                result.add(n.copy())
+            }
+        }
 
         return result
     }
