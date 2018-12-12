@@ -7,6 +7,7 @@ import android.os.Handler
 import android.view.View
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 class MainActivity : Activity(), GameListener {
 
@@ -213,10 +214,41 @@ class MainActivity : Activity(), GameListener {
     }
 
     override fun gameStarted() {
+        startTimer()
+//        txtTime.text = 0
 //        val str = "Game started!"
 //        println(str)
 //        Toast.makeText(this, str, Toast.LENGTH_SHORT)
 //            .show()
+    }
+
+    fun startTimer() {
+        var seconds = 0
+        run {
+            val timer = Timer()
+            timer.schedule(object : TimerTask() {
+                override fun run() {
+                    txtTime.text = secondsToHumanReadableString(seconds)
+                    seconds ++
+                }
+            }, 0, 1000)
+        }
+    }
+
+    /**
+     * This is probably the ugliest worst method I've ever written. I could honestly not care less :).
+     */
+    private fun secondsToHumanReadableString(seconds: Int): String {
+        return when {
+            seconds < 10 -> "00:0$seconds"
+            seconds < 60 -> "00:$seconds"
+            seconds < 120 -> "01:${seconds % 60}"
+            seconds < 180 -> "02:${seconds % 60}"
+            seconds < 240 -> "03:${seconds % 60}"
+            seconds < 300 -> "04:${seconds % 60}"
+            seconds < 360 -> "05:${seconds % 60}"
+            else -> "Lang"
+        }
     }
 
     @SuppressLint("SetTextI18n")
