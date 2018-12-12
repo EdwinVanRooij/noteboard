@@ -20,6 +20,8 @@ class GameEngine {
     private var currentNote: Note? = null
     private var guessedNote: String = ""
 
+    private var isStarted: Boolean = false
+
     init {
         unpickedNotes = LinkedList() // create new queue
         unpickedNotes.addAll(generateUnpickedNotes().shuffled()) // add all notes, shuffled
@@ -27,7 +29,17 @@ class GameEngine {
         incorrectlyGuessedNotes = ArrayList()
     }
 
+    fun restart() {
+        isStarted = false
+        start()
+    }
+
     fun start() {
+        if (isStarted) {
+            return
+        }
+
+        isStarted = true
         gameListener.gameStarted()
 
         resetScore()
@@ -49,6 +61,10 @@ class GameEngine {
      * Called by the user: which note did the end user pick?
      */
     fun guess(noteName: String) {
+        if (!isStarted) {
+            return
+        }
+
         guessedNote = noteName
 
         handleGuess()

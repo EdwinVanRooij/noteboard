@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : Activity(), GameListener {
@@ -24,6 +23,14 @@ class MainActivity : Activity(), GameListener {
 
         btnPlay.setOnClickListener {
             gameEngine.start()
+        }
+
+        btnReplay.setOnClickListener {
+            if (currentTextView != null) {
+                currentTextView!!.text = previousText
+                currentTextView!!.visibility = View.INVISIBLE
+            }
+            gameEngine.restart()
         }
 
         setGuessButtonListeners()
@@ -118,9 +125,6 @@ class MainActivity : Activity(), GameListener {
                 val parent = findViewById<View>(R.id.string1)
                 val child: TextView? = getChildByFret(parent, location.fret)
                 if (child != null) {
-                    child.visibility = View.VISIBLE
-                    previousText = child.text.toString()
-                    child.text = "?"
                     currentTextView = child
                 } else {
                     println("Could not find a textview for guitarLocation $location")
@@ -130,8 +134,6 @@ class MainActivity : Activity(), GameListener {
                 val parent = findViewById<View>(R.id.string2)
                 val child: TextView? = getChildByFret(parent, location.fret)
                 if (child != null) {
-                    child.visibility = View.VISIBLE
-                    child.text = "?"
                     currentTextView = child
                 } else {
                     println("Could not find a textview for guitarLocation $location")
@@ -141,8 +143,6 @@ class MainActivity : Activity(), GameListener {
                 val parent = findViewById<View>(R.id.string3)
                 val child: TextView? = getChildByFret(parent, location.fret)
                 if (child != null) {
-                    child.visibility = View.VISIBLE
-                    child.text = "?"
                     currentTextView = child
                 } else {
                     println("Could not find a textview for guitarLocation $location")
@@ -152,8 +152,6 @@ class MainActivity : Activity(), GameListener {
                 val parent = findViewById<View>(R.id.string4)
                 val child: TextView? = getChildByFret(parent, location.fret)
                 if (child != null) {
-                    child.visibility = View.VISIBLE
-                    child.text = "?"
                     currentTextView = child
                 } else {
                     println("Could not find a textview for guitarLocation $location")
@@ -163,8 +161,6 @@ class MainActivity : Activity(), GameListener {
                 val parent = findViewById<View>(R.id.string5)
                 val child: TextView? = getChildByFret(parent, location.fret)
                 if (child != null) {
-                    child.visibility = View.VISIBLE
-                    child.text = "?"
                     currentTextView = child
                 } else {
                     println("Could not find a textview for guitarLocation $location")
@@ -174,14 +170,19 @@ class MainActivity : Activity(), GameListener {
                 val parent = findViewById<View>(R.id.string6)
                 val child: TextView? = getChildByFret(parent, location.fret)
                 if (child != null) {
-                    child.visibility = View.VISIBLE
-                    child.text = "?"
                     currentTextView = child
                 } else {
                     println("Could not find a textview for guitarLocation $location")
                 }
             }
         }
+
+        previousText = currentTextView!!.text.toString()
+
+        currentTextView!!.visibility = View.VISIBLE
+        currentTextView!!.setTextColor(resources.getColor(R.color.neutral))
+        currentTextView!!.setShadowLayer(5F, 0F, 0F, resources.getColor(R.color.green1))
+        currentTextView!!.text = "?"
     }
 
     private fun getChildByFret(parent: View?, fret: Int): TextView? {
