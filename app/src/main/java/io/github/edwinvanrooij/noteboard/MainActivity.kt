@@ -214,7 +214,9 @@ class MainActivity : Activity(), GameListener {
     }
 
     override fun gameStarted() {
-        startTimer()
+        Thread(Runnable {
+            startTimer()
+        }).start()
 //        txtTime.text = 0
 //        val str = "Game started!"
 //        println(str)
@@ -223,13 +225,17 @@ class MainActivity : Activity(), GameListener {
     }
 
     fun startTimer() {
+
         var seconds = 0
+
         run {
             val timer = Timer()
             timer.schedule(object : TimerTask() {
                 override fun run() {
-                    txtTime.text = secondsToHumanReadableString(seconds)
-                    seconds ++
+                    runOnUiThread {
+                        txtTime.text = secondsToHumanReadableString(seconds)
+                    }
+                    seconds++
                 }
             }, 0, 1000)
         }
