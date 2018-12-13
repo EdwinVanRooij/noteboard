@@ -2,6 +2,8 @@ package io.github.edwinvanrooij.noteboard
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.media.AudioManager
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
@@ -121,6 +123,9 @@ class MainActivity : Activity(), GameListener {
     private fun showQuestionMark(
         location: GuitarLocation
     ) {
+        val mPlayer = MediaPlayer.create(this, R.raw.n_6_0)
+        mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC)
+        mPlayer.start()
         when {
             location.string == 1 -> {
                 val parent = findViewById<View>(R.id.string1)
