@@ -33,13 +33,13 @@ class GameEngineTest {
             }
 
             override fun onIncorrectGuess(
-                guess: String,
+                guess: GuitarString,
                 correct: Note
             ) {
                 println("Incorrectly guessed $correct")
             }
 
-            override fun gameStarted() {
+            override fun onGameStart() {
                 println("game started")
             }
 

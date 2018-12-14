@@ -146,7 +146,7 @@
         android:orientation="vertical"
         android:weightSum="6"
         >
-      <!--start String little E-->
+      <!--start GuitarString little E-->
       <FrameLayout
           android:id="@+id/string1"
           android:layout_width="match_parent"
@@ -159,8 +159,8 @@
             android:layout_height="wrap_content"
             />
       </FrameLayout>
-      <!--end String little E-->
-      <!--start String B-->
+      <!--end GuitarString little E-->
+      <!--start GuitarString B-->
       <FrameLayout
           android:id="@+id/string2"
           android:layout_width="match_parent"
@@ -173,8 +173,8 @@
             android:layout_height="wrap_content"
             />
       </FrameLayout>
-      <!--end String B-->
-      <!--start String G-->
+      <!--end GuitarString B-->
+      <!--start GuitarString G-->
       <FrameLayout
           android:id="@+id/string3"
           android:layout_width="match_parent"
@@ -187,8 +187,8 @@
             android:layout_height="wrap_content"
             />
       </FrameLayout>
-      <!--end String G-->
-      <!--start String D-->
+      <!--end GuitarString G-->
+      <!--start GuitarString D-->
       <FrameLayout
           android:id="@+id/string4"
           android:layout_width="match_parent"
@@ -201,8 +201,8 @@
             android:layout_height="wrap_content"
             />
       </FrameLayout>
-      <!--end String D-->
-      <!--start String A-->
+      <!--end GuitarString D-->
+      <!--start GuitarString A-->
       <FrameLayout
           android:id="@+id/string5"
           android:layout_width="match_parent"
@@ -215,8 +215,8 @@
             android:layout_height="wrap_content"
             />
       </FrameLayout>
-      <!--end String A-->
-      <!--start String big E-->
+      <!--end GuitarString A-->
+      <!--start GuitarString big E-->
       <FrameLayout
           android:id="@+id/string6"
           android:layout_width="match_parent"
@@ -229,7 +229,7 @@
             android:layout_height="wrap_content"
             />
       </FrameLayout>
-      <!--end String big E-->
+      <!--end GuitarString big E-->
     </LinearLayout>
     <!--end Fretboard Container-->
 

@@ -41,25 +41,25 @@ class MainActivity : Activity(), GameListener {
 
     private fun setGuessButtonListeners() {
         btnC.setOnClickListener {
-            gameEngine.guess("C")
+            gameEngine.guess(NoteName.C)
         }
         btnD.setOnClickListener {
-            gameEngine.guess("D")
+            gameEngine.guess(NoteName.D)
         }
         btnE.setOnClickListener {
-            gameEngine.guess("E")
+            gameEngine.guess(NoteName.E)
         }
         btnF.setOnClickListener {
-            gameEngine.guess("F")
+            gameEngine.guess(NoteName.F)
         }
         btnG.setOnClickListener {
-            gameEngine.guess("G")
+            gameEngine.guess(NoteName.G)
         }
         btnA.setOnClickListener {
-            gameEngine.guess("A")
+            gameEngine.guess(NoteName.A)
         }
         btnB.setOnClickListener {
-            gameEngine.guess("B")
+            gameEngine.guess(NoteName.B)
         }
     }
 
@@ -85,7 +85,7 @@ class MainActivity : Activity(), GameListener {
 
     @SuppressLint("SetTextI18n")
     override fun onIncorrectGuess(
-        guess: String,
+        guess: NoteName,
         correct: Note
     ) {
 //        val str = "Incorrectly guessed: Guessed $guess, but was $correct"
@@ -112,7 +112,7 @@ class MainActivity : Activity(), GameListener {
 //        Toast.makeText(this, str, Toast.LENGTH_SHORT)
 //            .show()
 
-        val locations: List<GuitarLocation> = gameEngine.getNoteLocationsOnGuitar(note).shuffled()
+        val locations: List<Fret> = gameEngine.getNoteLocationsOnGuitar(note).shuffled()
         val locationToVisualize = locations[0]
         println("To visualize: $locationToVisualize")
 
@@ -121,7 +121,7 @@ class MainActivity : Activity(), GameListener {
     }
 
     private fun showQuestionMark(
-        location: GuitarLocation
+        location: Fret
     ) {
         val mPlayer = MediaPlayer.create(this, R.raw.n_6_0)
         mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC)
@@ -218,7 +218,7 @@ class MainActivity : Activity(), GameListener {
         return null
     }
 
-    override fun gameStarted() {
+    override fun onGameStart() {
         Thread(Runnable {
             startTimer()
         }).start()
