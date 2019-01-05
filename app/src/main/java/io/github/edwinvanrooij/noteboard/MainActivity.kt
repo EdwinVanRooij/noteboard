@@ -269,8 +269,10 @@ class MainActivity : Activity(), GameListener {
             ).show()
         }
 
-        mPlayer!!.setAudioStreamType(AudioManager.STREAM_MUSIC)
-        mPlayer.start()
+        if (mPlayer != null) {
+            mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC)
+            mPlayer.start()
+        }
     }
 
     private fun showQuestionMark(
