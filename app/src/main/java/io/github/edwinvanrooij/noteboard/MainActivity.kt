@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
@@ -116,16 +117,165 @@ class MainActivity : Activity(), GameListener {
         val locationToVisualize = locations[0]
         println("To visualize: $locationToVisualize")
 
+        playSound(locationToVisualize)
         showQuestionMark(locationToVisualize)
         println("Showed (or not) question mark on: $locationToVisualize")
+    }
+
+    private fun playSound(l: Fret) {
+        var mPlayer: MediaPlayer? = null
+
+        when {
+            l.string == 6 -> {
+                when {
+                    l.fret == 0 -> mPlayer = MediaPlayer.create(this, R.raw.n_6_0)
+                    l.fret == 1 -> mPlayer = MediaPlayer.create(this, R.raw.n_6_1)
+                    l.fret == 2 -> mPlayer = MediaPlayer.create(this, R.raw.n_6_2)
+                    l.fret == 3 -> mPlayer = MediaPlayer.create(this, R.raw.n_6_3)
+                    l.fret == 4 -> mPlayer = MediaPlayer.create(this, R.raw.n_6_4)
+                    l.fret == 5 -> mPlayer = MediaPlayer.create(this, R.raw.n_6_5)
+                    l.fret == 6 -> mPlayer = MediaPlayer.create(this, R.raw.n_6_6)
+                    l.fret == 7 -> mPlayer = MediaPlayer.create(this, R.raw.n_6_7)
+                    l.fret == 8 -> mPlayer = MediaPlayer.create(this, R.raw.n_6_8)
+                    l.fret == 9 -> mPlayer = MediaPlayer.create(this, R.raw.n_6_9)
+                    l.fret == 10 -> mPlayer = MediaPlayer.create(this, R.raw.n_6_10)
+                    l.fret == 11 -> mPlayer = MediaPlayer.create(this, R.raw.n_6_11)
+                    l.fret == 12 -> mPlayer = MediaPlayer.create(this, R.raw.n_6_12)
+                    l.fret == 13 -> mPlayer = MediaPlayer.create(this, R.raw.n_6_13)
+                    l.fret == 14 -> mPlayer = MediaPlayer.create(this, R.raw.n_6_14)
+                    l.fret == 15 -> mPlayer = MediaPlayer.create(this, R.raw.n_6_15)
+//                    else -> Toast.makeText(
+//                        this,
+//                        "Error! Could not find fret ${l.fret} with string number ${l.string}",
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+                }
+            }
+            l.string == 5 -> {
+                when {
+                    l.fret == 0 -> mPlayer = MediaPlayer.create(this, R.raw.n_5_0)
+                    l.fret == 1 -> mPlayer = MediaPlayer.create(this, R.raw.n_5_1)
+                    l.fret == 2 -> mPlayer = MediaPlayer.create(this, R.raw.n_5_2)
+                    l.fret == 3 -> mPlayer = MediaPlayer.create(this, R.raw.n_5_3)
+                    l.fret == 4 -> mPlayer = MediaPlayer.create(this, R.raw.n_5_4)
+                    l.fret == 5 -> mPlayer = MediaPlayer.create(this, R.raw.n_5_5)
+                    l.fret == 6 -> mPlayer = MediaPlayer.create(this, R.raw.n_5_6)
+                    l.fret == 7 -> mPlayer = MediaPlayer.create(this, R.raw.n_5_7)
+                    l.fret == 8 -> mPlayer = MediaPlayer.create(this, R.raw.n_5_8)
+                    l.fret == 9 -> mPlayer = MediaPlayer.create(this, R.raw.n_5_9)
+                    l.fret == 10 -> mPlayer = MediaPlayer.create(this, R.raw.n_5_10)
+                    l.fret == 11 -> mPlayer = MediaPlayer.create(this, R.raw.n_5_11)
+                    l.fret == 12 -> mPlayer = MediaPlayer.create(this, R.raw.n_5_12)
+                    l.fret == 13 -> mPlayer = MediaPlayer.create(this, R.raw.n_5_13)
+                    l.fret == 14 -> mPlayer = MediaPlayer.create(this, R.raw.n_5_14)
+                    l.fret == 15 -> mPlayer = MediaPlayer.create(this, R.raw.n_5_15)
+//                    else -> Toast.makeText(
+//                        this,
+//                        "Error! Could not find fret ${l.fret} with string number ${l.string}",
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+                }
+            }
+            l.string == 4 -> {
+                when {
+                    l.fret == 0 -> mPlayer = MediaPlayer.create(this, R.raw.n_4_0)
+                    l.fret == 1 -> mPlayer = MediaPlayer.create(this, R.raw.n_4_1)
+                    l.fret == 2 -> mPlayer = MediaPlayer.create(this, R.raw.n_4_2)
+                    l.fret == 3 -> mPlayer = MediaPlayer.create(this, R.raw.n_4_3)
+                    l.fret == 4 -> mPlayer = MediaPlayer.create(this, R.raw.n_4_4)
+                    l.fret == 5 -> mPlayer = MediaPlayer.create(this, R.raw.n_4_5)
+                    l.fret == 6 -> mPlayer = MediaPlayer.create(this, R.raw.n_4_6)
+                    l.fret == 7 -> mPlayer = MediaPlayer.create(this, R.raw.n_4_7)
+                    l.fret == 8 -> mPlayer = MediaPlayer.create(this, R.raw.n_4_8)
+                    l.fret == 9 -> mPlayer = MediaPlayer.create(this, R.raw.n_4_9)
+                    l.fret == 10 -> mPlayer = MediaPlayer.create(this, R.raw.n_4_10)
+                    l.fret == 11 -> mPlayer = MediaPlayer.create(this, R.raw.n_4_11)
+                    l.fret == 12 -> mPlayer = MediaPlayer.create(this, R.raw.n_4_12)
+                    l.fret == 13 -> mPlayer = MediaPlayer.create(this, R.raw.n_4_13)
+                    l.fret == 14 -> mPlayer = MediaPlayer.create(this, R.raw.n_4_14)
+                    l.fret == 15 -> mPlayer = MediaPlayer.create(this, R.raw.n_4_15)
+//                    else ->
+//                        Toast.makeText(
+//                        this,
+//                        "Error! Could not find fret ${l.fret} with string number ${l.string}",
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+                }
+            }
+            l.string == 3 -> {
+                when {
+                    l.fret == 0 -> mPlayer = MediaPlayer.create(this, R.raw.n_3_0)
+                    l.fret == 1 -> mPlayer = MediaPlayer.create(this, R.raw.n_3_1)
+                    l.fret == 2 -> mPlayer = MediaPlayer.create(this, R.raw.n_3_2)
+                    l.fret == 3 -> mPlayer = MediaPlayer.create(this, R.raw.n_3_3)
+                    l.fret == 4 -> mPlayer = MediaPlayer.create(this, R.raw.n_3_4)
+                    l.fret == 5 -> mPlayer = MediaPlayer.create(this, R.raw.n_3_5)
+                    l.fret == 6 -> mPlayer = MediaPlayer.create(this, R.raw.n_3_6)
+                    l.fret == 7 -> mPlayer = MediaPlayer.create(this, R.raw.n_3_7)
+                    l.fret == 8 -> mPlayer = MediaPlayer.create(this, R.raw.n_3_8)
+                    l.fret == 9 -> mPlayer = MediaPlayer.create(this, R.raw.n_3_9)
+                    l.fret == 10 -> mPlayer = MediaPlayer.create(this, R.raw.n_3_10)
+                    l.fret == 11 -> mPlayer = MediaPlayer.create(this, R.raw.n_3_11)
+                    l.fret == 12 -> mPlayer = MediaPlayer.create(this, R.raw.n_3_12)
+                    l.fret == 13 -> mPlayer = MediaPlayer.create(this, R.raw.n_3_13)
+                    l.fret == 14 -> mPlayer = MediaPlayer.create(this, R.raw.n_3_14)
+                    l.fret == 15 -> mPlayer = MediaPlayer.create(this, R.raw.n_3_15)
+                }
+            }
+            l.string == 2 -> {
+                when {
+                    l.fret == 0 -> mPlayer = MediaPlayer.create(this, R.raw.n_2_0)
+                    l.fret == 1 -> mPlayer = MediaPlayer.create(this, R.raw.n_2_1)
+                    l.fret == 2 -> mPlayer = MediaPlayer.create(this, R.raw.n_2_2)
+                    l.fret == 3 -> mPlayer = MediaPlayer.create(this, R.raw.n_2_3)
+                    l.fret == 4 -> mPlayer = MediaPlayer.create(this, R.raw.n_2_4)
+                    l.fret == 5 -> mPlayer = MediaPlayer.create(this, R.raw.n_2_5)
+                    l.fret == 6 -> mPlayer = MediaPlayer.create(this, R.raw.n_2_6)
+                    l.fret == 7 -> mPlayer = MediaPlayer.create(this, R.raw.n_2_7)
+                    l.fret == 8 -> mPlayer = MediaPlayer.create(this, R.raw.n_2_8)
+                    l.fret == 9 -> mPlayer = MediaPlayer.create(this, R.raw.n_2_9)
+                    l.fret == 10 -> mPlayer = MediaPlayer.create(this, R.raw.n_2_10)
+                    l.fret == 11 -> mPlayer = MediaPlayer.create(this, R.raw.n_2_11)
+                    l.fret == 12 -> mPlayer = MediaPlayer.create(this, R.raw.n_2_12)
+                    l.fret == 13 -> mPlayer = MediaPlayer.create(this, R.raw.n_2_13)
+                    l.fret == 14 -> mPlayer = MediaPlayer.create(this, R.raw.n_2_14)
+                    l.fret == 15 -> mPlayer = MediaPlayer.create(this, R.raw.n_2_15)
+                }
+            }
+            l.string == 1 -> {
+                when {
+                    l.fret == 0 -> mPlayer = MediaPlayer.create(this, R.raw.n_1_0)
+                    l.fret == 1 -> mPlayer = MediaPlayer.create(this, R.raw.n_1_1)
+                    l.fret == 2 -> mPlayer = MediaPlayer.create(this, R.raw.n_1_2)
+                    l.fret == 3 -> mPlayer = MediaPlayer.create(this, R.raw.n_1_3)
+                    l.fret == 4 -> mPlayer = MediaPlayer.create(this, R.raw.n_1_4)
+                    l.fret == 5 -> mPlayer = MediaPlayer.create(this, R.raw.n_1_5)
+                    l.fret == 6 -> mPlayer = MediaPlayer.create(this, R.raw.n_1_6)
+                    l.fret == 7 -> mPlayer = MediaPlayer.create(this, R.raw.n_1_7)
+                    l.fret == 8 -> mPlayer = MediaPlayer.create(this, R.raw.n_1_8)
+                    l.fret == 9 -> mPlayer = MediaPlayer.create(this, R.raw.n_1_9)
+                    l.fret == 10 -> mPlayer = MediaPlayer.create(this, R.raw.n_1_10)
+                    l.fret == 11 -> mPlayer = MediaPlayer.create(this, R.raw.n_1_11)
+                    l.fret == 12 -> mPlayer = MediaPlayer.create(this, R.raw.n_1_12)
+                    l.fret == 13 -> mPlayer = MediaPlayer.create(this, R.raw.n_1_13)
+                    l.fret == 14 -> mPlayer = MediaPlayer.create(this, R.raw.n_1_14)
+                    l.fret == 15 -> mPlayer = MediaPlayer.create(this, R.raw.n_1_15)
+                }
+            }
+            else -> Toast.makeText(
+                this,
+                "Error! Could not find string with number ${l.string}",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+
+        mPlayer!!.setAudioStreamType(AudioManager.STREAM_MUSIC)
+        mPlayer.start()
     }
 
     private fun showQuestionMark(
         location: Fret
     ) {
-        val mPlayer = MediaPlayer.create(this, R.raw.n_6_0)
-        mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC)
-        mPlayer.start()
         when {
             location.string == 1 -> {
                 val parent = findViewById<View>(R.id.string1)
@@ -250,16 +400,7 @@ class MainActivity : Activity(), GameListener {
      * This is probably the ugliest worst method I've ever written. I could honestly not care less :).
      */
     private fun secondsToHumanReadableString(seconds: Int): String {
-        return when {
-            seconds < 10 -> "00:0$seconds"
-            seconds < 60 -> "00:$seconds"
-            seconds < 120 -> "01:${seconds % 60}"
-            seconds < 180 -> "02:${seconds % 60}"
-            seconds < 240 -> "03:${seconds % 60}"
-            seconds < 300 -> "04:${seconds % 60}"
-            seconds < 360 -> "05:${seconds % 60}"
-            else -> "Lang"
-        }
+        return "%d:%02d".format(seconds / 60, seconds % 60)
     }
 
     @SuppressLint("SetTextI18n")
