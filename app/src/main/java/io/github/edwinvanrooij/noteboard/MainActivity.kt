@@ -19,11 +19,19 @@ class MainActivity : Activity(), GameListener {
     private var previousText: String = ""
     private var currentTextView: TextView? = null
 
+    private var mPlayer: MediaPlayer? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         gameEngine.setGameListener(this)
+
+        btnRepeat.setOnClickListener {
+            if (mPlayer != null) {
+                mPlayer!!.start()
+            }
+        }
 
         btnPlay.setOnClickListener {
             gameEngine.start()
@@ -123,7 +131,6 @@ class MainActivity : Activity(), GameListener {
     }
 
     private fun playSound(l: Fret) {
-        var mPlayer: MediaPlayer? = null
 
         when {
             l.string == 6 -> {
@@ -270,8 +277,8 @@ class MainActivity : Activity(), GameListener {
         }
 
         if (mPlayer != null) {
-            mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC)
-            mPlayer.start()
+            mPlayer!!.setAudioStreamType(AudioManager.STREAM_MUSIC)
+            mPlayer!!.start()
         }
     }
 
