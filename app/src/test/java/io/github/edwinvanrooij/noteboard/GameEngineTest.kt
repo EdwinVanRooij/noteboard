@@ -20,6 +20,10 @@ class GameEngineTest {
     @Test
     fun randomNote() {
         gameEngine.setGameListener(object : GameListener {
+            override fun onIncorrectGuess(guess: NoteName, correct: Note) {
+                println("Incorrectly guessed $correct")
+            }
+
             override fun onAccuracyChange(accuracy: Double) {
                 println("accuracy change $accuracy")
             }
@@ -30,13 +34,6 @@ class GameEngineTest {
 
             override fun onCorrectGuess(note: Note) {
                 println("Correctly guessed $note")
-            }
-
-            override fun onIncorrectGuess(
-                guess: GuitarString,
-                correct: Note
-            ) {
-                println("Incorrectly guessed $correct")
             }
 
             override fun onGameStart() {
@@ -54,8 +51,8 @@ class GameEngineTest {
 
     @Test
     fun generateUnpickedNotes() {
-        val lowestNote = Note(name = "F", octave = 2)
-        val highestNote = Note(name = "D", octave = 5)
+        val lowestNote = Note(name = NoteName.F, octave = 2)
+        val highestNote = Note(name = NoteName.D, octave = 5)
 
         val octaveNumbers = gameEngine.getOctaveNumbersBetween(
             lowestOctave = lowestNote.octave, highestOctave = highestNote.octave
@@ -72,8 +69,8 @@ class GameEngineTest {
 
     @Test
     fun generateNotesInclusiveBetween() {
-        val lowestNote = Note(name = "A", octave = 3)
-        val highestNote = Note(name = "B", octave = 3)
+        val lowestNote = Note(name = NoteName.A, octave = 3)
+        val highestNote = Note(name =NoteName.B, octave = 3)
 
         val notes = gameEngine.generateNotesInclusiveBetween(lowestNote, highestNote)
 
@@ -89,7 +86,7 @@ class GameEngineTest {
 
     @Test
     fun generateAllNotesInOctave() {
-        val lowestNote = Note(name = "A", octave = 3)
+        val lowestNote = Note(name = NoteName.A, octave = 3)
 
         val notes = gameEngine.generateAllNotesInOctave(lowestNote.octave)
 
@@ -99,7 +96,7 @@ class GameEngineTest {
 
     @Test
     fun generateNotesInOctaveInclusiveAbove() {
-        val lowestNote = Note(name = "C", octave = 2)
+        val lowestNote = Note(name = NoteName.C, octave = 2)
 
         val notes = gameEngine.generateNotesInOctaveInclusiveAbove(lowestNote)
 
@@ -109,7 +106,7 @@ class GameEngineTest {
 
     @Test
     fun generateNotesInOctaveInclusiveBelow() {
-        val highestNote = Note(name = "C", octave = 5)
+        val highestNote = Note(name = NoteName.C, octave = 5)
 
         val notes = gameEngine.generateNotesInOctaveInclusiveBelow(highestNote)
 
