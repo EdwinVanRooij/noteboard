@@ -3,14 +3,12 @@ package io.github.edwinvanrooij.noteboard.lib.music
 import io.github.edwinvanrooij.noteboard.lib.exceptions.NoteException
 import io.github.edwinvanrooij.noteboard.lib.music.NoteName.*
 
-import io.kotlintest.shouldThrow
-
 import org.junit.Assert.*
 import org.junit.Test
 
 class NoteTest {
 
-    @Test
+    @Test(expected = NoteException::class)
     fun `test getNextNote`() {
         // Every note should go to the correct next note and stay in the same octave
         assertTrue(Note(C, 4).getNextNote() == Note(NoteName.D, 4))
@@ -22,10 +20,10 @@ class NoteTest {
         assertTrue(Note(B, 4).getNextNote() == Note(NoteName.C, 5)) // B is an exception, goes to next octave
 
         // Notes in this app can't go above C8 (highest playable note on the piano)
-        shouldThrow<NoteException> { Note(C, 8).getNextNote() }
+        Note(C, 8).getNextNote() // exception
     }
 
-    @Test
+    @Test(expected = NoteException::class)
     fun `test getPreviousNote`() {
         // Every note should go to the correct previous note and stay in the same octave
         assertTrue(Note(C, 4).getPreviousNote() == Note(NoteName.B, 3)) // c is an exception, goes to previous octave
@@ -37,6 +35,6 @@ class NoteTest {
         assertTrue(Note(B, 4).getPreviousNote() == Note(NoteName.A, 4))
 
         // Notes can't go below the C in the octave 0 (C0)
-        shouldThrow<NoteException> { Note(C, 0).getPreviousNote() }
+        Note(C, 0).getPreviousNote() // exception
     }
 }

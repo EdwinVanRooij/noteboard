@@ -7,7 +7,6 @@ import com.nhaarman.mockitokotlin2.verify
 import io.github.edwinvanrooij.noteboard.lib.exceptions.*
 import io.github.edwinvanrooij.noteboard.lib.guitar.FretLocation
 import io.github.edwinvanrooij.noteboard.lib.music.NoteName
-import io.kotlintest.shouldThrow
 import org.junit.Before
 import org.junit.Test
 
@@ -50,33 +49,28 @@ class GameEngineTest {
         verify(listener).onNewFretLocation(any())
     }
 
-    @Test
+    @Test(expected = GameSettingsNotSetException::class)
     fun `start -- bad -- Should not work without gameSettings initialized`() {
         val listener: IGameListener = mock()
         gameEngine.setGameListener(listener)
 
-        shouldThrow<GameSettingsNotSetException> {
-            gameEngine.start()
-        }
+        gameEngine.start() // exception
     }
 
-    @Test
+    @Test(expected = GameListenerNotSetException::class)
     fun `start -- bad -- Should not work without a game listener`() {
         gameEngine.initialize(mockGameSettings())
 
-        shouldThrow<GameListenerNotSetException> {
-            gameEngine.start()
-        }
+        gameEngine.start() // exception
     }
 
-    @Test
+    @Test(expected = GameAlreadyStartedException::class)
     fun `start -- bad -- Should not work after a game started`() {
         gameEngine.setGameListener(mock())
         gameEngine.initialize(mockGameSettings())
         gameEngine.start()
-        shouldThrow<GameAlreadyStartedException> {
-            gameEngine.start()
-        }
+
+        gameEngine.start() // exception
     }
     //endregion
 
@@ -97,41 +91,39 @@ class GameEngineTest {
         verify(listener).onGameStop()
     }
 
-    @Test
+    @Test(expected = GameSettingsNotSetException::class)
     fun `stop() -- bad -- Should not work without gameSettings initialized`() {
         val listener: IGameListener = mock()
         gameEngine.setGameListener(listener)
 
-        shouldThrow<GameSettingsNotSetException> {
-            gameEngine.stop()
-        }
+        gameEngine.stop() // exception
     }
 
-    @Test
+    @Test(expected = GameListenerNotSetException::class)
     fun `stop() -- bad -- Should not work without a game listener`() {
         gameEngine.initialize(mockGameSettings())
 
-        shouldThrow<GameListenerNotSetException> {
-            gameEngine.stop()
-        }
+        gameEngine.stop() // exception
     }
 
-    @Test
+    @Test(expected = GameNotStartedException::class)
     fun `stop() -- bad -- Should not work before a game started`() {
         val listener: IGameListener = mock()
         gameEngine.setGameListener(listener)
         gameEngine.initialize(mockGameSettings())
-        shouldThrow<GameNotStartedException> { gameEngine.stop() }
+
+        gameEngine.stop() // exception
     }
 
-    @Test
+    @Test(expected = GameNotStartedException::class)
     fun `stop() -- bad -- Should not work after a game stopped`() {
         val listener: IGameListener = mock()
         gameEngine.setGameListener(listener)
         gameEngine.initialize(mockGameSettings())
         gameEngine.start()
         gameEngine.stop()
-        shouldThrow<GameNotStartedException> { gameEngine.stop() }
+
+        gameEngine.stop()  // exception
     }
     //endregion
 
@@ -202,41 +194,37 @@ class GameEngineTest {
         verify(listener).onScoreChange(any())
     }
 
-    @Test
+    @Test(expected = GameSettingsNotSetException::class)
     fun `guess -- bad -- Should not work without gameSettings initialized`() {
         val listener: IGameListener = mock()
         gameEngine.setGameListener(listener)
-        shouldThrow<GameSettingsNotSetException> {
-            val noteName: NoteName = NoteName.C // Randomly picked; could be any other note.
-            gameEngine.guess(noteName)
-        }
+
+        gameEngine.guess(NoteName.C) // Randomly picked; could be any other note. // exception
     }
 
-    @Test
+    @Test(expected = GameListenerNotSetException::class)
     fun `guess -- bad -- Should not work without a game listener`() {
         gameEngine.initialize(mockGameSettings())
-        shouldThrow<GameListenerNotSetException> {
-            val noteName: NoteName = NoteName.C // Randomly picked; could be any other note.
-            gameEngine.guess(noteName)
-        }
+
+        gameEngine.guess(NoteName.C) // Randomly picked; could be any other note. // exception
     }
 
-    @Test
+    @Test(expected = GameNotStartedException::class)
     fun `guess -- bad -- Should not work before a game started`() {
         gameEngine.setGameListener(mock())
         gameEngine.initialize(mockGameSettings())
-        shouldThrow<GameNotStartedException> {
-            gameEngine.guess(NoteName.C)
-        }
+
+        gameEngine.guess(NoteName.C) // exception
     }
 
-    @Test
+    @Test(expected = GameNotStartedException::class)
     fun `guess -- bad -- Should not work after a game stopped`() {
         gameEngine.setGameListener(mock())
         gameEngine.initialize(mockGameSettings())
         gameEngine.start()
         gameEngine.stop()
-        shouldThrow<GameNotStartedException> { gameEngine.guess(NoteName.C) }
+
+        gameEngine.guess(NoteName.C)  // exception
     }
     //endregion
 
@@ -250,10 +238,11 @@ class GameEngineTest {
         gameEngine.setGameListener(gameListener)
     }
 
-    @Test
+    @Test(expected = GameListenerAlreadySetException::class)
     fun `setGameListener -- bad -- should not work if there's already a listener set`() {
         gameEngine.setGameListener(mock())
-        shouldThrow<GameListenerAlreadySetException> { gameEngine.setGameListener(mock()) }
+
+        gameEngine.setGameListener(mock())  // exception
     }
     //endregion
 
