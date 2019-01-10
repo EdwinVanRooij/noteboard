@@ -1,12 +1,12 @@
 package io.github.edwinvanrooij.noteboard.lib.music
 
 import io.github.edwinvanrooij.noteboard.lib.exceptions.NoteException
-import org.junit.Test
-import io.kotlintest.shouldThrow
-
 import io.github.edwinvanrooij.noteboard.lib.music.NoteName.*
 
+import io.kotlintest.shouldThrow
+
 import org.junit.Assert.*
+import org.junit.Test
 
 class NoteTest {
 
