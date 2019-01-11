@@ -61,4 +61,8 @@ class Note(
 
         return true
     }
+
+    operator fun compareTo(openNote: Note): Int {
+        TODO("implement")
+    }
 }

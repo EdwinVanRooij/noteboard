@@ -4,9 +4,9 @@ import io.github.edwinvanrooij.noteboard.lib.music.Note
 import io.github.edwinvanrooij.noteboard.lib.music.NoteName
 
 class Guitar(
-    val frets: Int // amount of frets on the io.github.edwinvanrooij.guitar
+    frets: Int // amount of frets on the io.github.edwinvanrooij.guitar
 ) {
-    val guitarStrings = ArrayList<GuitarString>()
+    private val guitarStrings = ArrayList<GuitarString>()
 
     init {
         // Add all 6 io.github.edwinvanrooij.guitar strings on standard tuning
@@ -27,19 +27,11 @@ class Guitar(
      * This means there may be multiple items of the same note in the list, if they can be played on multiple frets.
      */
     fun getAllNotes() : List<Note>{
-        return arrayListOf(
-            Note(NoteName.C, 4),
-            Note(NoteName.C, 4),
-            Note(NoteName.C, 4),
-            Note(NoteName.C, 4),
-            Note(NoteName.C, 4),
-            Note(NoteName.C, 4),
-            Note(NoteName.C, 4),
-            Note(NoteName.C, 4),
-            Note(NoteName.C, 4),
-            Note(NoteName.C, 4)
-        )
-        // todo; implement
+        val result = ArrayList<Note>()
+        for (string in guitarStrings) {
+            result.addAll(string.getPlayableNotes())
+        }
+        return result
     }
 
     /**

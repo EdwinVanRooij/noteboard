@@ -1,6 +1,7 @@
 package io.github.edwinvanrooij.noteboard.lib.guitar
 
 import io.github.edwinvanrooij.noteboard.lib.music.Note
+import io.github.edwinvanrooij.noteboard.lib.exceptions.NoteOutOfBoundsException
 import io.github.edwinvanrooij.noteboard.lib.music.NoteName
 
 class GuitarString(
@@ -40,6 +41,20 @@ class GuitarString(
         }
 
         return result
+    }
+
+    /**
+     * Returns the location on this string where the given [note] can be played.
+     * Throws a [NoteOutOfBoundsException] if the given [note] can not be played on this string.
+     */
+    fun getFretLocationByNote(note: Note): FretLocation {
+        if (note < openNote) {
+            throw NoteOutOfBoundsException("Note '$note' is lower than the open note '$openNote' of this string.")
+        }
+        // todo; if note is higher than highest playable note on this string, throw outofbounds
+        
+        // todo; success case; return the correct location
+        TODO()
     }
 
     /**
