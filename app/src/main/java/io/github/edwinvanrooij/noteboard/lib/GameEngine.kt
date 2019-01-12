@@ -53,6 +53,7 @@ class GameEngine : IGameEngine {
         if (polledNote == null) {
             // Polled note is null, so the queue is empty. We've had all notes, end the game.
             stopGame()
+            return
         }
 
         currentNote = polledNote // set the just-picked non-null note as the new currentNote

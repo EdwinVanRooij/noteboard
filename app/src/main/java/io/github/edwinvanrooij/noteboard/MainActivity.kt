@@ -16,7 +16,7 @@ import java.util.*
 
 class MainActivity : Activity(), io.github.edwinvanrooij.noteboard.lib.IGameListener {
     override fun onGameStop() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        Toast.makeText(this, "End!", Toast.LENGTH_LONG).show()
     }
 
     override fun onNewFretLocation(location: FretLocation) {
@@ -268,6 +268,8 @@ class MainActivity : Activity(), io.github.edwinvanrooij.noteboard.lib.IGameList
         if (mPlayer != null) {
             mPlayer!!.setAudioStreamType(AudioManager.STREAM_MUSIC)
             mPlayer!!.start()
+            mPlayer!!.reset()
+            mPlayer!!.release()
         }
     }
 
