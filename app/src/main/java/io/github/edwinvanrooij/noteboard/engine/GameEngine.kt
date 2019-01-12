@@ -1,9 +1,9 @@
-package io.github.edwinvanrooij.noteboard.lib
+package io.github.edwinvanrooij.noteboard.engine
 
-import io.github.edwinvanrooij.noteboard.lib.exceptions.*
-import io.github.edwinvanrooij.noteboard.lib.guitar.Guitar
-import io.github.edwinvanrooij.noteboard.lib.music.Note
-import io.github.edwinvanrooij.noteboard.lib.music.NoteName
+import io.github.edwinvanrooij.noteboard.engine.exceptions.*
+import io.github.edwinvanrooij.noteboard.engine.guitar.Guitar
+import io.github.edwinvanrooij.noteboard.engine.music.Note
+import io.github.edwinvanrooij.noteboard.engine.music.NoteName
 import java.util.*
 
 class GameEngine : IGameEngine {
@@ -115,6 +115,8 @@ class GameEngine : IGameEngine {
      */
     private fun onIncorrectGuess(noteName: NoteName) {
         incorrectlyGuessedNotes.add(currentNote!!)
+        // score remains unchanged
+        gameListener.onScoreChange(score)
         updateAccuracy()
         gameListener.onIncorrectGuess(guessedNoteName = noteName, correctNote = currentNote!!)
         executeNextNoteRoutine()

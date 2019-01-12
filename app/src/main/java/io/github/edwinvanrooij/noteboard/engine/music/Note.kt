@@ -1,7 +1,7 @@
-package io.github.edwinvanrooij.noteboard.lib.music
+package io.github.edwinvanrooij.noteboard.engine.music
 
-import io.github.edwinvanrooij.noteboard.lib.exceptions.NoteException
-import io.github.edwinvanrooij.noteboard.lib.music.NoteName.*
+import io.github.edwinvanrooij.noteboard.engine.exceptions.NoteException
+import io.github.edwinvanrooij.noteboard.engine.music.NoteName.*
 
 class Note(
     val noteName: NoteName,

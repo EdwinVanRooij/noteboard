@@ -5,63 +5,22 @@ import android.app.Activity
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.os.Handler
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
-import io.github.edwinvanrooij.noteboard.lib.GameSettings
-import io.github.edwinvanrooij.noteboard.lib.guitar.FretLocation
+import io.github.edwinvanrooij.noteboard.engine.GameEngine
+import io.github.edwinvanrooij.noteboard.engine.GameSettings
+import io.github.edwinvanrooij.noteboard.engine.IGameListener
+import io.github.edwinvanrooij.noteboard.engine.guitar.FretLocation
+import io.github.edwinvanrooij.noteboard.engine.music.Note
+import io.github.edwinvanrooij.noteboard.engine.music.NoteName
+import io.github.edwinvanrooij.noteboard.engine.music.NoteName.*
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
-class MainActivity : Activity(), io.github.edwinvanrooij.noteboard.lib.IGameListener {
-    override fun onGameStop() {
-        Toast.makeText(this, "End!", Toast.LENGTH_LONG).show()
-    }
+class MainActivity : Activity(), IGameListener {
 
-    override fun onNewFretLocation(location: FretLocation) {
-        playSound(location)
-        showQuestionMark(location)
-        println("Showed (or not) question mark on: $location")
-    }
-
-    override fun onCorrectGuess(note: io.github.edwinvanrooij.noteboard.lib.music.Note) {
-        currentTextView!!.text = "${note.noteName}${note.octave}"
-        currentTextView!!.setTextColor(resources.getColor(R.color.correct))
-
-//        val handler = Handler()
-//        handler.postDelayed({
-//            Thread.sleep(0) // sleep 1s on correct guess
-//            Thread.sleep(1000) // sleep 1s on correct guess
-
-            currentTextView!!.text = previousText
-            currentTextView!!.visibility = View.INVISIBLE
-
-//            gameEngine.n  enextNote()
-//        }, 0)
-//    }, 1000)
-    }
-
-    override fun onIncorrectGuess(
-        guessedNoteName: io.github.edwinvanrooij.noteboard.lib.music.NoteName,
-        correctNote: io.github.edwinvanrooij.noteboard.lib.music.Note
-    ) {
-        currentTextView!!.text = "${correctNote.noteName}${correctNote.octave}"
-        currentTextView!!.setTextColor(resources.getColor(R.color.incorrect))
-
-//        val handler = Handler()
-//        handler.postDelayed({
-//            Thread.sleep(0) // sleep 1.5s on incorrect guess
-//            Thread.sleep(1500) // sleep 1.5s on incorrect guess
-
-            currentTextView!!.text = previousText
-            currentTextView!!.visibility = View.INVISIBLE
-//        }, 0)
-//    }, 1000)
-
-    }
-
-    private var gameEngine: io.github.edwinvanrooij.noteboard.lib.GameEngine = io.github.edwinvanrooij.noteboard.lib.GameEngine()
+    private var gameEngine: GameEngine = GameEngine()
 
     private var previousText: String = ""
     private var currentTextView: TextView? = null
@@ -96,27 +55,53 @@ class MainActivity : Activity(), io.github.edwinvanrooij.noteboard.lib.IGameList
         setGuessButtonListeners()
     }
 
+    override fun onIncorrectGuess(guessedNoteName: NoteName, correctNote: Note) {
+        currentTextView!!.text = "${correctNote.noteName}${correctNote.octave}"
+        currentTextView!!.setTextColor(resources.getColor(R.color.incorrect))
+        //sleep?
+        currentTextView!!.text = previousText
+        currentTextView!!.visibility = View.INVISIBLE
+
+    }
+
+    override fun onGameStop() {
+        Toast.makeText(this, "End!", Toast.LENGTH_LONG).show()
+    }
+
+    override fun onNewFretLocation(location: FretLocation) {
+        playSound(location)
+        showQuestionMark(location)
+        println("Showed (or not) question mark on: $location")
+    }
+
+    override fun onCorrectGuess(note: Note) {
+        currentTextView!!.text = "${note.noteName}${note.octave}"
+        currentTextView!!.setTextColor(resources.getColor(R.color.correct))
+        //sleep?
+        currentTextView!!.text = previousText
+        currentTextView!!.visibility = View.INVISIBLE
+    }
     private fun setGuessButtonListeners() {
         btnC.setOnClickListener {
-            gameEngine.guess(io.github.edwinvanrooij.noteboard.lib.music.NoteName.C)
+            gameEngine.guess(C)
         }
         btnD.setOnClickListener {
-            gameEngine.guess(io.github.edwinvanrooij.noteboard.lib.music.NoteName.D)
+            gameEngine.guess(D)
         }
         btnE.setOnClickListener {
-            gameEngine.guess(io.github.edwinvanrooij.noteboard.lib.music.NoteName.E)
+            gameEngine.guess(E)
         }
         btnF.setOnClickListener {
-            gameEngine.guess(io.github.edwinvanrooij.noteboard.lib.music.NoteName.F)
+            gameEngine.guess(F)
         }
         btnG.setOnClickListener {
-            gameEngine.guess(io.github.edwinvanrooij.noteboard.lib.music.NoteName.G)
+            gameEngine.guess(G)
         }
         btnA.setOnClickListener {
-            gameEngine.guess(io.github.edwinvanrooij.noteboard.lib.music.NoteName.A)
+            gameEngine.guess(A)
         }
         btnB.setOnClickListener {
-            gameEngine.guess(io.github.edwinvanrooij.noteboard.lib.music.NoteName.B)
+            gameEngine.guess(B)
         }
     }
 

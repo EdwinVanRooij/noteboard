@@ -1,12 +1,12 @@
-package io.github.edwinvanrooij.noteboard.lib
+package io.github.edwinvanrooij.noteboard.engine
 
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
-import io.github.edwinvanrooij.noteboard.lib.exceptions.*
-import io.github.edwinvanrooij.noteboard.lib.guitar.FretLocation
-import io.github.edwinvanrooij.noteboard.lib.music.NoteName
+import io.github.edwinvanrooij.noteboard.engine.exceptions.*
+import io.github.edwinvanrooij.noteboard.engine.guitar.FretLocation
+import io.github.edwinvanrooij.noteboard.engine.music.NoteName
 import org.junit.Before
 import org.junit.Test
 

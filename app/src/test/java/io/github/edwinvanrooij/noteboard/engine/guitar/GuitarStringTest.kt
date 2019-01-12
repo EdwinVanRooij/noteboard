@@ -1,11 +1,10 @@
-package io.github.edwinvanrooij.noteboard.lib.guitar
+package io.github.edwinvanrooij.noteboard.engine.guitar
 
 import org.junit.Test
 
 import org.junit.Assert.*
-import io.github.edwinvanrooij.noteboard.lib.music.Note
-import io.github.edwinvanrooij.noteboard.lib.music.NoteName.*
-import kotlin.math.exp
+import io.github.edwinvanrooij.noteboard.engine.music.Note
+import io.github.edwinvanrooij.noteboard.engine.music.NoteName.*
 
 class GuitarStringTest {
 

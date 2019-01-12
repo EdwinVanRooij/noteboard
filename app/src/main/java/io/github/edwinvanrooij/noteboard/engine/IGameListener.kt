@@ -1,8 +1,8 @@
-package io.github.edwinvanrooij.noteboard.lib
+package io.github.edwinvanrooij.noteboard.engine
 
-import io.github.edwinvanrooij.noteboard.lib.guitar.FretLocation
-import io.github.edwinvanrooij.noteboard.lib.music.Note
-import io.github.edwinvanrooij.noteboard.lib.music.NoteName
+import io.github.edwinvanrooij.noteboard.engine.guitar.FretLocation
+import io.github.edwinvanrooij.noteboard.engine.music.Note
+import io.github.edwinvanrooij.noteboard.engine.music.NoteName
 
 interface IGameListener {
 

@@ -1,3 +1,3 @@
-package io.github.edwinvanrooij.noteboard.lib.exceptions
+package io.github.edwinvanrooij.noteboard.engine.exceptions
 
 class NoteOutOfBoundsException(message: String) : Exception(message)

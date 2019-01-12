@@ -1,8 +1,8 @@
-package io.github.edwinvanrooij.noteboard.lib.guitar
+package io.github.edwinvanrooij.noteboard.engine.guitar
 
-import io.github.edwinvanrooij.noteboard.lib.music.Note
-import io.github.edwinvanrooij.noteboard.lib.exceptions.NoteOutOfBoundsException
-import io.github.edwinvanrooij.noteboard.lib.music.NoteName
+import io.github.edwinvanrooij.noteboard.engine.music.Note
+import io.github.edwinvanrooij.noteboard.engine.exceptions.NoteOutOfBoundsException
+import io.github.edwinvanrooij.noteboard.engine.music.NoteName
 
 class GuitarString(
     private val stringNumber: Int, // on a guitar, string 1 is the 'high'/'thin' E4 string, while string 6 is the 'thick' or 'low' E2 string
