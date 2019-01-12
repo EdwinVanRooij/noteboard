@@ -5,6 +5,7 @@ import io.github.edwinvanrooij.noteboard.lib.exceptions.NoteOutOfBoundsException
 import io.github.edwinvanrooij.noteboard.lib.music.NoteName
 
 class GuitarString(
+    private val stringNumber: Int, // on a guitar, string 1 is the 'high'/'thin' E4 string, while string 6 is the 'thick' or 'low' E2 string
     private val openNote: Note,
     private val frets: Int // amount of frets beneath the string
 ) {
@@ -19,7 +20,7 @@ class GuitarString(
         var currentFret = 0
 
         result.add(currentNote)
-        currentNote = openNote.getNextNote()
+        currentNote = openNote.getNoteAbove()
 
         // Keep adding notes as playable as long as they fit on the fretboard
         while (thisNoteFitsOnFretboard(currentFret, currentNote, frets)) {
@@ -37,7 +38,7 @@ class GuitarString(
                 currentFret += 2
             }
 
-            currentNote = currentNote.getNextNote()
+            currentNote = currentNote.getNoteAbove()
         }
 
         return result
@@ -48,13 +49,54 @@ class GuitarString(
      * Throws a [NoteOutOfBoundsException] if the given [note] can not be played on this string.
      */
     fun getFretLocationByNote(note: Note): FretLocation {
+        // Check if note is below lowest note
         if (note < openNote) {
             throw NoteOutOfBoundsException("Note '$note' is lower than the open note '$openNote' of this string.")
         }
-        // todo; if note is higher than highest playable note on this string, throw outofbounds
-        
-        // todo; success case; return the correct location
-        TODO()
+
+        // Check if note is above highest note
+        if (note > getHighestStringNote()) {
+            throw NoteOutOfBoundsException("Note '$note' is lower than the open note '$openNote' of this string.")
+        }
+
+        // Note is on this string, get the location
+        var currentFret = 0
+        var currentNote = openNote
+        while (true) {
+            if (currentNote == note) {
+                // Current note equals the required note, return the location where we're currently at
+                return FretLocation(stringNumber, currentFret)
+            } else {
+                // We haven't reached the required note yet, move one note up
+                currentFret += currentNote.getDistanceBetweenNoteAbove()
+                currentNote = currentNote.getNoteAbove()
+            }
+        }
+    }
+
+    /**
+     * Returns the highest playable note on this string.
+     */
+    fun getHighestStringNote(): Note {
+        var currentlyHighestNote = openNote
+        var currentFret = 0
+
+        while (true) {
+            val nextNoteFretDistance =
+                currentlyHighestNote.getDistanceBetweenNoteAbove() // 1 semitone = 1 fret on the guitar
+            val nextNote = currentlyHighestNote.getNoteAbove()
+
+            // Only change the currently highest note if the distance it takes to move from the current fret to the next fret fits on the guitar
+            val nextFretDistance = currentFret + nextNoteFretDistance
+            if (nextFretDistance <= frets) { // frets = max amount of frets on this guitar
+                currentlyHighestNote = nextNote
+                currentFret += nextNoteFretDistance
+            } else {
+                break
+            }
+        }
+
+        return currentlyHighestNote
     }
 
     /**

@@ -12,12 +12,12 @@ class Guitar(
         // Add all 6 io.github.edwinvanrooij.guitar strings on standard tuning
         guitarStrings.addAll(
             arrayOf(
-                GuitarString(Note(NoteName.E, 4), frets), // string 1
-                GuitarString(Note(NoteName.B, 3), frets), // string 2
-                GuitarString(Note(NoteName.G, 3), frets), // string 3
-                GuitarString(Note(NoteName.D, 3), frets), // string 4
-                GuitarString(Note(NoteName.A, 2), frets), // string 5
-                GuitarString(Note(NoteName.E, 2), frets) // string 6
+                GuitarString(1, Note(NoteName.E, 4), frets), // string 1
+                GuitarString(2, Note(NoteName.B, 3), frets), // string 2
+                GuitarString(3, Note(NoteName.G, 3), frets), // string 3
+                GuitarString(4,Note(NoteName.D, 3), frets), // string 4
+                GuitarString(5,Note(NoteName.A, 2), frets), // string 5
+                GuitarString(6,Note(NoteName.E, 2), frets) // string 6
             )
         )
     }

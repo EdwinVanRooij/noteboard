@@ -9,9 +9,20 @@ class Note(
 ) {
 
     /**
+     * Returns the distance in semitones between this and the next note.
+     */
+    fun getDistanceBetweenNoteAbove(): Int {
+        return if (noteName == B || noteName == E) { // Only between B to C and E to F, the distance is 1 semitone
+            1
+        } else { // In all other cases, the distance between two notes is 2 semitones
+            2
+        }
+    }
+
+    /**
      * Returns the next [Note] relative to this note in the musical alphabet, including its [octave].
      */
-    fun getNextNote(): Note {
+    fun getNoteAbove(): Note {
         if (noteName == C && octave == 8) {
             throw NoteException("Notes in this app can't go above C8 (highest playable note on the piano)")
         }
@@ -32,7 +43,7 @@ class Note(
     /**
      * Returns the previous [Note] relative to this note in the musical alphabet, including its [octave].
      */
-    fun getPreviousNote(): Note {
+    fun getNoteBelow(): Note {
         if (noteName == C && octave == 0) {
             throw NoteException("Notes can't go below the C in the octave 0 (C0)")
         }
@@ -51,18 +62,36 @@ class Note(
     }
 
     override fun equals(other: Any?): Boolean {
-        if (this === other) return true
-        if (javaClass != other?.javaClass) return false
-
-        other as Note
-
-        if (noteName != other.noteName) return false
-        if (octave != other.octave) return false
-
-        return true
+        val otherNote = other as Note
+        return this.noteName == otherNote.noteName && this.octave == otherNote.octave
     }
 
-    operator fun compareTo(openNote: Note): Int {
-        TODO("implement")
+    operator fun compareTo(otherNote: Note): Int {
+        // This note is in a lower octave, so we compare lower than the other note
+        if (this.octave < otherNote.octave) {
+            return -1
+        }
+
+        // This note is in a higher octave, so we compare higher than the other note
+        if (this.octave > otherNote.octave) {
+            return 1
+        }
+
+        // The notes are in an equal octave, compare the NoteNames
+        if (this.octave == otherNote.octave) {
+            if (this.noteName.ordinal > otherNote.noteName.ordinal) {
+                // The ordinal of the NoteName goes from low to high; C is the lowest, B is the highest note in an octave.
+                // This note's ordinal is higher, so we compare higher
+                return 1
+            } else if (this.noteName.ordinal < otherNote.noteName.ordinal) {
+                // This note's ordinal is lower, so we compare lower
+                return -1
+            } else {
+                // Ordinals are equal, so both notes are equal in pitch
+                return 0
+            }
+        }
+
+        throw Exception("Should be impossible to get here. Comparing pitch of notes to each other.")
     }
 }
