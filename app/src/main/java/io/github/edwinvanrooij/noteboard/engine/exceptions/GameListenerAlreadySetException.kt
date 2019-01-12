@@ -1,3 +1,3 @@
-package io.github.edwinvanrooij.noteboard.lib.exceptions
+package io.github.edwinvanrooij.noteboard.engine.exceptions
 
 class GameListenerAlreadySetException(message: String) : Exception(message)

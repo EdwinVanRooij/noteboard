@@ -1,4 +1,4 @@
-package io.github.edwinvanrooij.noteboard.lib.music
+package io.github.edwinvanrooij.noteboard.engine.music
 
 enum class NoteName {
     C,

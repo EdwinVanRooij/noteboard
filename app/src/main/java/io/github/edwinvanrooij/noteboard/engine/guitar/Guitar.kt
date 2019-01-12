@@ -1,8 +1,8 @@
-package io.github.edwinvanrooij.noteboard.lib.guitar
+package io.github.edwinvanrooij.noteboard.engine.guitar
 
-import io.github.edwinvanrooij.noteboard.lib.exceptions.NoteOutOfBoundsException
-import io.github.edwinvanrooij.noteboard.lib.music.Note
-import io.github.edwinvanrooij.noteboard.lib.music.NoteName
+import io.github.edwinvanrooij.noteboard.engine.exceptions.NoteOutOfBoundsException
+import io.github.edwinvanrooij.noteboard.engine.music.Note
+import io.github.edwinvanrooij.noteboard.engine.music.NoteName
 
 class Guitar(
     frets: Int // amount of frets on the io.github.edwinvanrooij.guitar
@@ -47,6 +47,13 @@ class Guitar(
                 locations.add(string.getFretLocationByNote(note))
             } catch (ignored: NoteOutOfBoundsException) {}
         }
+
+        if (locations.size == 0) {
+            // No strings could find a location for this note, throw exception
+            throw NoteOutOfBoundsException("No string on this guitar could play the note $note")
+        }
+
+        // We have at least one FretLocation, pick one and return it
         return locations.shuffled().take(1)[0]
     }
 }

@@ -1,8 +1,8 @@
-package io.github.edwinvanrooij.noteboard.lib.guitar
+package io.github.edwinvanrooij.noteboard.engine.guitar
 
-import io.github.edwinvanrooij.noteboard.lib.exceptions.NoteOutOfBoundsException
-import io.github.edwinvanrooij.noteboard.lib.music.Note
-import io.github.edwinvanrooij.noteboard.lib.music.NoteName
+import io.github.edwinvanrooij.noteboard.engine.exceptions.NoteOutOfBoundsException
+import io.github.edwinvanrooij.noteboard.engine.music.Note
+import io.github.edwinvanrooij.noteboard.engine.music.NoteName
 import org.junit.Test
 
 import org.junit.Assert.*

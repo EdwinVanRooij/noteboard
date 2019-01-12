@@ -1,4 +1,4 @@
-package io.github.edwinvanrooij.noteboard.lib.guitar
+package io.github.edwinvanrooij.noteboard.engine.guitar
 
 data class FretLocation(
     val stringNumber: Int,
