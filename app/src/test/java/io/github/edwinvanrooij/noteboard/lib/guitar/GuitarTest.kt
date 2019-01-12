@@ -39,16 +39,23 @@ class GuitarTest {
         val b5 = Note(NoteName.B, 5) // highest
         val c4 = Note(NoteName.C, 4) // middle
 
-        assertEquals(FretLocation(6, 0), guitar.getFretLocation(e2))
-        assertEquals(FretLocation(1, 19), guitar.getFretLocation(b5))
+        val expected1 = FretLocation(6, 0)
+        val actual1 = guitar.getFretLocation(e2)
+
+        val expected2 = FretLocation(1, 19)
+        val actual2 = guitar.getFretLocation(b5)
+
+        assertEquals(expected1, actual1)
+        assertEquals(expected2, actual2)
 
         // Check if the returned location is one of the actually possible locations
         val fretLocation = guitar.getFretLocation(c4)
         var found = false
         val possibleLocations = arrayOf(
-            FretLocation(2, 2),
-            FretLocation(3, 6),
-            FretLocation(3, 11)
+            FretLocation(2, 1),
+            FretLocation(3, 5),
+            FretLocation(4, 10),
+            FretLocation(5, 15)
         )
         for (l in possibleLocations) {
             if (fretLocation == l) {
