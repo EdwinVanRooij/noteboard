@@ -24,6 +24,9 @@ class MainActivity : Activity(), IGameListener {
     private var previousText: String = ""
     private var currentTextView: TextView? = null
 
+    private var seconds: Int = 0
+    private var timerThread: Thread? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -71,7 +74,6 @@ class MainActivity : Activity(), IGameListener {
     override fun onNewNote(note: Note, location: FretLocation) {
         soundManager.playSound(note)
         showQuestionMark(location)
-        println("Should have showed question mark on: $location")
     }
 
     @SuppressLint("SetTextI18n")
@@ -107,9 +109,7 @@ class MainActivity : Activity(), IGameListener {
         }
     }
 
-    private fun showQuestionMark(
-        location: FretLocation
-    ) {
+    private fun showQuestionMark(location: FretLocation) {
         when {
             location.stringNumber == 1 -> {
                 val parent = findViewById<View>(R.id.string1)
@@ -204,34 +204,34 @@ class MainActivity : Activity(), IGameListener {
 
     override fun onGameStart() {
         Toast.makeText(this, "Start!", Toast.LENGTH_LONG).show()
-        Thread(Runnable {
-            startTimer()
-        }).start()
-//        txtTime.text = 0
-//        val str = "Game started!"
-//        println(str)
-//        Toast.makeText(this, str, Toast.LENGTH_SHORT)
-//            .show()
+        startTimer()
     }
 
-    fun stopTimer() {
-        // todo; stop the timer
+    /**
+     * Stops the timer thread and resets the seconds.
+     */
+    private fun stopTimer() {
+        timerThread!!.interrupt()
+        seconds = 0
     }
 
-    fun startTimer() {
-        var seconds = 0
-
-        run {
-            val timer = Timer()
-            timer.schedule(object : TimerTask() {
-                override fun run() {
-                    runOnUiThread {
-                        txtTime.text = secondsToHumanReadableString(seconds)
+    /**
+     * Initializes and starts the timer thread, updating the timer TextView on the ui thread every second.
+     */
+    private fun startTimer() {
+        txtTime.text = secondsToHumanReadableString(seconds)
+        timerThread = object : Thread() {
+            override fun run() {
+                try {
+                    while (!this.isInterrupted) {
+                        Thread.sleep(1000)
+                        txtTime.text = secondsToHumanReadableString(++seconds)
                     }
-                    seconds++
+                } catch (e: InterruptedException) {
                 }
-            }, 0, 1000)
+            }
         }
+        timerThread!!.start()
     }
 
     /**
