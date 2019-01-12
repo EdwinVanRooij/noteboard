@@ -26,6 +26,7 @@ class MainActivity : Activity(), IGameListener {
 
     private var seconds: Int = 0
     private var timerThread: Thread? = null
+    private var newNoteThread: Thread? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,8 +73,21 @@ class MainActivity : Activity(), IGameListener {
     }
 
     override fun onNewNote(note: Note, location: FretLocation) {
-        soundManager.playSound(note)
-        showQuestionMark(location)
+//        newNoteThread = object : Thread() {
+//            override fun run() {
+//                try {
+//                    while (!this.isInterrupted) {
+//                        Thread.sleep(1000)
+//                        runOnUiThread {
+                            soundManager.playSound(note)
+                            showQuestionMark(location)
+//                        }
+//                    }
+//                } catch (e: InterruptedException) {
+//                }
+//            }
+//        }
+//        newNoteThread!!.start()
     }
 
     @SuppressLint("SetTextI18n")
