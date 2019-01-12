@@ -13,7 +13,9 @@ class SoundManager(val context: Context) {
     fun playSound(note: Note) {
         if (note.octave == 2) {
             if (note.noteName == A) {
-//                mPlayer = MediaPlayer.create(context, R.raw.A2)
+                mPlayer = MediaPlayer.create(context, R.raw.a2)
+            } else if (note.noteName == B) {
+//                mPlayer = MediaPlayer.create(context, R.raw.b2)
             }
         }
 //        when {
