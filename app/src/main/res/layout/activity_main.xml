@@ -117,12 +117,12 @@
                     android:text="🔊"
             />
             <Button
-                    android:id="@+id/btnReplay"
+                    android:id="@+id/btnStop"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textSize="10dp"
-                    android:text="🔁"
+                    android:text="⏹"
             />
             <Button
                     android:id="@+id/btnPlay"

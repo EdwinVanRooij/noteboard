@@ -42,12 +42,12 @@ class MainActivity : Activity(), IGameListener {
             gameEngine.start()
         }
 
-        btnReplay.setOnClickListener {
+        btnStop.setOnClickListener {
             if (currentTextView != null) {
                 currentTextView!!.text = previousText
                 currentTextView!!.visibility = View.INVISIBLE
             }
-            gameEngine.start()
+            gameEngine.stop()
         }
 
         setGuessButtonListeners()
@@ -65,10 +65,11 @@ class MainActivity : Activity(), IGameListener {
 
     override fun onGameStop() {
         Toast.makeText(this, "End!", Toast.LENGTH_LONG).show()
+        stopTimer()
     }
 
     override fun onNewNote(note: Note, location: FretLocation) {
-        playSound(note)
+        soundManager.playSound(note)
         showQuestionMark(location)
         println("Should have showed question mark on: $location")
     }
@@ -104,10 +105,6 @@ class MainActivity : Activity(), IGameListener {
         btnB.setOnClickListener {
             gameEngine.guess(B)
         }
-    }
-
-    private fun playSound(note: Note) {
-        soundManager.playSound(note)
     }
 
     private fun showQuestionMark(
@@ -173,7 +170,7 @@ class MainActivity : Activity(), IGameListener {
         previousText = currentTextView!!.text.toString()
 
         currentTextView!!.visibility = View.VISIBLE
-        currentTextView!!.setTextColor(resources.getColor(R.color.neutral))
+        currentTextView!!.setTextColor(resources.getColor(R.color.black))
         currentTextView!!.setShadowLayer(5F, 0F, 0F, resources.getColor(R.color.green1))
         currentTextView!!.text = "?"
     }
@@ -206,6 +203,7 @@ class MainActivity : Activity(), IGameListener {
     }
 
     override fun onGameStart() {
+        Toast.makeText(this, "Start!", Toast.LENGTH_LONG).show()
         Thread(Runnable {
             startTimer()
         }).start()
@@ -216,8 +214,11 @@ class MainActivity : Activity(), IGameListener {
 //            .show()
     }
 
-    fun startTimer() {
+    fun stopTimer() {
+        // todo; stop the timer
+    }
 
+    fun startTimer() {
         var seconds = 0
 
         run {
