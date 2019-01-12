@@ -17,9 +17,9 @@ interface IGameListener {
     fun onGameStop()
 
     /**
-     * Occurs when a new fret [location] was picked for the user to guess the note for.
+     * Occurs when a new [note] was picked, to be guessed at the given fret [location].
      */
-    fun onNewFretLocation(location: FretLocation)
+    fun onNewNote(note: Note, location: FretLocation)
 
     /**
      * Occurs when the user's [accuracy] has changed.

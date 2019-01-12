@@ -58,7 +58,8 @@ class GameEngine : IGameEngine {
 
         currentNote = polledNote // set the just-picked non-null note as the new currentNote
 
-        gameListener.onNewFretLocation(
+        gameListener.onNewNote(
+            currentNote!!,
             guitar.getFretLocation(currentNote!!)
         )
     }

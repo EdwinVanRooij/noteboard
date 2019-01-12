@@ -24,7 +24,7 @@ class GameEngineTest {
     }
 
     // onGameStart is called
-    // onNewFretLocation is called
+    // onNewNote is called
     // ---
     // Should not work without gameSettings initialized
     // Should not work without a game listener
@@ -46,7 +46,7 @@ class GameEngineTest {
         gameEngine.setGameListener(listener)
         gameEngine.initialize(mockGameSettings())
         gameEngine.start()
-        verify(listener).onNewFretLocation(any())
+        verify(listener).onNewNote(any())
     }
 
     @Test(expected = GameSettingsNotSetException::class)
@@ -146,7 +146,7 @@ class GameEngineTest {
 
         // Capture the prompted fretLocation
         argumentCaptor<FretLocation>().apply {
-            verify(listener).onNewFretLocation(capture())
+            verify(listener).onNewNote(capture())
 
             // We can't test if we guessed correctly, because the picked note is random. Below is what it'd look like.
             // 'firstValue' is the fretLocation we have to guess
@@ -165,7 +165,7 @@ class GameEngineTest {
 
         // Capture the prompted fretLocation
         argumentCaptor<FretLocation>().apply {
-            verify(listener).onNewFretLocation(capture())
+            verify(listener).onNewNote(capture())
 
             // We can't test if we guessed incorrectly, because the picked note is random. Below is what it'd look like.
             // 'firstValue' is the fretLocation we have to guess
