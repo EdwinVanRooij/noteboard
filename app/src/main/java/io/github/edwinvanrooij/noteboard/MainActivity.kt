@@ -14,7 +14,6 @@ import io.github.edwinvanrooij.noteboard.engine.music.Note
 import io.github.edwinvanrooij.noteboard.engine.music.NoteName
 import io.github.edwinvanrooij.noteboard.engine.music.NoteName.*
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.*
 
 class MainActivity : Activity(), IGameListener {
 
@@ -24,9 +23,14 @@ class MainActivity : Activity(), IGameListener {
     private var previousText: String = ""
     private var currentTextView: TextView? = null
 
-    private var seconds: Int = 0
+    private var timerSeconds: Int = 0
     private var timerThread: Thread? = null
+
+    private val newNoteDelay: Long = 1100L // in ms
     private var newNoteThread: Thread? = null
+
+    private val guessFeedbackRemovalDelay: Long = 900L // in ms
+    private var guessFeedbackRemovalThread: Thread? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,10 +65,24 @@ class MainActivity : Activity(), IGameListener {
     override fun onIncorrectGuess(guessedNoteName: NoteName, correctNote: Note) {
         currentTextView!!.text = "${correctNote.noteName}${correctNote.octave}"
         currentTextView!!.setTextColor(resources.getColor(R.color.incorrect))
-        //sleep?
-        currentTextView!!.text = previousText
-        currentTextView!!.visibility = View.INVISIBLE
 
+        removeGuessFeedback()
+    }
+
+    private fun removeGuessFeedback() {
+        guessFeedbackRemovalThread = object : Thread() {
+            override fun run() {
+                try {
+                    Thread.sleep(guessFeedbackRemovalDelay)
+                    runOnUiThread {
+                        currentTextView!!.text = previousText
+                        currentTextView!!.visibility = View.INVISIBLE
+                    }
+                } catch (e: InterruptedException) {
+                }
+            }
+        }
+        guessFeedbackRemovalThread!!.start()
     }
 
     override fun onGameStop() {
@@ -73,30 +91,26 @@ class MainActivity : Activity(), IGameListener {
     }
 
     override fun onNewNote(note: Note, location: FretLocation) {
-//        newNoteThread = object : Thread() {
-//            override fun run() {
-//                try {
-//                    while (!this.isInterrupted) {
-//                        Thread.sleep(1000)
-//                        runOnUiThread {
-                            soundManager.playSound(note)
-                            showQuestionMark(location)
-//                        }
-//                    }
-//                } catch (e: InterruptedException) {
-//                }
-//            }
-//        }
-//        newNoteThread!!.start()
+        newNoteThread = object : Thread() {
+            override fun run() {
+                try {
+                    Thread.sleep(newNoteDelay)
+                    runOnUiThread {
+                        soundManager.playSound(note)
+                        showQuestionMark(location)
+                    }
+                } catch (e: InterruptedException) {
+                }
+            }
+        }
+        newNoteThread!!.start()
     }
 
     @SuppressLint("SetTextI18n")
     override fun onCorrectGuess(note: Note) {
         currentTextView!!.text = "${note.noteName}${note.octave}"
         currentTextView!!.setTextColor(resources.getColor(R.color.correct))
-        //sleep?
-        currentTextView!!.text = previousText
-        currentTextView!!.visibility = View.INVISIBLE
+        removeGuessFeedback()
     }
 
     private fun setGuessButtonListeners() {
@@ -222,24 +236,24 @@ class MainActivity : Activity(), IGameListener {
     }
 
     /**
-     * Stops the timer thread and resets the seconds.
+     * Stops the timer thread and resets the timerSeconds.
      */
     private fun stopTimer() {
         timerThread!!.interrupt()
-        seconds = 0
+        timerSeconds = 0
     }
 
     /**
      * Initializes and starts the timer thread, updating the timer TextView on the ui thread every second.
      */
     private fun startTimer() {
-        txtTime.text = secondsToHumanReadableString(seconds)
+        txtTime.text = secondsToHumanReadableString(timerSeconds)
         timerThread = object : Thread() {
             override fun run() {
                 try {
                     while (!this.isInterrupted) {
                         Thread.sleep(1000)
-                        txtTime.text = secondsToHumanReadableString(++seconds)
+                        txtTime.text = secondsToHumanReadableString(++timerSeconds)
                     }
                 } catch (e: InterruptedException) {
                 }
