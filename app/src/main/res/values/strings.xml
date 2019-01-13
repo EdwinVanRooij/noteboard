@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Noteboard</string>
+    <string name="game_not_started">Start the game first!</string>
 </resources>

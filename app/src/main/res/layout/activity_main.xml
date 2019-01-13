@@ -14,7 +14,6 @@
         android:layout_weight="0.15"
         android:background="@color/green2"
         android:orientation="horizontal"
-        android:padding="4dp"
         android:weightSum="4">
 
         <LinearLayout
@@ -23,7 +22,7 @@
             android:layout_weight="1"
             android:background="@color/green4"
             android:orientation="vertical"
-            android:padding="4dp"
+            android:padding="8dp"
             android:weightSum="2">
 
             <TextView
@@ -51,7 +50,7 @@
             android:layout_weight="1"
             android:background="@color/green4"
             android:orientation="vertical"
-            android:padding="4dp"
+            android:padding="8dp"
             android:weightSum="2">
 
             <TextView
@@ -79,7 +78,7 @@
             android:layout_weight="1"
             android:background="@color/green4"
             android:orientation="vertical"
-            android:padding="4dp"
+            android:padding="8dp"
             android:weightSum="2">
 
             <TextView
@@ -109,21 +108,25 @@
             android:orientation="horizontal"
             android:weightSum="2">
 
-            <Button
+            <at.markushi.ui.CircleButton
                 android:id="@+id/btnStop"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="⏹"
-                android:textSize="10sp" />
+                android:padding="12dp"
+                android:src="@drawable/ic_stop_black_24dp"
+                app:cb_color="#3498db"
+                app:cb_pressedRingWidth="8dip" />
 
-            <Button
+            <at.markushi.ui.CircleButton
                 android:id="@+id/btnPlay"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="▶"
-                android:textSize="10sp" />
+                android:padding="12dp"
+                android:src="@drawable/ic_play_arrow_black_24dp"
+                app:cb_color="#3498db"
+                app:cb_pressedRingWidth="8dip" />
         </LinearLayout>
 
 
@@ -252,54 +255,77 @@
                 android:orientation="horizontal"
                 android:weightSum="7">
 
-                <Button
+                <at.markushi.ui.CircleButton
                     android:id="@+id/btnC"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="C" />
+                    android:padding="22dp"
+                    android:src="@drawable/c"
+                    app:cb_color="#3498db"
+                    app:cb_pressedRingWidth="8dip" />
 
-                <Button
+                <at.markushi.ui.CircleButton
                     android:id="@+id/btnD"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="D" />
+                    android:padding="22dp"
+                    android:src="@drawable/d"
+                    app:cb_color="#3498db"
+                    app:cb_pressedRingWidth="8dip" />
 
-                <Button
+                <at.markushi.ui.CircleButton
                     android:id="@+id/btnE"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="E" />
+                    android:padding="22dp"
+                    android:src="@drawable/e"
+                    app:cb_color="#3498db"
+                    app:cb_pressedRingWidth="8dip" />
 
-                <Button
+                <at.markushi.ui.CircleButton
                     android:id="@+id/btnF"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="F" />
+                    android:padding="22dp"
+                    android:src="@drawable/f"
+                    app:cb_color="#3498db"
+                    app:cb_pressedRingWidth="8dip" />
 
-                <Button
+                <at.markushi.ui.CircleButton
                     android:id="@+id/btnG"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="G" />
+                    android:padding="22dp"
+                    android:src="@drawable/g"
+                    app:cb_color="#3498db"
+                    app:cb_pressedRingWidth="8dip" />
 
-                <Button
+                <at.markushi.ui.CircleButton
                     android:id="@+id/btnA"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="A" />
+                    android:padding="22dp"
+                    android:src="@drawable/a"
+                    app:cb_color="#3498db"
+                    app:cb_pressedRingWidth="8dip" />
 
-                <Button
+
+                <at.markushi.ui.CircleButton
                     android:id="@+id/btnB"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="B" />
+                    android:padding="22dp"
+                    android:src="@drawable/b"
+                    app:cb_color="#3498db"
+                    app:cb_pressedRingWidth="8dip" />
+
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

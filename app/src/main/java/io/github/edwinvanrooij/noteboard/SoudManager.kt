@@ -12,10 +12,11 @@ class SoundManager(private val context: Context) {
 
     private var mPlayer: MediaPlayer? = null
 
+    private var mPlayerCorrect: MediaPlayer = MediaPlayer.create(context, R.raw.correct)
+    private var mPlayerIncorrect: MediaPlayer = MediaPlayer.create(context, R.raw.incorrect)
+
     fun playSound(note: Note) {
         if (mPlayer != null) {
-//            mPlayer!!.setAudioStreamType(AudioManager.STREAM_MUSIC)
-//        mPlayer!!.start()
             mPlayer!!.reset()
             mPlayer!!.release()
         }
@@ -78,13 +79,24 @@ class SoundManager(private val context: Context) {
         }
     }
 
-
-    fun repeatLastSound() {
+    fun repeatLastNote() {
         if (mPlayer != null) {
             mPlayer!!.setAudioStreamType(AudioManager.STREAM_MUSIC)
             mPlayer!!.stop()
             mPlayer!!.prepare()
             mPlayer!!.start()
         }
+    }
+
+    fun playCorrectSound() {
+        mPlayer!!.setAudioStreamType(AudioManager.STREAM_MUSIC)
+        mPlayer!!.stop()
+        mPlayerCorrect.start()
+    }
+
+    fun playIncorrectSound() {
+        mPlayer!!.setAudioStreamType(AudioManager.STREAM_MUSIC)
+        mPlayer!!.stop()
+        mPlayerIncorrect.start()
     }
 }
