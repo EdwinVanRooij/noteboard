@@ -40,7 +40,7 @@ class MainActivity : Activity(), IGameListener {
         setContentView(R.layout.activity_main)
 
         gameEngine = GameEngine()
-        gameEngine.initialize(GameSettings(0))
+        gameEngine.initialize(GameSettings(15))
         gameEngine.setGameListener(this)
 
         soundManager = SoundManager(this)
