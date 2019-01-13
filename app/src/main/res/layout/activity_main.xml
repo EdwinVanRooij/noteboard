@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -35,6 +36,7 @@
                 android:textSize="10sp" />
 
             <TextView
+                android:id="@+id/tvTime"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -62,6 +64,7 @@
                 android:textSize="10sp" />
 
             <TextView
+                android:id="@+id/tvScore"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -89,6 +92,7 @@
                 android:textSize="10sp" />
 
             <TextView
+                android:id="@+id/tvAccuracy"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -103,16 +107,10 @@
             android:layout_weight="1"
             android:background="@color/green4"
             android:orientation="horizontal"
-            android:weightSum="3">
+            android:weightSum="2">
 
             <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="🔊"
-                android:textSize="10sp" />
-
-            <Button
+                android:id="@+id/btnStop"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -120,18 +118,19 @@
                 android:textSize="10sp" />
 
             <Button
+                android:id="@+id/btnPlay"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="▶"
                 android:textSize="10sp" />
-            <!--android:text="▻"-->
         </LinearLayout>
 
 
     </LinearLayout>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/llBg"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.6"
@@ -237,89 +236,12 @@
         android:orientation="vertical"
         android:padding="4dp">
 
-        <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_weight="0.50"-->
-        <!--android:background="@color/green4"-->
-        <!--android:orientation="horizontal"-->
-        <!--android:weightSum="1"-->
-        <!--&gt;-->
-        <!--<LinearLayout-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_weight="1"-->
-        <!--android:background="@color/green5"-->
-        <!--android:orientation="horizontal"-->
-        <!--android:paddingEnd="16dp"-->
-        <!--android:paddingStart="16dp"-->
-        <!--android:weightSum="6"-->
-        <!--&gt;-->
-
-        <!--<Button-->
-        <!--android:id="@+id/btnCsharp"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginEnd="16dp"-->
-        <!--android:layout_marginStart="16dp"-->
-        <!--android:layout_weight="1"-->
-        <!--android:text="C♯"-->
-        <!--/>-->
-        <!--<Button-->
-        <!--android:id="@+id/btnEflat"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginEnd="16dp"-->
-        <!--android:layout_marginStart="16dp"-->
-        <!--android:layout_weight="1"-->
-        <!--android:text="E♭"-->
-        <!--/>-->
-        <!--<Button-->
-        <!--android:id="@+id/btnNone"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_weight="1"-->
-        <!--android:text=""-->
-        <!--android:visibility="invisible"-->
-        <!--/>-->
-
-        <!--<Button-->
-        <!--android:id="@+id/btnFsharp"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginEnd="16dp"-->
-        <!--android:layout_marginStart="16dp"-->
-        <!--android:layout_weight="1"-->
-        <!--android:text="F♯"-->
-        <!--/>-->
-        <!--<Button-->
-        <!--android:id="@+id/btnAflat"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginEnd="16dp"-->
-        <!--android:layout_marginStart="16dp"-->
-        <!--android:layout_weight="1"-->
-        <!--android:text="A♭"-->
-        <!--/>-->
-        <!--<Button-->
-        <!--android:id="@+id/btnBflat"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginEnd="16dp"-->
-        <!--android:layout_marginStart="16dp"-->
-        <!--android:layout_weight="1"-->
-        <!--android:text="B♭"-->
-        <!--/>-->
-        <!--</LinearLayout>-->
-
-        <!--</LinearLayout>-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.50"
             android:background="@color/green4"
             android:orientation="horizontal"
-            android:weightSum="1"
             tools:ignore="NestedWeights">
 
             <LinearLayout
@@ -331,49 +253,54 @@
                 android:weightSum="7">
 
                 <Button
+                    android:id="@+id/btnC"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="C" />
 
                 <Button
+                    android:id="@+id/btnD"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="D" />
 
                 <Button
+                    android:id="@+id/btnE"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="E" />
 
                 <Button
+                    android:id="@+id/btnF"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="F" />
 
                 <Button
+                    android:id="@+id/btnG"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="G" />
 
                 <Button
+                    android:id="@+id/btnA"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="A" />
 
                 <Button
+                    android:id="@+id/btnB"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="B" />
             </LinearLayout>
-
         </LinearLayout>
-
     </LinearLayout>
 </LinearLayout>

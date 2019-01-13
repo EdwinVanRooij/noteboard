@@ -13,6 +13,13 @@ class SoundManager(private val context: Context) {
     private var mPlayer: MediaPlayer? = null
 
     fun playSound(note: Note) {
+        if (mPlayer != null) {
+//            mPlayer!!.setAudioStreamType(AudioManager.STREAM_MUSIC)
+//        mPlayer!!.start()
+            mPlayer!!.reset()
+            mPlayer!!.release()
+        }
+
         when {
             note.octave == 2 ->
                 when {
@@ -68,13 +75,15 @@ class SoundManager(private val context: Context) {
         if (mPlayer != null) {
             mPlayer!!.setAudioStreamType(AudioManager.STREAM_MUSIC)
             mPlayer!!.start()
-            mPlayer!!.reset()
-            mPlayer!!.release()
         }
     }
 
+
     fun repeatLastSound() {
         if (mPlayer != null) {
+            mPlayer!!.setAudioStreamType(AudioManager.STREAM_MUSIC)
+            mPlayer!!.stop()
+            mPlayer!!.prepare()
             mPlayer!!.start()
         }
     }

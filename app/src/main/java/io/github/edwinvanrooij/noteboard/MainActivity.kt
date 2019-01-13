@@ -1,11 +1,15 @@
 package io.github.edwinvanrooij.noteboard
 
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.view.animation.LinearInterpolator
 import android.widget.TextView
 import android.widget.Toast
+import io.github.edwinvanrooij.noteboard.R.id.*
 import io.github.edwinvanrooij.noteboard.engine.GameEngine
 import io.github.edwinvanrooij.noteboard.engine.GameSettings
 import io.github.edwinvanrooij.noteboard.engine.IGameListener
@@ -26,10 +30,10 @@ class MainActivity : Activity(), IGameListener {
     private var timerSeconds: Int = 0
     private var timerThread: Thread? = null
 
-    private val newNoteDelay: Long = 1100L // in ms
+    private val newNoteDelay: Long = 2000L // in ms
     private var newNoteThread: Thread? = null
 
-    private val guessFeedbackRemovalDelay: Long = 900L // in ms
+    private val guessFeedbackRemovalDelay: Long = 1500L // in ms
     private var guessFeedbackRemovalThread: Thread? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,8 +46,7 @@ class MainActivity : Activity(), IGameListener {
 
         soundManager = SoundManager(this)
 
-
-        btnRepeat.setOnClickListener {
+        llBg.setOnClickListener {
             soundManager.repeatLastSound()
         }
 
@@ -248,13 +251,13 @@ class MainActivity : Activity(), IGameListener {
      * Initializes and starts the timer thread, updating the timer TextView on the ui thread every second.
      */
     private fun startTimer() {
-        txtTime.text = secondsToHumanReadableString(timerSeconds)
+        tvTime.text = secondsToHumanReadableString(timerSeconds)
         timerThread = object : Thread() {
             override fun run() {
                 try {
                     while (!this.isInterrupted) {
                         Thread.sleep(1000)
-                        txtTime.text = secondsToHumanReadableString(++timerSeconds)
+                        tvTime.text = secondsToHumanReadableString(++timerSeconds)
                     }
                 } catch (e: InterruptedException) {
                 }
@@ -274,10 +277,10 @@ class MainActivity : Activity(), IGameListener {
     override fun onAccuracyChange(accuracy: Double) {
         val in100s = (accuracy * 100)
         val rounded = String.format("%.2f", in100s)
-        txtAccuracy.text = "$rounded%"
+        tvAccuracy.text = "$rounded%"
     }
 
     override fun onScoreChange(score: Int) {
-        txtScore.text = score.toString()
+        tvScore.text = score.toString()
     }
 }
