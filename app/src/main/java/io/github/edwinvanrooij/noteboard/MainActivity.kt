@@ -42,6 +42,7 @@ class MainActivity : Activity(), IGameListener {
 
         soundManager = SoundManager(this)
 
+
         btnRepeat.setOnClickListener {
             soundManager.repeatLastSound()
         }

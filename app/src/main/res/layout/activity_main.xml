@@ -1,137 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/green1"
-              android:orientation="vertical"
-              android:padding="4dp"
->
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/green1"
+    android:orientation="vertical"
+    android:padding="4dp">
 
     <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.15"
-            android:background="@color/green2"
-            android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.15"
+        android:background="@color/green2"
+        android:orientation="horizontal"
+        android:padding="4dp"
+        android:weightSum="4">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/green4"
+            android:orientation="vertical"
             android:padding="4dp"
-            android:weightSum="4"
-    >
-        <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:background="@color/green4"
-                android:orientation="vertical"
-                android:padding="4dp"
-                android:weightSum="2"
-        >
+                android:background="@color/green5"
+                android:text="Time"
+                android:textAlignment="center"
+                android:textSize="10sp" />
+
             <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:background="@color/green5"
-                    android:text="Time"
-                    android:textSize="10dp"
-                    android:textAlignment="center"
-            />
-            <TextView
-                    android:id="@+id/txtTime"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:textSize="10dp"
-                    android:background="@color/green5"
-                    android:textAlignment="center"
-            />
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/green5"
+                android:textAlignment="center"
+                android:textSize="10sp" />
         </LinearLayout>
+
         <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/green4"
+            android:orientation="vertical"
+            android:padding="4dp"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:background="@color/green4"
-                android:orientation="vertical"
-                android:padding="4dp"
-                android:weightSum="2"
-        >
+                android:background="@color/green5"
+                android:text="Score"
+                android:textAlignment="center"
+                android:textSize="10sp" />
+
             <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:textSize="10dp"
-                    android:background="@color/green5"
-                    android:text="Score"
-                    android:textAlignment="center"
-            />
-            <TextView
-                    android:id="@+id/txtScore"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:textSize="10dp"
-                    android:background="@color/green5"
-                    android:textAlignment="center"
-            />
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/green5"
+                android:textAlignment="center"
+                android:textSize="10sp" />
         </LinearLayout>
+
         <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/green4"
+            android:orientation="vertical"
+            android:padding="4dp"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:background="@color/green4"
-                android:orientation="vertical"
-                android:padding="4dp"
-                android:weightSum="2"
-        >
+                android:background="@color/green5"
+                android:text="Accuracy"
+                android:textAlignment="center"
+                android:textSize="10sp" />
+
             <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:textSize="10dp"
-                    android:layout_weight="1"
-                    android:background="@color/green5"
-                    android:text="Accuracy"
-                    android:textAlignment="center"
-            />
-            <TextView
-                    android:id="@+id/txtAccuracy"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:textSize="10dp"
-                    android:layout_weight="1"
-                    android:background="@color/green5"
-                    android:textAlignment="center"
-            />
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/green5"
+                android:textAlignment="center"
+                android:textSize="10sp" />
         </LinearLayout>
+
         <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/green4"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <Button
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/green4"
-                android:orientation="horizontal"
-                android:weightSum="3">
+                android:text="🔊"
+                android:textSize="10sp" />
+
             <Button
-                    android:id="@+id/btnRepeat"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="10dp"
-                    android:text="🔊"
-            />
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="⏹"
+                android:textSize="10sp" />
+
             <Button
-                    android:id="@+id/btnStop"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textSize="10dp"
-                    android:text="⏹"
-            />
-            <Button
-                    android:id="@+id/btnPlay"
-                    android:layout_width="0dp"
-                    android:textSize="10dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="▶"
-            />
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="▶"
+                android:textSize="10sp" />
             <!--android:text="▻"-->
         </LinearLayout>
 
@@ -139,103 +132,95 @@
     </LinearLayout>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                  android:layout_width="match_parent"
-                  android:layout_height="0dp"
-                  android:layout_weight="0.6"
-                  android:background="@drawable/without"
-                  android:orientation="horizontal"
-                  android:padding="4dp"
-    >
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.6"
+        android:background="@drawable/without"
+        android:orientation="horizontal"
+        android:padding="4dp">
 
         <!--start Fretboard Container-->
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                      android:layout_width="match_parent"
-                      android:layout_height="match_parent"
-                      android:orientation="vertical"
-                      android:weightSum="6"
-        >
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="6">
             <!--start GuitarString little E-->
             <FrameLayout
-                    android:id="@+id/string1"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-            >
+                android:id="@+id/string1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
                 <include
-                        layout="@layout/string"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                />
+                    layout="@layout/string"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
             </FrameLayout>
             <!--end GuitarString little E-->
             <!--start GuitarString B-->
             <FrameLayout
-                    android:id="@+id/string2"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-            >
+                android:id="@+id/string2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
                 <include
-                        layout="@layout/string"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                />
+                    layout="@layout/string"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
             </FrameLayout>
             <!--end GuitarString B-->
             <!--start GuitarString G-->
             <FrameLayout
-                    android:id="@+id/string3"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-            >
+                android:id="@+id/string3"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
                 <include
-                        layout="@layout/string"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                />
+                    layout="@layout/string"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
             </FrameLayout>
             <!--end GuitarString G-->
             <!--start GuitarString D-->
             <FrameLayout
-                    android:id="@+id/string4"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-            >
+                android:id="@+id/string4"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
                 <include
-                        layout="@layout/string"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                />
+                    layout="@layout/string"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
             </FrameLayout>
             <!--end GuitarString D-->
             <!--start GuitarString A-->
             <FrameLayout
-                    android:id="@+id/string5"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-            >
+                android:id="@+id/string5"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
                 <include
-                        layout="@layout/string"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                />
+                    layout="@layout/string"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
             </FrameLayout>
             <!--end GuitarString A-->
             <!--start GuitarString big E-->
             <FrameLayout
-                    android:id="@+id/string6"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-            >
+                android:id="@+id/string6"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
                 <include
-                        layout="@layout/string"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                />
+                    layout="@layout/string"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" />
             </FrameLayout>
             <!--end GuitarString big E-->
         </LinearLayout>
@@ -245,13 +230,12 @@
     </LinearLayout>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                  android:layout_width="match_parent"
-                  android:layout_height="0dp"
-                  android:layout_weight="0.25"
-                  android:background="@color/green3"
-                  android:orientation="vertical"
-                  android:padding="4dp"
-    >
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.25"
+        android:background="@color/green3"
+        android:orientation="vertical"
+        android:padding="4dp">
 
         <!--<LinearLayout-->
         <!--android:layout_width="match_parent"-->
@@ -330,73 +314,63 @@
 
         <!--</LinearLayout>-->
         <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="0.50"
-                android:background="@color/green4"
-                android:orientation="horizontal"
-                android:weightSum="1"
-                tools:ignore="NestedWeights"
-        >
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.50"
+            android:background="@color/green4"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            tools:ignore="NestedWeights">
+
             <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/green5"
+                android:orientation="horizontal"
+                android:weightSum="7">
+
+                <Button
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@color/green5"
-                    android:orientation="horizontal"
-                    android:weightSum="7"
-            >
+                    android:text="C" />
 
                 <Button
-                        android:id="@+id/btnC"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="C"
-                />
-                <Button
-                        android:id="@+id/btnD"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="D"
-                />
-                <Button
-                        android:id="@+id/btnE"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="E"
-                />
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="D" />
 
                 <Button
-                        android:id="@+id/btnF"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="F"
-                />
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="E" />
+
                 <Button
-                        android:id="@+id/btnG"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="G"
-                />
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="F" />
+
                 <Button
-                        android:id="@+id/btnA"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="A"
-                />
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="G" />
+
                 <Button
-                        android:id="@+id/btnB"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="B"
-                />
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="A" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="B" />
             </LinearLayout>
 
         </LinearLayout>
