@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Noteboard</string>
     <string name="game_not_started">Start the game first!</string>
+    <string name="game_already_started">Stop the currently ongoing game first!</string>
 </resources>

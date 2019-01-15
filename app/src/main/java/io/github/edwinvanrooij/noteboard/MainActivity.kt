@@ -50,7 +50,11 @@ class MainActivity : Activity(), IGameListener {
         }
 
         btnPlay.setOnClickListener {
-            gameEngine.start()
+            try {
+                gameEngine.start()
+            } catch (e: GameAlreadyStartedException) {
+                Toast.makeText(this, R.string.game_already_started, Toast.LENGTH_SHORT).show()
+            }
         }
 
         btnStop.setOnClickListener {
@@ -58,7 +62,11 @@ class MainActivity : Activity(), IGameListener {
                 currentTextView!!.text = previousText
                 currentTextView!!.visibility = View.INVISIBLE
             }
-            gameEngine.stop()
+            try {
+                gameEngine.stop()
+            } catch (e: GameNotStartedException) {
+                Toast.makeText(this, R.string.game_not_started, Toast.LENGTH_SHORT).show()
+            }
         }
 
         setGuessButtonListeners()
