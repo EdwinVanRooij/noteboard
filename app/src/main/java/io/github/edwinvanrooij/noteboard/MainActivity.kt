@@ -112,7 +112,7 @@ class MainActivity : Activity(), IGameListener {
 
     @SuppressLint("SetTextI18n")
     override fun onCorrectGuess(note: Note) {
-        currentTextView!!.text = "${note.noteName}${note.octave}"
+        currentTextView!!.text = "${note.noteName}"
         currentTextView!!.setTextColor(resources.getColor(R.color.correct))
         soundManager.playCorrectSound()
 
