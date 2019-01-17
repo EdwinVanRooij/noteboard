@@ -10,6 +10,7 @@ import android.widget.Toast
 import io.github.edwinvanrooij.noteboard.engine.GameEngine
 import io.github.edwinvanrooij.noteboard.engine.GameSettings
 import io.github.edwinvanrooij.noteboard.engine.IGameListener
+import io.github.edwinvanrooij.noteboard.engine.exceptions.GameAlreadyStartedException
 import io.github.edwinvanrooij.noteboard.engine.exceptions.GameNotStartedException
 import io.github.edwinvanrooij.noteboard.engine.guitar.FretLocation
 import io.github.edwinvanrooij.noteboard.engine.music.Note
