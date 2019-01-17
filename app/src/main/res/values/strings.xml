@@ -2,4 +2,7 @@
     <string name="app_name">Noteboard</string>
     <string name="game_not_started">Start the game first!</string>
     <string name="game_already_started">Stop the currently ongoing game first!</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
