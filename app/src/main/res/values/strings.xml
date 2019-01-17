@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">Noteboard</string>
+
     <string name="game_not_started">Start the game first!</string>
     <string name="game_already_started">Stop the currently ongoing game first!</string>
+
+    <string name="placeholder_landing">Landing fragment</string>
+    <string name="placeholder_results">Results fragment</string>
+    <string name="wait_before_display">Please wait until a question mark has displayed!</string>
+    <string name="btn_stats">Stats</string>
+    <string name="btn_play">Play!</string>
+    <string name="btn_options">Options</string>
 </resources>
