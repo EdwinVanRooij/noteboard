@@ -6,6 +6,7 @@ import android.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.fragment_results.*
 
 
 /**
@@ -13,6 +14,8 @@ import android.view.ViewGroup
  *
  */
 class ResultsFragment : Fragment() {
+
+    private lateinit var resultsFragmentListener: ResultsFragmentListener
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,5 +25,15 @@ class ResultsFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_results, container, false)
     }
 
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+        btnDone.setOnClickListener {
+            this.resultsFragmentListener.onDone()
+        }
+    }
+
+    fun setResultsFragmentListener(resultsFragmentListener: ResultsFragmentListener) {
+        this.resultsFragmentListener = resultsFragmentListener
+    }
 }
