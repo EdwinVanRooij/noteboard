@@ -1,25 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:materialdesign="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".LandingFragment"
-    android:orientation="horizontal"
-    >
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".LandingFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/placeholder_landing" />
+        android:layout_above="@id/btnStart"
+        android:weightSum="3">
 
-    <at.markushi.ui.CircleButton
+        <ImageView
+            android:id="@+id/left"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/guitar_rtl" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@android:style/TextAppearance.Holo.Large"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textAlignment="center" />
+
+        <ImageView
+            android:id="@+id/right"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/guitar_ltr" />
+    </LinearLayout>
+
+    <!--style="@android:style/Widget.Material.Button.Colored"-->
+    <Button
         android:id="@+id/btnStart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="12dp"
-        android:src="@drawable/ic_play_arrow_black_24dp"
-        app:cb_color="#3498db"
-        app:cb_pressedRingWidth="8dip" />
+        style="@android:style/Widget.Material.Button.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_above="@id/btnStats"
+        android:layout_marginLeft="64dp"
+        android:layout_marginRight="64dp"
+        android:text="@string/btn_play" />
 
-</LinearLayout>
+    <Button
+        android:id="@+id/btnStats"
+        style="@android:style/Widget.Material.Button.Borderless.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_above="@id/btnOptions"
+        android:layout_marginLeft="64dp"
+        android:layout_marginRight="64dp"
+        android:text="@string/btn_stats" />
+
+    <Button
+        android:id="@+id/btnOptions"
+        style="@android:style/Widget.Material.Button.Borderless.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="64dp"
+        android:layout_marginRight="64dp"
+        android:text="@string/btn_options" />
+
+</RelativeLayout>

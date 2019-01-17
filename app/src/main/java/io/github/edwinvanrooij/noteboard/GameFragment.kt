@@ -94,6 +94,10 @@ class GameFragment : Fragment(), IGameListener {
 
     @SuppressLint("SetTextI18n")
     override fun onIncorrectGuess(guessedNoteName: NoteName, correctNote: Note) {
+        if (currentTextView == null) {
+            return
+        }
+
         currentTextView!!.text = "${correctNote.noteName}${correctNote.octave}"
         currentTextView!!.setTextColor(resources.getColor(R.color.incorrect))
         soundManager.playIncorrectSound()
@@ -106,9 +110,14 @@ class GameFragment : Fragment(), IGameListener {
             override fun run() {
                 try {
                     Thread.sleep(guessFeedbackRemovalDelay)
+                    if (activity == null) {
+                        return
+                    }
                     activity.runOnUiThread {
-                        currentTextView!!.text = previousText
-                        currentTextView!!.visibility = View.INVISIBLE
+                        if (currentTextView != null) {
+                            currentTextView!!.text = previousText
+                            currentTextView!!.visibility = View.INVISIBLE
+                        }
                     }
                 } catch (e: InterruptedException) {
                 }
@@ -129,6 +138,9 @@ class GameFragment : Fragment(), IGameListener {
             override fun run() {
                 try {
                     Thread.sleep(newNoteDelay)
+                    if (activity == null) {
+                        return
+                    }
                     activity.runOnUiThread {
                         soundManager.playSound(note)
                         showQuestionMark(location)
@@ -142,6 +154,10 @@ class GameFragment : Fragment(), IGameListener {
 
     @SuppressLint("SetTextI18n")
     override fun onCorrectGuess(note: Note) {
+        if (currentTextView == null) {
+            return
+        }
+
         currentTextView!!.text = "${note.noteName}"
         currentTextView!!.setTextColor(resources.getColor(R.color.correct))
         soundManager.playCorrectSound()
@@ -152,6 +168,10 @@ class GameFragment : Fragment(), IGameListener {
     private fun setGuessButtonListeners() {
         fun guess(note: NoteName) {
             try {
+                if (currentTextView == null) {
+                    Toast.makeText(activity, R.string.wait_before_display, Toast.LENGTH_SHORT).show()
+                    return
+                }
                 gameEngine.guess(note)
             } catch (e: GameNotStartedException) {
                 Toast.makeText(activity, R.string.game_not_started, Toast.LENGTH_SHORT).show()
@@ -182,6 +202,10 @@ class GameFragment : Fragment(), IGameListener {
 
     private fun showQuestionMark(location: FretLocation) {
         currentTextView = getTextViewByFretLocation(location)
+
+        if (currentTextView == null) {
+            return
+        }
 
         previousText = currentTextView!!.text.toString()
 
