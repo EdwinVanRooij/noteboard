@@ -13,6 +13,7 @@ import android.view.animation.ScaleAnimation
 import android.widget.TextView
 import android.widget.Toast
 import io.github.edwinvanrooij.noteboard.engine.GameEngine
+import io.github.edwinvanrooij.noteboard.engine.GameResults
 import io.github.edwinvanrooij.noteboard.engine.GameSettings
 import io.github.edwinvanrooij.noteboard.engine.IGameListener
 import io.github.edwinvanrooij.noteboard.engine.exceptions.GameAlreadyStartedException
@@ -126,11 +127,11 @@ class GameFragment : Fragment(), IGameListener {
         guessFeedbackRemovalThread!!.start()
     }
 
-    override fun onGameStop() {
+    override fun onGameStop(results: GameResults) {
         Toast.makeText(activity, "End!", Toast.LENGTH_LONG).show()
         stopTimer()
 
-        gameFragmentListener.onGameOver()
+        gameFragmentListener.onGameOver(results)
     }
 
     override fun onNewNote(note: Note, location: FretLocation) {

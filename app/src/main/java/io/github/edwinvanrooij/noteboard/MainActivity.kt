@@ -3,6 +3,11 @@ package io.github.edwinvanrooij.noteboard
 import android.app.Activity
 import android.app.Fragment
 import android.os.Bundle
+import android.transition.Explode
+import android.transition.Fade
+import android.transition.Slide
+import android.view.Gravity
+import io.github.edwinvanrooij.noteboard.engine.GameResults
 
 
 class MainActivity : Activity(), GameFragmentListener, LandingFragmentListener, ResultsFragmentListener {
@@ -21,23 +26,33 @@ class MainActivity : Activity(), GameFragmentListener, LandingFragmentListener, 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        startFragment(landingFragment)
+        showFragment(landingFragment)
     }
 
-    override fun onGameOver() {
-        startFragment(resultsFragment)
+    override fun onGameOver(results: GameResults) {
+        showFragment(resultsFragment)
     }
 
     override fun onStartGame() {
-        startFragment(gameFragment)
+        showFragment(gameFragment)
     }
 
     override fun onDone() {
-        startFragment(landingFragment)
+        showFragment(landingFragment)
     }
 
-    private fun startFragment(fragment: Fragment) {
-        fragment.arguments = intent.extras
+    private fun showFragment(fragment: Fragment) {
+        // Set enter transition
+        val enterTransition = Fade()
+        enterTransition.duration = 200
+        enterTransition.startDelay = 200
+        fragment.enterTransition = enterTransition
+
+        // Set exit transition
+        val exitTransition = Fade()
+        exitTransition.duration = 200
+        fragment.exitTransition = exitTransition
+
         fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
     }
 }

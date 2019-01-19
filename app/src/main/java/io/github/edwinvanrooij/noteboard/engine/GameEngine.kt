@@ -67,7 +67,13 @@ class GameEngine : IGameEngine {
     private fun stopGame() {
         currentNote = null
         gameStarted = false
-        gameListener.onGameStop()
+        val gameResults = generateGameResults()
+        gameListener.onGameStop(gameResults)
+    }
+
+    private fun generateGameResults(): GameResults {
+//        TODO()
+        return GameResults(0, 0, 0.0)
     }
 
     override fun stop() {
