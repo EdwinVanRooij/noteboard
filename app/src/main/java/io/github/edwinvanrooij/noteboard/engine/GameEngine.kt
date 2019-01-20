@@ -72,7 +72,8 @@ class GameEngine : IGameEngine {
     }
 
     private fun generateGameResults(): GameResults {
-        return GameResults(score, accuracy)
+        val points = score * (accuracy * 100).toInt()
+        return GameResults(score, accuracy, points)
     }
 
     override fun stop() {

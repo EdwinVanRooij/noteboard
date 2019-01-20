@@ -30,6 +30,11 @@ class MainActivity : Activity(), GameFragmentListener, LandingFragmentListener, 
     }
 
     override fun onGameOver(results: GameResults) {
+        val bundle = Bundle()
+
+        bundle.putSerializable(KEY_GAME_RESULTS, results)
+        resultsFragment.arguments = bundle
+
         showFragment(resultsFragment)
     }
 

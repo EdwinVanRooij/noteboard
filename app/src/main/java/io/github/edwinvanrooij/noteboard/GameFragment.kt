@@ -24,6 +24,7 @@ import io.github.edwinvanrooij.noteboard.engine.music.NoteName
 import io.github.edwinvanrooij.noteboard.engine.music.NoteName.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_game.*
+import kotlin.math.roundToInt
 
 
 /**
@@ -40,7 +41,7 @@ class GameFragment : Fragment(), IGameListener {
     private var previousText: String = ""
     private var currentTextView: TextView? = null
 
-    private var timerSeconds: Int = 0
+    private var timerSeconds: Int = 0 // is set on game start
     private var timerThread: Thread? = null
 
     private val newNoteDelay: Long = 1500L // in ms
@@ -70,29 +71,30 @@ class GameFragment : Fragment(), IGameListener {
             soundManager.repeatLastNote()
         }
 
-        btnPlay.setOnClickListener {
-            soundManager.playButtonClick()
+        gameEngine.start()
+//        btnPlay.setOnClickListener {
+//            soundManager.playButtonClick()
+//
+//            try {
+//                gameEngine.start()
+//            } catch (e: GameAlreadyStartedException) {
+//                Toast.makeText(activity, R.string.game_already_started, Toast.LENGTH_SHORT).show()
+//            }
+//        }
 
-            try {
-                gameEngine.start()
-            } catch (e: GameAlreadyStartedException) {
-                Toast.makeText(activity, R.string.game_already_started, Toast.LENGTH_SHORT).show()
-            }
-        }
-
-        btnStop.setOnClickListener {
-            soundManager.playButtonClick()
-
-            if (currentTextView != null) {
-                currentTextView!!.text = previousText
-                currentTextView!!.visibility = View.INVISIBLE
-            }
-            try {
-                gameEngine.stop()
-            } catch (e: GameNotStartedException) {
-                Toast.makeText(activity, R.string.game_not_started, Toast.LENGTH_SHORT).show()
-            }
-        }
+//        btnStop.setOnClickListener {
+//            soundManager.playButtonClick()
+//
+//            if (currentTextView != null) {
+//                currentTextView!!.text = previousText
+//                currentTextView!!.visibility = View.INVISIBLE
+//            }
+//            try {
+//                gameEngine.stop()
+//            } catch (e: GameNotStartedException) {
+//                Toast.makeText(activity, R.string.game_not_started, Toast.LENGTH_SHORT).show()
+//            }
+//        }
 
         setGuessButtonListeners()
     }
@@ -132,9 +134,6 @@ class GameFragment : Fragment(), IGameListener {
     }
 
     override fun onGameStop(results: GameResults) {
-        Toast.makeText(activity, "End!", Toast.LENGTH_LONG).show()
-        stopTimer()
-
         gameFragmentListener.onGameOver(results)
     }
 
@@ -277,29 +276,50 @@ class GameFragment : Fragment(), IGameListener {
     }
 
     override fun onGameStart() {
-        Toast.makeText(activity, "Start!", Toast.LENGTH_LONG).show()
         startTimer()
     }
 
-    /**
-     * Stops the timer thread and resets the timerSeconds.
-     */
-    private fun stopTimer() {
-        timerThread!!.interrupt()
-        timerSeconds = 0
-    }
+//    /**
+//     * Stops the timer thread and resets the timerSeconds.
+//     */
+//    private fun stopTimer() {
+//        timerThread!!.interrupt()
+//        timerSeconds = 0
+//    }
 
     /**
      * Initializes and starts the timer thread, updating the timer TextView on the ui thread every second.
      */
     private fun startTimer() {
+        timerSeconds = 60
         tvTime.text = secondsToHumanReadableString(timerSeconds)
         timerThread = object : Thread() {
             override fun run() {
                 try {
                     while (!isInterrupted) {
                         Thread.sleep(1000)
-                        tvTime.text = secondsToHumanReadableString(++timerSeconds)
+                        timerSeconds -= 1
+                        activity.runOnUiThread {
+                            tvTime.text = secondsToHumanReadableString(timerSeconds)
+                        }
+
+                        if (timerSeconds == 0) {
+                            interrupt() // interrupting this thread means stopping this game
+                            timerThread!!.interrupt() // interrupting this thread means stopping this game
+
+                            // Thread was interrupted, stop the game
+                            activity.runOnUiThread {
+                                if (currentTextView != null) {
+                                    currentTextView!!.text = previousText
+                                    currentTextView!!.visibility = View.INVISIBLE
+                                }
+                                try {
+                                    gameEngine.stop()
+                                } catch (e: GameNotStartedException) {
+                                    Toast.makeText(activity, R.string.game_not_started, Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                        }
                     }
                 } catch (e: InterruptedException) {
                 }
@@ -317,9 +337,7 @@ class GameFragment : Fragment(), IGameListener {
 
     @SuppressLint("SetTextI18n")
     override fun onAccuracyChange(accuracy: Double) {
-        val in100s = (accuracy * 100)
-        val rounded = String.format("%.2f", in100s)
-        tvAccuracy.text = "$rounded%"
+        tvAccuracy.text = accuracyToString(accuracy)
     }
 
     override fun onScoreChange(score: Int) {
