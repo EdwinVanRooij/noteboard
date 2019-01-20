@@ -71,6 +71,8 @@ class GameFragment : Fragment(), IGameListener {
         }
 
         btnPlay.setOnClickListener {
+            soundManager.playButtonClick()
+
             try {
                 gameEngine.start()
             } catch (e: GameAlreadyStartedException) {
@@ -79,6 +81,8 @@ class GameFragment : Fragment(), IGameListener {
         }
 
         btnStop.setOnClickListener {
+            soundManager.playButtonClick()
+
             if (currentTextView != null) {
                 currentTextView!!.text = previousText
                 currentTextView!!.visibility = View.INVISIBLE
@@ -99,7 +103,7 @@ class GameFragment : Fragment(), IGameListener {
             return
         }
 
-        currentTextView!!.text = "${correctNote.noteName}${correctNote.octave}"
+        currentTextView!!.text = "${correctNote.noteName}"
         currentTextView!!.setTextColor(resources.getColor(R.color.incorrect))
         soundManager.playIncorrectSound()
 

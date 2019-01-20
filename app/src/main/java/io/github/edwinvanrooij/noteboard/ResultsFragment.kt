@@ -17,6 +17,8 @@ class ResultsFragment : Fragment() {
 
     private lateinit var resultsFragmentListener: ResultsFragmentListener
 
+    private lateinit var soundManager: SoundManager
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,9 +29,15 @@ class ResultsFragment : Fragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        soundManager = SoundManager(activity)
 
-        btnDone.setOnClickListener {
-            this.resultsFragmentListener.onDone()
+        btnPlayAgain.setOnClickListener {
+            soundManager.playButtonClick()
+            this.resultsFragmentListener.onPlayAgain()
+        }
+        btnMenu.setOnClickListener {
+            soundManager.playButtonClick()
+            this.resultsFragmentListener.onMenu()
         }
     }
 

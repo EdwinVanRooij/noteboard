@@ -72,8 +72,7 @@ class GameEngine : IGameEngine {
     }
 
     private fun generateGameResults(): GameResults {
-//        TODO()
-        return GameResults(0, 0, 0.0)
+        return GameResults(score, accuracy)
     }
 
     override fun stop() {

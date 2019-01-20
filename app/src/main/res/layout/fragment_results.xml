@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     tools:context=".ResultsFragment">
 
     <TextView
@@ -12,14 +12,35 @@
         android:layout_height="wrap_content"
         android:text="@string/placeholder_results" />
 
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:paddingLeft="64dp"
+        android:paddingRight="64dp"
+        android:paddingBottom="16dp"
+        android:weightSum="4"
+        tools:context=".ResultsFragment">
+        <!--style="@android:style/Widget.Material.Button.Colored"-->
 
-    <at.markushi.ui.CircleButton
-        android:id="@+id/btnDone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="12dp"
-        android:src="@drawable/ic_play_arrow_black_24dp"
-        app:cb_color="#3498db"
-        app:cb_pressedRingWidth="8dip" />
+        <Button
+            android:id="@+id/btnMenu"
+            style="@android:style/Widget.Material.Button.Borderless.Colored"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_weight="1"
+            android:text="@string/btn_menu" />
 
+        <Button
+            android:id="@+id/btnPlayAgain"
+            style="@android:style/Widget.Material.Button.Colored"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_weight="3"
+            android:text="@string/btn_play_again" />
+
+    </LinearLayout>
 </LinearLayout>

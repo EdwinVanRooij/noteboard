@@ -10,4 +10,6 @@
     <string name="btn_stats">Stats</string>
     <string name="btn_play">Play!</string>
     <string name="btn_options">Options</string>
+    <string name="btn_play_again">Play again!</string>
+    <string name="btn_menu">menu</string>
 </resources>

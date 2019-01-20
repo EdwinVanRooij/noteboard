@@ -18,6 +18,8 @@ class LandingFragment : Fragment() {
 
     private lateinit var landingFragmentListener: LandingFragmentListener
 
+    private lateinit var soundManager: SoundManager
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,8 +30,10 @@ class LandingFragment : Fragment() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        soundManager = SoundManager(activity)
 
         btnStart.setOnClickListener {
+            soundManager.playButtonClick()
             this.landingFragmentListener.onStartGame()
         }
     }

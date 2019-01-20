@@ -37,8 +37,12 @@ class MainActivity : Activity(), GameFragmentListener, LandingFragmentListener, 
         showFragment(gameFragment)
     }
 
-    override fun onDone() {
+    override fun onMenu() {
         showFragment(landingFragment)
+    }
+
+    override fun onPlayAgain() {
+        showFragment(gameFragment)
     }
 
     private fun showFragment(fragment: Fragment) {
