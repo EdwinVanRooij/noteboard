@@ -34,7 +34,15 @@ class LandingFragment : Fragment() {
 
         btnStart.setOnClickListener {
             soundManager.playButtonClick()
-            this.landingFragmentListener.onStartGame()
+            this.landingFragmentListener.onStartClick()
+        }
+        btnStats.setOnClickListener {
+            soundManager.playButtonClick()
+            this.landingFragmentListener.onStatsClick()
+        }
+        btnOptions.setOnClickListener {
+            soundManager.playButtonClick()
+            this.landingFragmentListener.onOptionsClick()
         }
     }
 

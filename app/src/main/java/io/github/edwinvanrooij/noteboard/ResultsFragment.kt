@@ -14,7 +14,6 @@ import kotlin.math.roundToInt
 
 /**
  * A simple [Fragment] subclass.
- *
  */
 class ResultsFragment : Fragment() {
 

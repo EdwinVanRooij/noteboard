@@ -3,10 +3,8 @@ package io.github.edwinvanrooij.noteboard
 import android.app.Activity
 import android.app.Fragment
 import android.os.Bundle
-import android.transition.Explode
 import android.transition.Fade
-import android.transition.Slide
-import android.view.Gravity
+import android.widget.Toast
 import io.github.edwinvanrooij.noteboard.engine.GameResults
 
 
@@ -15,6 +13,7 @@ class MainActivity : Activity(), GameFragmentListener, LandingFragmentListener, 
     private val landingFragment = LandingFragment()
     private val gameFragment = GameFragment()
     private val resultsFragment = ResultsFragment()
+    private val optionsFragment = OptionsFragment()
 
     init {
         landingFragment.setLandingFragmentListener(this)
@@ -38,8 +37,16 @@ class MainActivity : Activity(), GameFragmentListener, LandingFragmentListener, 
         showFragment(resultsFragment)
     }
 
-    override fun onStartGame() {
+    override fun onStartClick() {
         showFragment(gameFragment)
+    }
+
+    override fun onStatsClick() {
+        Toast.makeText(this, "Not implemented yet.", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onOptionsClick() {
+        showFragment(optionsFragment)
     }
 
     override fun onMenu() {

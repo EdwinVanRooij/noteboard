@@ -17,4 +17,39 @@
     <string name="score">Score</string>
     <string name="accuracy">Accuracy</string>
     <string name="points">Points</string>
+    <string name="root_title">Title</string>
+    <string name="title_basic_preference">Basic pref title</string>
+    <string name="summary_basic_preference">Basic pref summary</string>
+    <string name="title_stylish_preference">Stylish pref title</string>
+    <string name="summary_stylish_preference">Stylish pref summary</string>
+    <string name="inline_preferences">Inline title</string>
+    <string name="title_checkbox_preference">Title checkbox pref</string>
+    <string name="summary_checkbox_preference">Summary checkbox pref</string>
+    <string name="dialog_based_preferences">Dialog based pref</string>
+    <string name="title_edittext_preference">Title edittext</string>
+    <string name="summary_edittext_preference">Summary edittext</string>
+    <string name="dialog_title_edittext_preference">Dialog title</string>
+    <string name="title_list_preference">List pref title</string>
+    <string name="summary_list_preference">List summary</string>
+    <string name="dialog_title_list_preference">list dialog title</string>
+    <string name="title_multi_list_preference">multiselect list title</string>
+    <string name="summary_multi_list_preference">multiselect list summary</string>
+    <string name="dialog_title_multi_list_preference">multiselect list dialog title</string>
+    <string name="launch_preferences">launch pref</string>
+    <string name="title_screen_preference">screen pref</string>
+    <string name="summary_screen_preference">screen summary</string>
+    <string name="title_next_screen_toggle_preference">checkbox pref</string>
+    <string name="summary_next_screen_toggle_preference">checkbox summ</string>
+    <string name="title_intent_preference">pref screen title</string>
+    <string name="summary_intent_preference">pref screen summary</string>
+    <string name="preference_attributes">pref title</string>
+    <string name="title_parent_preference">checkbox pref</string>
+    <string name="summary_parent_preference">summary checkbox</string>
+    <string name="title_child_preference">checkbox title</string>
+    <string name="summary_child_preference">checkbox pref</string>
+    <string name="summary_dropdown_preference">checkbox pref summary</string>
+    <string name="title_dropdown_preference">checkbox pref title</string>
+
+
+
 </resources>

@@ -4,7 +4,7 @@ import io.github.edwinvanrooij.noteboard.engine.music.NoteName
 
 interface IGameEngine {
     /**
-     * Initialize the engine with user-specific settings.
+     * Initialize the engine with user-specific options.
      */
     fun initialize(gameSettings: GameSettings)
 
