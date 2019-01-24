@@ -2,4 +2,10 @@
 <resources>
     <string-array name="entries_list_preference">List entries</string-array>
     <string-array name="entryvalues_list_preference">List entry values</string-array>
+
+    <string-array name="options_entries_game_time"> <!--In seconds-->
+        <item>10</item>
+        <item>30</item>
+        <item>60</item>
+    </string-array>
 </resources>

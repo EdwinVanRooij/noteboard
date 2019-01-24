@@ -8,29 +8,32 @@ import android.widget.Toast
 import io.github.edwinvanrooij.noteboard.engine.GameResults
 
 
-class MainActivity : Activity(), GameFragmentListener, LandingFragmentListener, ResultsFragmentListener {
+class MainActivity : Activity(), GameFragmentListener, LandingFragmentListener, ResultsFragmentListener, OptionsFragmentListener {
 
     private val landingFragment = LandingFragment()
     private val gameFragment = GameFragment()
     private val resultsFragment = ResultsFragment()
     private val optionsFragment = OptionsFragment()
 
+    private lateinit var preferenceManager: MyPreferenceManager
+
     init {
         landingFragment.setLandingFragmentListener(this)
         gameFragment.setGameFragmentListener(this)
         resultsFragment.setResultsFragmentListener(this)
+        optionsFragment.setOptionsFragmentListener(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        preferenceManager = MyPreferenceManager(this)
         showFragment(landingFragment)
     }
 
     override fun onGameOver(results: GameResults) {
         val bundle = Bundle()
-
         bundle.putSerializable(KEY_GAME_RESULTS, results)
         resultsFragment.arguments = bundle
 
@@ -38,11 +41,20 @@ class MainActivity : Activity(), GameFragmentListener, LandingFragmentListener, 
     }
 
     override fun onStartClick() {
+        val bundle = Bundle()
+        val settings = preferenceManager.getGameSettings()
+        bundle.putSerializable(KEY_GAME_SETTINGS, settings)
+        gameFragment.arguments = bundle
+
         showFragment(gameFragment)
     }
 
     override fun onStatsClick() {
         Toast.makeText(this, "Not implemented yet.", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onOptionsDone() {
+        showFragment(landingFragment)
     }
 
     override fun onOptionsClick() {

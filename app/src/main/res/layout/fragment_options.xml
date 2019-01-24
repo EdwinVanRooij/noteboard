@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="64dp"
+    android:paddingTop="16dp"
+    android:paddingRight="64dp"
+    android:paddingBottom="16dp"
+    tools:context=".OptionsFragment">
+
+    <FrameLayout
+        android:id="@+id/fragment_container_options"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:weightSum="4"
+        tools:context=".ResultsFragment">
+
+        <Button
+            android:id="@+id/btnMenu"
+            android:layout_width="0dp"
+            style="@android:style/Widget.Material.Button.Colored"
+            android:layout_height="64dp"
+            android:layout_weight="1"
+            android:text="@string/btn_menu" />
+
+    </LinearLayout>
+</LinearLayout>

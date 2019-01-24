@@ -49,7 +49,18 @@
     <string name="summary_child_preference">checkbox pref</string>
     <string name="summary_dropdown_preference">checkbox pref summary</string>
     <string name="title_dropdown_preference">checkbox pref title</string>
+    <string name="options_game_time_title">Game time</string>
+    <string name="options_game_time_summary">Specifies the amount of seconds each game should last.</string>
+    <string name="options_game_time_dialog_title">Seconds</string>
+    <string name="options_game_category_title">Game</string>
+    <string name="options_game_frets_title">Frets</string>
+    <string name="options_game_frets_summary">Specifies the amount of frets the fretboard should have.</string>
+    <string name="options_game_frets_dialog_title">Frets</string>
+    <string name="key_options_game_frets">options_game_frets</string>
+    <string name="key_options_game_time">options_game_time</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

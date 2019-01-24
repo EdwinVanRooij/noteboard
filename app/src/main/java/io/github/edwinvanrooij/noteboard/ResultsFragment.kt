@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import io.github.edwinvanrooij.noteboard.engine.GameResults
 import kotlinx.android.synthetic.main.fragment_results.*
-import kotlin.math.roundToInt
 
 
 /**

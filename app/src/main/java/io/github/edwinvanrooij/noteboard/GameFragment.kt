@@ -1,14 +1,12 @@
 package io.github.edwinvanrooij.noteboard
 
 
-import android.os.Bundle
+import android.annotation.SuppressLint
 import android.app.Fragment
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-import android.annotation.SuppressLint
-import android.app.Activity
 import android.view.animation.ScaleAnimation
 import android.widget.TextView
 import android.widget.Toast
@@ -16,15 +14,12 @@ import io.github.edwinvanrooij.noteboard.engine.GameEngine
 import io.github.edwinvanrooij.noteboard.engine.GameResults
 import io.github.edwinvanrooij.noteboard.engine.GameSettings
 import io.github.edwinvanrooij.noteboard.engine.IGameListener
-import io.github.edwinvanrooij.noteboard.engine.exceptions.GameAlreadyStartedException
 import io.github.edwinvanrooij.noteboard.engine.exceptions.GameNotStartedException
 import io.github.edwinvanrooij.noteboard.engine.guitar.FretLocation
 import io.github.edwinvanrooij.noteboard.engine.music.Note
 import io.github.edwinvanrooij.noteboard.engine.music.NoteName
 import io.github.edwinvanrooij.noteboard.engine.music.NoteName.*
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_game.*
-import kotlin.math.roundToInt
 
 
 /**
@@ -32,6 +27,8 @@ import kotlin.math.roundToInt
  *
  */
 class GameFragment : Fragment(), IGameListener {
+
+    private lateinit var settings: GameSettings
 
     private lateinit var gameFragmentListener: GameFragmentListener
 
@@ -54,6 +51,8 @@ class GameFragment : Fragment(), IGameListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        settings = arguments.getSerializable(KEY_GAME_SETTINGS) as GameSettings
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_game, container, false)
     }
@@ -62,7 +61,8 @@ class GameFragment : Fragment(), IGameListener {
         super.onViewCreated(view, savedInstanceState)
 
         gameEngine = GameEngine()
-        gameEngine.initialize(GameSettings(15))
+        gameEngine.initialize(settings)
+        timerSeconds = settings.time
         gameEngine.setGameListener(this)
 
         soundManager = SoundManager(activity)
@@ -72,30 +72,6 @@ class GameFragment : Fragment(), IGameListener {
         }
 
         gameEngine.start()
-//        btnPlay.setOnClickListener {
-//            soundManager.playButtonClick()
-//
-//            try {
-//                gameEngine.start()
-//            } catch (e: GameAlreadyStartedException) {
-//                Toast.makeText(activity, R.string.game_already_started, Toast.LENGTH_SHORT).show()
-//            }
-//        }
-
-//        btnStop.setOnClickListener {
-//            soundManager.playButtonClick()
-//
-//            if (currentTextView != null) {
-//                currentTextView!!.text = previousText
-//                currentTextView!!.visibility = View.INVISIBLE
-//            }
-//            try {
-//                gameEngine.stop()
-//            } catch (e: GameNotStartedException) {
-//                Toast.makeText(activity, R.string.game_not_started, Toast.LENGTH_SHORT).show()
-//            }
-//        }
-
         setGuessButtonListeners()
     }
 
@@ -279,19 +255,11 @@ class GameFragment : Fragment(), IGameListener {
         startTimer()
     }
 
-//    /**
-//     * Stops the timer thread and resets the timerSeconds.
-//     */
-//    private fun stopTimer() {
-//        timerThread!!.interrupt()
-//        timerSeconds = 0
-//    }
-
     /**
      * Initializes and starts the timer thread, updating the timer TextView on the ui thread every second.
      */
     private fun startTimer() {
-        timerSeconds = 60
+//        timerSeconds = 60
         tvTime.text = secondsToHumanReadableString(timerSeconds)
         timerThread = object : Thread() {
             override fun run() {
@@ -299,6 +267,9 @@ class GameFragment : Fragment(), IGameListener {
                     while (!isInterrupted) {
                         Thread.sleep(1000)
                         timerSeconds -= 1
+                        if (activity == null) {
+                            return
+                        }
                         activity.runOnUiThread {
                             tvTime.text = secondsToHumanReadableString(timerSeconds)
                         }
@@ -308,6 +279,9 @@ class GameFragment : Fragment(), IGameListener {
                             timerThread!!.interrupt() // interrupting this thread means stopping this game
 
                             // Thread was interrupted, stop the game
+                            if (activity == null) {
+                                return
+                            }
                             activity.runOnUiThread {
                                 if (currentTextView != null) {
                                     currentTextView!!.text = previousText
