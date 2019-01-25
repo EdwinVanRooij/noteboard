@@ -51,6 +51,31 @@ class ResultsFragment : Fragment() {
             soundManager.playButtonClick()
             this.resultsFragmentListener.onMenu()
         }
+
+        enableButtons()
+    }
+
+    private fun enableButtons() {
+        if (activity == null) {
+            return
+        }
+
+        val newThread = object : Thread() {
+            override fun run() {
+                try {
+                    Thread.sleep(1200)
+                    if (activity == null) {
+                        return
+                    }
+                    activity.runOnUiThread {
+                        btnMenu.isEnabled = true
+                        btnPlayAgain.isEnabled = true
+                    }
+                } catch (e: InterruptedException) {
+                }
+            }
+        }
+        newThread.start()
     }
 
     fun setResultsFragmentListener(resultsFragmentListener: ResultsFragmentListener) {

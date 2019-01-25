@@ -127,6 +127,7 @@
             style="@android:style/Widget.Material.Button.Borderless.Colored"
             android:layout_width="0dp"
             android:layout_height="64dp"
+            android:enabled="false"
             android:layout_weight="1"
             android:text="@string/btn_menu" />
 
@@ -135,6 +136,7 @@
             style="@android:style/Widget.Material.Button.Colored"
             android:layout_width="0dp"
             android:layout_height="64dp"
+            android:enabled="false"
             android:layout_weight="3"
             android:text="@string/btn_play_again" />
 
