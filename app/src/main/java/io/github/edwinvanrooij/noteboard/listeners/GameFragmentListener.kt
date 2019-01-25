@@ -1,4 +1,4 @@
-package io.github.edwinvanrooij.noteboard
+package io.github.edwinvanrooij.noteboard.listeners
 
 import io.github.edwinvanrooij.noteboard.engine.GameResults
 

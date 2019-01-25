@@ -1,4 +1,4 @@
-package io.github.edwinvanrooij.noteboard
+package io.github.edwinvanrooij.noteboard.ui
 
 
 import android.annotation.SuppressLint
@@ -7,7 +7,9 @@ import android.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import io.github.edwinvanrooij.noteboard.*
 import io.github.edwinvanrooij.noteboard.engine.GameResults
+import io.github.edwinvanrooij.noteboard.listeners.ResultsFragmentListener
 import kotlinx.android.synthetic.main.fragment_results.*
 
 

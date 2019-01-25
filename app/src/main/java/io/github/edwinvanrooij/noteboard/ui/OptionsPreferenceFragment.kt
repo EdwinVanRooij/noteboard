@@ -1,7 +1,8 @@
-package io.github.edwinvanrooij.noteboard
+package io.github.edwinvanrooij.noteboard.ui
 
 import android.os.Bundle
 import android.preference.PreferenceFragment
+import io.github.edwinvanrooij.noteboard.R
 
 
 class OptionsPreferenceFragment : PreferenceFragment() {

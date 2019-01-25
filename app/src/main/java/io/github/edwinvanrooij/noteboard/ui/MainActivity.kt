@@ -1,14 +1,22 @@
-package io.github.edwinvanrooij.noteboard
+package io.github.edwinvanrooij.noteboard.ui
 
 import android.app.Activity
 import android.app.Fragment
 import android.os.Bundle
 import android.transition.Fade
 import android.widget.Toast
+import io.github.edwinvanrooij.noteboard.*
 import io.github.edwinvanrooij.noteboard.engine.GameResults
+import io.github.edwinvanrooij.noteboard.listeners.GameFragmentListener
+import io.github.edwinvanrooij.noteboard.listeners.LandingFragmentListener
+import io.github.edwinvanrooij.noteboard.listeners.OptionsFragmentListener
+import io.github.edwinvanrooij.noteboard.listeners.ResultsFragmentListener
 
 
-class MainActivity : Activity(), GameFragmentListener, LandingFragmentListener, ResultsFragmentListener, OptionsFragmentListener {
+class MainActivity : Activity(), GameFragmentListener,
+    LandingFragmentListener,
+    ResultsFragmentListener,
+    OptionsFragmentListener {
 
     private val landingFragment = LandingFragment()
     private val gameFragment = GameFragment()

@@ -1,4 +1,4 @@
-package io.github.edwinvanrooij.noteboard
+package io.github.edwinvanrooij.noteboard.listeners
 
 interface LandingFragmentListener {
     /**

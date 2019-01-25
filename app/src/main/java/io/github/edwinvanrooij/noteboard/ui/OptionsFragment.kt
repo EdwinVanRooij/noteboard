@@ -1,12 +1,14 @@
-package io.github.edwinvanrooij.noteboard
+package io.github.edwinvanrooij.noteboard.ui
 
 
 import android.os.Bundle
 import android.app.Fragment
-import android.transition.Fade
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import io.github.edwinvanrooij.noteboard.listeners.OptionsFragmentListener
+import io.github.edwinvanrooij.noteboard.R
+import io.github.edwinvanrooij.noteboard.SoundManager
 import kotlinx.android.synthetic.main.fragment_options.*
 
 
@@ -31,7 +33,10 @@ class OptionsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         soundManager = SoundManager(activity)
 
-        fragmentManager.beginTransaction().replace(R.id.fragment_container_options, OptionsPreferenceFragment()).commit()
+        fragmentManager.beginTransaction().replace(
+            R.id.fragment_container_options,
+            OptionsPreferenceFragment()
+        ).commit()
 
         btnMenu.setOnClickListener {
             soundManager.playButtonClick()

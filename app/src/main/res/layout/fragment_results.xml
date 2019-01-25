@@ -8,7 +8,7 @@
     android:paddingTop="16dp"
     android:paddingRight="64dp"
     android:paddingBottom="16dp"
-    tools:context=".ResultsFragment">
+    tools:context=".ui.ResultsFragment">
 
     <!--style="@android:style/TextAppearance.Holo.Large"-->
     <TextView
@@ -120,7 +120,7 @@
         android:gravity="bottom"
         android:orientation="horizontal"
         android:weightSum="4"
-        tools:context=".ResultsFragment">
+        tools:context=".ui.ResultsFragment">
 
         <Button
             android:id="@+id/btnMenu"

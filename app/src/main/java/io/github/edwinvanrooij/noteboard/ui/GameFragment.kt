@@ -1,4 +1,4 @@
-package io.github.edwinvanrooij.noteboard
+package io.github.edwinvanrooij.noteboard.ui
 
 
 import android.annotation.SuppressLint
@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.view.animation.ScaleAnimation
 import android.widget.TextView
 import android.widget.Toast
+import io.github.edwinvanrooij.noteboard.*
 import io.github.edwinvanrooij.noteboard.engine.GameEngine
 import io.github.edwinvanrooij.noteboard.engine.GameResults
 import io.github.edwinvanrooij.noteboard.engine.GameSettings
@@ -19,6 +20,7 @@ import io.github.edwinvanrooij.noteboard.engine.guitar.FretLocation
 import io.github.edwinvanrooij.noteboard.engine.music.Note
 import io.github.edwinvanrooij.noteboard.engine.music.NoteName
 import io.github.edwinvanrooij.noteboard.engine.music.NoteName.*
+import io.github.edwinvanrooij.noteboard.listeners.GameFragmentListener
 import kotlinx.android.synthetic.main.fragment_game.*
 
 
@@ -290,7 +292,8 @@ class GameFragment : Fragment(), IGameListener {
                                 try {
                                     gameEngine.stop()
                                 } catch (e: GameNotStartedException) {
-                                    Toast.makeText(activity, R.string.game_not_started, Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(activity,
+                                        R.string.game_not_started, Toast.LENGTH_SHORT).show()
                                 }
                             }
                         }
