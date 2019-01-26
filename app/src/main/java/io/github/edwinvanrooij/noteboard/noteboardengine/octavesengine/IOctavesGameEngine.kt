@@ -22,4 +22,10 @@ interface IOctavesGameEngine {
      * Guess the latest retrieved note, only name specification is needed for equality, instead of scientific note specification.
      */
     fun guess(noteName: NoteName)
+
+    /**
+     * Sets a game listener on this game engine.
+     * This game listeners deals with events generated from the Game Engine, such as onStart(), onQuit(), onNewNote(...), etc.
+     */
+    fun setGameListener(gameListener: IOctavesGameListener)
 }

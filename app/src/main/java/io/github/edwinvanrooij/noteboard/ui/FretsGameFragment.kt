@@ -11,7 +11,7 @@ import android.view.animation.ScaleAnimation
 import android.widget.TextView
 import android.widget.Toast
 import io.github.edwinvanrooij.noteboard.*
-import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.FretsFretsGameEngine
+import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.FretsGameEngine
 import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.FretsGameResults
 import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.FretsGameSettings
 import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.IFretsGameListener
@@ -32,7 +32,7 @@ class FretsGameFragment : Fragment(), IFretsGameListener {
 
     private lateinit var gameFragmentListener: GameFragmentListener
 
-    private lateinit var fretsGameEngine: FretsFretsGameEngine
+    private lateinit var fretsGameEngine: FretsGameEngine
     private lateinit var soundManager: SoundManager
 
     private var previousText: String = ""
@@ -60,7 +60,7 @@ class FretsGameFragment : Fragment(), IFretsGameListener {
         super.onViewCreated(view, savedInstanceState)
         val settings = arguments.getSerializable(KEY_GAME_SETTINGS) as FretsGameSettings
 
-        fretsGameEngine = FretsFretsGameEngine()
+        fretsGameEngine = FretsGameEngine()
         fretsGameEngine.initialize(settings)
         timerSeconds = settings.time
         fretsGameEngine.setGameListener(this)

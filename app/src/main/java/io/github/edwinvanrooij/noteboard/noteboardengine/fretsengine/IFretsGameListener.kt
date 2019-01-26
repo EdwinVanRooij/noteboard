@@ -14,7 +14,7 @@ interface IFretsGameListener {
     /**
      * Occurs when a game has stopped.
      */
-    fun onGameStop(resultsFrets: FretsGameResults)
+    fun onGameStop(results: FretsGameResults)
 
     /**
      * Occurs when a new [note] was picked, to be guessed at the given fret [location].

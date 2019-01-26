@@ -6,9 +6,9 @@ import io.github.edwinvanrooij.noteboard.noteboardengine.exceptions.*
 import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.guitar.Guitar
 import java.util.*
 
-class FretsFretsGameEngine : IFretsGameEngine {
+class FretsGameEngine : IFretsGameEngine {
 
-    private lateinit var fretsGameListener: IFretsGameListener
+    private lateinit var gameListener: IFretsGameListener
     private lateinit var guitar: Guitar
 
     private var gameStarted: Boolean = false
@@ -38,7 +38,7 @@ class FretsFretsGameEngine : IFretsGameEngine {
 
         // Start the game
         gameStarted = true
-        fretsGameListener.onGameStart()
+        gameListener.onGameStart()
 
         // Start the first round
         executeNextNoteRoutine()
@@ -58,7 +58,7 @@ class FretsFretsGameEngine : IFretsGameEngine {
 
         currentNote = polledNote // set the just-picked non-null note as the new currentNote
 
-        fretsGameListener.onNewNote(
+        gameListener.onNewNote(
             currentNote!!,
             guitar.getFretLocation(currentNote!!)
         )
@@ -68,7 +68,7 @@ class FretsFretsGameEngine : IFretsGameEngine {
         currentNote = null
         gameStarted = false
         val gameResults = generateGameResults()
-        fretsGameListener.onGameStop(gameResults)
+        gameListener.onGameStop(gameResults)
     }
 
     private fun generateGameResults(): FretsGameResults {
@@ -111,9 +111,9 @@ class FretsFretsGameEngine : IFretsGameEngine {
     private fun onCorrectGuess() {
         correctlyGuessedNotes.add(currentNote!!)
         score++ // add one point to score
-        fretsGameListener.onScoreChange(score)
+        gameListener.onScoreChange(score)
         updateAccuracy()
-        fretsGameListener.onCorrectGuess(currentNote!!)
+        gameListener.onCorrectGuess(currentNote!!)
         executeNextNoteRoutine()
     }
 
@@ -123,9 +123,9 @@ class FretsFretsGameEngine : IFretsGameEngine {
     private fun onIncorrectGuess(noteName: NoteName) {
         incorrectlyGuessedNotes.add(currentNote!!)
         // score remains unchanged
-        fretsGameListener.onScoreChange(score)
+        gameListener.onScoreChange(score)
         updateAccuracy()
-        fretsGameListener.onIncorrectGuess(guessedNoteName = noteName, correctNote = currentNote!!)
+        gameListener.onIncorrectGuess(guessedNoteName = noteName, correctNote = currentNote!!)
         executeNextNoteRoutine()
     }
 
@@ -133,14 +133,14 @@ class FretsFretsGameEngine : IFretsGameEngine {
         // accuracy = correctGuesses / totalGuesses
         accuracy = correctlyGuessedNotes.size.toDouble() /
                 (correctlyGuessedNotes.size.toDouble() + incorrectlyGuessedNotes.size.toDouble())
-        fretsGameListener.onAccuracyChange(accuracy)
+        gameListener.onAccuracyChange(accuracy)
     }
 
-    override fun setGameListener(fretsGameListener: IFretsGameListener) {
-        if (this::fretsGameListener.isInitialized) {
-            throw GameListenerAlreadySetException("There is already a fretsGameListener set.")
+    override fun setGameListener(gameListener: IFretsGameListener) {
+        if (this::gameListener.isInitialized) {
+            throw GameListenerAlreadySetException("There is already a gameListener set.")
         }
-        this.fretsGameListener = fretsGameListener
+        this.gameListener = gameListener
     }
 
     /**
@@ -149,7 +149,7 @@ class FretsFretsGameEngine : IFretsGameEngine {
     private fun checkGamePrerequisites() {
         checkStartPrerequisites()
         if (!gameStarted) {
-            throw GameNotStartedException("Game was not started yet! Did you forget to execute start() on the FretsFretsGameEngine?")
+            throw GameNotStartedException("Game was not started yet! Did you forget to execute start() on the FretsGameEngine?")
         }
     }
 
@@ -157,8 +157,8 @@ class FretsFretsGameEngine : IFretsGameEngine {
      * Checks if all necessary preparation is done prior to executing start().
      */
     private fun checkStartPrerequisites() {
-        if (!::fretsGameListener.isInitialized) {
-            throw GameListenerNotSetException("There is no fretsGameListener set. Did you forget to set the game listener before starting a game?")
+        if (!::gameListener.isInitialized) {
+            throw GameListenerNotSetException("There is no gameListener set. Did you forget to set the game listener before starting a game?")
         }
         if (!::guitar.isInitialized) {
             throw GameSettingsNotSetException("Guitar is not initialized. Did you forget to set the FretsGameSettings?")

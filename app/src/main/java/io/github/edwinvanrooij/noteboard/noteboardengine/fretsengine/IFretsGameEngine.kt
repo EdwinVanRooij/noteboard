@@ -27,5 +27,5 @@ interface IFretsGameEngine {
      * Sets a game listener on this game engine.
      * This game listeners deals with events generated from the Game Engine, such as onStart(), onQuit(), onNewNote(...), etc.
      */
-    fun setGameListener(fretsGameListener: IFretsGameListener)
+    fun setGameListener(gameListener: IFretsGameListener)
 }
