@@ -134,42 +134,11 @@ class FretsGameEngineTest {
     // Should not work before a game started
     // Should not work after a game stopped
     //region guess
-    @Test
-    fun `guess -- good -- onCorrectGuess is called on correct guess`() {
-        val gameListener: IFretsGameListener = mock()
-        gameEngine.setGameListener(gameListener)
-        gameEngine.initialize(mockGameSettings())
-        gameEngine.start()
+    // Can't test this one due to unpredictable random
+    //fun `guess -- good -- onCorrectGuess is called on correct guess`()
 
-        // Capture the prompted fretLocation
-        argumentCaptor<FretLocation>().apply {
-            verify(gameListener).onNewNote(any(), any()) // capture()
-
-            // We can't test if we guessed correctly, because the picked note is random. Below is what it'd look like.
-            // 'firstValue' is the fretLocation we have to guess
-            // gameEngine.guess(NoteName.C)
-            // Guessed correctly, check if onCorrectGuess fired
-            // verify(listener).onCorrectGuess(any())
-        }
-    }
-
-    @Test
-    fun `guess -- good -- onIncorrectGuess is called on incorrect guess`() {
-        val gameListener: IFretsGameListener = mock()
-        gameEngine.setGameListener(gameListener)
-        gameEngine.initialize(mockGameSettings())
-        gameEngine.start()
-
-        // Capture the prompted fretLocation
-        argumentCaptor<FretLocation>().apply {
-            verify(gameListener).onNewNote(any(), any()) // capture()
-
-            // We can't test if we guessed incorrectly, because the picked note is random. Below is what it'd look like.
-            // 'firstValue' is the fretLocation we have to guess
-            // gameEngine.guess(NoteName.A)
-            // verify(listener).onIncorrectGuess(any(), any())
-        }
-    }
+    // Can't test this one due to unpredictable random
+    //fun `guess -- good -- onIncorrectGuess is called on incorrect guess`() {
 
     @Test
     fun `guess -- good -- onAccuracyChange is called`() {
@@ -242,7 +211,6 @@ class FretsGameEngineTest {
         gameEngine.setGameListener(mock())  // exception
     }
     //endregion
-
 
     // Should work if the engine is not initialized yet
     // Should work if the engine is already initialized
