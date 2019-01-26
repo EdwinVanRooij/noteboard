@@ -32,27 +32,25 @@ class FretsGameEngineTest {
     //region start
     @Test
     fun `start -- good -- onGameStart is called`() {
-        val listenerFrets: IFretsGameListener = mock()
-        gameEngine.setGameListener(listenerFrets)
+        val gameListener: IFretsGameListener = mock()
+        gameEngine.setGameListener(gameListener)
         gameEngine.initialize(mockGameSettings())
         gameEngine.start()
-        verify(listenerFrets).onGameStart()
+        verify(gameListener).onGameStart()
     }
 
     @Test
     fun `start -- good -- onNewNote is called`() {
-        val listenerFrets: IFretsGameListener = mock()
-        gameEngine.setGameListener(listenerFrets)
+        val gameListener: IFretsGameListener = mock()
+        gameEngine.setGameListener(gameListener)
         gameEngine.initialize(mockGameSettings())
         gameEngine.start()
-        verify(listenerFrets).onNewNote(any(), any())
+        verify(gameListener).onNewNote(any(), any())
     }
 
     @Test(expected = GameSettingsNotSetException::class)
     fun `start -- bad -- Should not work without gameSettings initialized`() {
-        val listenerFrets: IFretsGameListener = mock()
-        gameEngine.setGameListener(listenerFrets)
-
+        gameEngine.setGameListener(mock())
         gameEngine.start() // exception
     }
 
@@ -82,18 +80,18 @@ class FretsGameEngineTest {
     //region stop
     @Test
     fun `stop -- good -- onGameStop is called`() {
-        val listenerFrets: IFretsGameListener = mock()
-        gameEngine.setGameListener(listenerFrets)
+        val gameListener: IFretsGameListener = mock()
+        gameEngine.setGameListener(gameListener)
         gameEngine.initialize(mockGameSettings())
         gameEngine.start() // start the game first
         gameEngine.stop()
-        verify(listenerFrets).onGameStop(any())
+        verify(gameListener).onGameStop(any())
     }
 
     @Test(expected = GameSettingsNotSetException::class)
     fun `stop() -- bad -- Should not work without gameSettings initialized`() {
-        val listenerFrets: IFretsGameListener = mock()
-        gameEngine.setGameListener(listenerFrets)
+        val gameListener: IFretsGameListener = mock()
+        gameEngine.setGameListener(gameListener)
 
         gameEngine.stop() // exception
     }
@@ -107,8 +105,8 @@ class FretsGameEngineTest {
 
     @Test(expected = GameNotStartedException::class)
     fun `stop() -- bad -- Should not work before a game started`() {
-        val listenerFrets: IFretsGameListener = mock()
-        gameEngine.setGameListener(listenerFrets)
+        val gameListener: IFretsGameListener = mock()
+        gameEngine.setGameListener(gameListener)
         gameEngine.initialize(mockGameSettings())
 
         gameEngine.stop() // exception
@@ -116,8 +114,8 @@ class FretsGameEngineTest {
 
     @Test(expected = GameNotStartedException::class)
     fun `stop() -- bad -- Should not work after a game stopped`() {
-        val listenerFrets: IFretsGameListener = mock()
-        gameEngine.setGameListener(listenerFrets)
+        val gameListener: IFretsGameListener = mock()
+        gameEngine.setGameListener(gameListener)
         gameEngine.initialize(mockGameSettings())
         gameEngine.start()
         gameEngine.stop()
@@ -138,14 +136,14 @@ class FretsGameEngineTest {
     //region guess
     @Test
     fun `guess -- good -- onCorrectGuess is called on correct guess`() {
-        val listenerFrets: IFretsGameListener = mock()
-        gameEngine.setGameListener(listenerFrets)
+        val gameListener: IFretsGameListener = mock()
+        gameEngine.setGameListener(gameListener)
         gameEngine.initialize(mockGameSettings())
         gameEngine.start()
 
         // Capture the prompted fretLocation
         argumentCaptor<FretLocation>().apply {
-            verify(listenerFrets).onNewNote(any(), any()) // capture()
+            verify(gameListener).onNewNote(any(), any()) // capture()
 
             // We can't test if we guessed correctly, because the picked note is random. Below is what it'd look like.
             // 'firstValue' is the fretLocation we have to guess
@@ -157,14 +155,14 @@ class FretsGameEngineTest {
 
     @Test
     fun `guess -- good -- onIncorrectGuess is called on incorrect guess`() {
-        val listenerFrets: IFretsGameListener = mock()
-        gameEngine.setGameListener(listenerFrets)
+        val gameListener: IFretsGameListener = mock()
+        gameEngine.setGameListener(gameListener)
         gameEngine.initialize(mockGameSettings())
         gameEngine.start()
 
         // Capture the prompted fretLocation
         argumentCaptor<FretLocation>().apply {
-            verify(listenerFrets).onNewNote(any(), any()) // capture()
+            verify(gameListener).onNewNote(any(), any()) // capture()
 
             // We can't test if we guessed incorrectly, because the picked note is random. Below is what it'd look like.
             // 'firstValue' is the fretLocation we have to guess
@@ -175,28 +173,28 @@ class FretsGameEngineTest {
 
     @Test
     fun `guess -- good -- onAccuracyChange is called`() {
-        val listenerFrets: IFretsGameListener = mock()
-        gameEngine.setGameListener(listenerFrets)
+        val gameListener: IFretsGameListener = mock()
+        gameEngine.setGameListener(gameListener)
         gameEngine.initialize(mockGameSettings())
         gameEngine.start() // start the game first
         gameEngine.guess(NoteName.C)
-        verify(listenerFrets).onAccuracyChange(any())
+        verify(gameListener).onAccuracyChange(any())
     }
 
     @Test
     fun `guess -- good -- onScoreChange is called`() {
-        val listenerFrets: IFretsGameListener = mock()
-        gameEngine.setGameListener(listenerFrets)
+        val gameListener: IFretsGameListener = mock()
+        gameEngine.setGameListener(gameListener)
         gameEngine.initialize(mockGameSettings())
         gameEngine.start() // start the game first
         gameEngine.guess(NoteName.C)
-        verify(listenerFrets).onScoreChange(any())
+        verify(gameListener).onScoreChange(any())
     }
 
     @Test(expected = GameSettingsNotSetException::class)
     fun `guess -- bad -- Should not work without gameSettings initialized`() {
-        val listenerFrets: IFretsGameListener = mock()
-        gameEngine.setGameListener(listenerFrets)
+        val gameListener: IFretsGameListener = mock()
+        gameEngine.setGameListener(gameListener)
 
         gameEngine.guess(NoteName.C) // Randomly picked; could be any other note. // exception
     }
