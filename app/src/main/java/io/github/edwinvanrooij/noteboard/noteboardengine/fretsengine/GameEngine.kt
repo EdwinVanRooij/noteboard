@@ -1,9 +1,9 @@
-package io.github.edwinvanrooij.noteboard.engine
+package io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine
 
-import io.github.edwinvanrooij.noteboard.engine.exceptions.*
-import io.github.edwinvanrooij.noteboard.engine.guitar.Guitar
-import io.github.edwinvanrooij.noteboard.engine.music.Note
-import io.github.edwinvanrooij.noteboard.engine.music.NoteName
+import io.github.edwinvanrooij.noteboard.noteboardengine.Note
+import io.github.edwinvanrooij.noteboard.noteboardengine.NoteName
+import io.github.edwinvanrooij.noteboard.noteboardengine.exceptions.*
+import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.guitar.Guitar
 import java.util.*
 
 class GameEngine : IGameEngine {

@@ -11,16 +11,16 @@ import android.view.animation.ScaleAnimation
 import android.widget.TextView
 import android.widget.Toast
 import io.github.edwinvanrooij.noteboard.*
-import io.github.edwinvanrooij.noteboard.engine.GameEngine
-import io.github.edwinvanrooij.noteboard.engine.GameResults
-import io.github.edwinvanrooij.noteboard.engine.GameSettings
-import io.github.edwinvanrooij.noteboard.engine.IGameListener
-import io.github.edwinvanrooij.noteboard.engine.exceptions.GameNotStartedException
-import io.github.edwinvanrooij.noteboard.engine.guitar.FretLocation
-import io.github.edwinvanrooij.noteboard.engine.music.Note
-import io.github.edwinvanrooij.noteboard.engine.music.NoteName
-import io.github.edwinvanrooij.noteboard.engine.music.NoteName.*
+import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.GameEngine
+import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.GameResults
+import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.GameSettings
+import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.IGameListener
+import io.github.edwinvanrooij.noteboard.noteboardengine.exceptions.GameNotStartedException
+import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.guitar.FretLocation
 import io.github.edwinvanrooij.noteboard.listeners.GameFragmentListener
+import io.github.edwinvanrooij.noteboard.noteboardengine.Note
+import io.github.edwinvanrooij.noteboard.noteboardengine.NoteName
+import io.github.edwinvanrooij.noteboard.noteboardengine.NoteName.*
 import kotlinx.android.synthetic.main.fragment_game.*
 
 

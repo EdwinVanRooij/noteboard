@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.transition.Fade
 import android.widget.Toast
 import io.github.edwinvanrooij.noteboard.*
-import io.github.edwinvanrooij.noteboard.engine.GameResults
+import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.GameResults
 import io.github.edwinvanrooij.noteboard.listeners.GameFragmentListener
 import io.github.edwinvanrooij.noteboard.listeners.LandingFragmentListener
 import io.github.edwinvanrooij.noteboard.listeners.OptionsFragmentListener

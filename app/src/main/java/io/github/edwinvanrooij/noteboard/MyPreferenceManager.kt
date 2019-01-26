@@ -2,7 +2,7 @@ package io.github.edwinvanrooij.noteboard
 
 import android.content.Context
 import android.preference.PreferenceManager
-import io.github.edwinvanrooij.noteboard.engine.GameSettings
+import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.GameSettings
 import java.lang.ClassCastException
 
 class MyPreferenceManager(private val context: Context) {

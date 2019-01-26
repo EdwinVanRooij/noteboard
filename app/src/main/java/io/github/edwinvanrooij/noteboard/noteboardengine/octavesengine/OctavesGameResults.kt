@@ -1,8 +1,8 @@
-package io.github.edwinvanrooij.noteboard.engine
+package io.github.edwinvanrooij.noteboard.noteboardengine.octavesengine
 
 import java.io.Serializable
 
-data class GameResults(
+data class OctavesGameResults(
     val score: Int,
     val accuracy: Double,
     val points: Int // points = score * accuracy

@@ -1,6 +1,6 @@
-package io.github.edwinvanrooij.noteboard.engine
+package io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine
 
-import io.github.edwinvanrooij.noteboard.engine.music.NoteName
+import io.github.edwinvanrooij.noteboard.noteboardengine.NoteName
 
 interface IGameEngine {
     /**

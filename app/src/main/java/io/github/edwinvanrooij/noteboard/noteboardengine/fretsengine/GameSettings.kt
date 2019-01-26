@@ -1,4 +1,4 @@
-package io.github.edwinvanrooij.noteboard.engine
+package io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine
 
 import java.io.Serializable
 

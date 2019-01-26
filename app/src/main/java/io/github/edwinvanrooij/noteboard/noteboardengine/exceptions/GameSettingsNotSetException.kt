@@ -1,3 +1,3 @@
-package io.github.edwinvanrooij.noteboard.engine.exceptions
+package io.github.edwinvanrooij.noteboard.noteboardengine.exceptions
 
 class GameSettingsNotSetException(message: String) : Exception(message)
