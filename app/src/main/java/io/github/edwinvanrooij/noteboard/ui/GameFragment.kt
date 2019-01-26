@@ -11,7 +11,7 @@ import android.view.animation.ScaleAnimation
 import android.widget.TextView
 import android.widget.Toast
 import io.github.edwinvanrooij.noteboard.*
-import io.github.edwinvanrooij.noteboard.engine.NoteboardEngine
+import io.github.edwinvanrooij.noteboard.engine.GameEngine
 import io.github.edwinvanrooij.noteboard.engine.GameResults
 import io.github.edwinvanrooij.noteboard.engine.GameSettings
 import io.github.edwinvanrooij.noteboard.engine.IGameListener
@@ -34,7 +34,7 @@ class GameFragment : Fragment(), IGameListener {
 
     private lateinit var gameFragmentListener: GameFragmentListener
 
-    private lateinit var noteboardEngine: NoteboardEngine
+    private lateinit var gameEngine: GameEngine
     private lateinit var soundManager: SoundManager
 
     private var previousText: String = ""
@@ -62,10 +62,10 @@ class GameFragment : Fragment(), IGameListener {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        noteboardEngine = NoteboardEngine()
-        noteboardEngine.initialize(settings)
+        gameEngine = GameEngine()
+        gameEngine.initialize(settings)
         timerSeconds = settings.time
-        noteboardEngine.setGameListener(this)
+        gameEngine.setGameListener(this)
 
         soundManager = SoundManager(activity)
 
@@ -73,7 +73,7 @@ class GameFragment : Fragment(), IGameListener {
             soundManager.repeatLastNote()
         }
 
-        noteboardEngine.start()
+        gameEngine.start()
         setGuessButtonListeners()
     }
 
@@ -154,7 +154,7 @@ class GameFragment : Fragment(), IGameListener {
                     Toast.makeText(activity, R.string.wait_before_display, Toast.LENGTH_SHORT).show()
                     return
                 }
-                noteboardEngine.guess(note)
+                gameEngine.guess(note)
             } catch (e: GameNotStartedException) {
                 Toast.makeText(activity, R.string.game_not_started, Toast.LENGTH_SHORT).show()
             }
@@ -290,7 +290,7 @@ class GameFragment : Fragment(), IGameListener {
                                     currentTextView!!.visibility = View.INVISIBLE
                                 }
                                 try {
-                                    noteboardEngine.stop()
+                                    gameEngine.stop()
                                 } catch (e: GameNotStartedException) {
                                     Toast.makeText(activity,
                                         R.string.game_not_started, Toast.LENGTH_SHORT).show()

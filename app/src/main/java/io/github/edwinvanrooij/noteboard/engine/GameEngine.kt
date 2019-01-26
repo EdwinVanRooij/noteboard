@@ -6,7 +6,7 @@ import io.github.edwinvanrooij.noteboard.engine.music.Note
 import io.github.edwinvanrooij.noteboard.engine.music.NoteName
 import java.util.*
 
-class NoteboardEngine : IGameEngine {
+class GameEngine : IGameEngine {
 
     private lateinit var gameListener: IGameListener
     private lateinit var guitar: Guitar
@@ -149,7 +149,7 @@ class NoteboardEngine : IGameEngine {
     private fun checkGamePrerequisites() {
         checkStartPrerequisites()
         if (!gameStarted) {
-            throw GameNotStartedException("Game was not started yet! Did you forget to execute start() on the NoteboardEngine?")
+            throw GameNotStartedException("Game was not started yet! Did you forget to execute start() on the GameEngine?")
         }
     }
 
