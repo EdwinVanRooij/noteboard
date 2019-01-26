@@ -9,6 +9,7 @@ import java.util.*
 class FretsGameEngine : IFretsGameEngine {
 
     private lateinit var gameListener: IFretsGameListener
+    private lateinit var gameSettings: FretsGameSettings
     private lateinit var guitar: Guitar
 
     private var gameStarted: Boolean = false
@@ -19,8 +20,9 @@ class FretsGameEngine : IFretsGameEngine {
     private lateinit var correctlyGuessedNotes: ArrayList<Note>
     private lateinit var incorrectlyGuessedNotes: ArrayList<Note>
 
-    override fun initialize(fretsGameSettings: FretsGameSettings) {
-        guitar = Guitar(fretsGameSettings.guitarFrets)
+    override fun initialize(gameSettings: FretsGameSettings) {
+        this.gameSettings = gameSettings
+        guitar = Guitar(gameSettings.guitarFrets)
     }
 
     override fun start() {
@@ -160,7 +162,7 @@ class FretsGameEngine : IFretsGameEngine {
         if (!::gameListener.isInitialized) {
             throw GameListenerNotSetException("There is no gameListener set. Did you forget to set the game listener before starting a game?")
         }
-        if (!::guitar.isInitialized) {
+        if (!::gameSettings.isInitialized) {
             throw GameSettingsNotSetException("Guitar is not initialized. Did you forget to set the FretsGameSettings?")
         }
     }

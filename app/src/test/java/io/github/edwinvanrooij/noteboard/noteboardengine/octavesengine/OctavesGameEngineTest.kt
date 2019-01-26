@@ -27,31 +27,32 @@ class OctavesGameEngineTest {
     //region start
     @Test
     fun `start -- good -- onGameStart is called`() {
-        val listenerFrets: IOctavesGameListener = mock()
-        gameEngine.setGameListener(listenerFrets)
+        val gameListener: IOctavesGameListener = mock()
+        gameEngine.setGameListener(gameListener)
         gameEngine.initialize(mockGameSettings())
         gameEngine.start()
-        verify(listenerFrets).onGameStart()
+        verify(gameListener).onGameStart()
     }
 
     @Test
     fun `start -- good -- onNewNote is called`() {
-        val listenerFrets: IOctavesGameListener = mock()
-        gameEngine.setGameListener(listenerFrets)
+        val gameListener: IOctavesGameListener = mock()
+        gameEngine.setGameListener(gameListener)
         gameEngine.initialize(mockGameSettings())
         gameEngine.start()
-        verify(listenerFrets).onNewNote(any())
+        verify(gameListener).onNewNote(any())
     }
 
     @Test(expected = GameSettingsNotSetException::class)
     fun `start -- bad -- Should not work without gameSettings initialized`() {
-        gameEngine.setGameListener(mock())
+        val gameListener: IOctavesGameListener = mock()
+        gameEngine.setGameListener(gameListener)
         gameEngine.start() // exception
     }
 
     @Test(expected = GameListenerNotSetException::class)
     fun `start -- bad -- Should not work without a game listener`() {
-        gameEngine.initialize(mock())
+        gameEngine.initialize(mockGameSettings())
 
         gameEngine.start() // exception
     }
@@ -59,7 +60,7 @@ class OctavesGameEngineTest {
     @Test(expected = GameAlreadyStartedException::class)
     fun `start -- bad -- Should not work after a game started`() {
         gameEngine.setGameListener(mock())
-        gameEngine.initialize(mock())
+        gameEngine.initialize(mockGameSettings())
         gameEngine.start()
 
         gameEngine.start() // exception

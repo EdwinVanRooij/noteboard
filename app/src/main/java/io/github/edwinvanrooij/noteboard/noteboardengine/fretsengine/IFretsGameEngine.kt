@@ -6,7 +6,7 @@ interface IFretsGameEngine {
     /**
      * Initialize the engine with user-specific options.
      */
-    fun initialize(fretsGameSettings: FretsGameSettings)
+    fun initialize(gameSettings: FretsGameSettings)
 
     /**
      * Starts a new game.
