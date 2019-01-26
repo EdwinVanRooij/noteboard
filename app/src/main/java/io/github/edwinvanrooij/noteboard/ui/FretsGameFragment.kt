@@ -21,7 +21,7 @@ import io.github.edwinvanrooij.noteboard.listeners.GameFragmentListener
 import io.github.edwinvanrooij.noteboard.noteboardengine.Note
 import io.github.edwinvanrooij.noteboard.noteboardengine.NoteName
 import io.github.edwinvanrooij.noteboard.noteboardengine.NoteName.*
-import kotlinx.android.synthetic.main.fragment_game.*
+import kotlinx.android.synthetic.main.fragment_game_frets.*
 
 
 /**
@@ -51,9 +51,8 @@ class FretsGameFragment : Fragment(), IFretsGameListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_game, container, false)
+        return inflater.inflate(R.layout.fragment_game_frets, container, false)
     }
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
