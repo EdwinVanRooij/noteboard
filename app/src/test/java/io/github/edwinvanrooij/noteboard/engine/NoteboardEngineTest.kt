@@ -11,16 +11,16 @@ import org.junit.Before
 import org.junit.Test
 
 /**
- * No actions can be performed on the [GameEngine] before setting a [IGameListener]
- * No game actions can be performed on the [GameEngine] before game start
+ * No actions can be performed on the [NoteboardEngine] before setting a [IGameListener]
+ * No game actions can be performed on the [NoteboardEngine] before game start
  */
-class GameEngineTest {
+class NoteboardEngineTest {
 
-    private lateinit var gameEngine: GameEngine
+    private lateinit var noteboardEngine: NoteboardEngine
 
     @Before
     fun setUp() {
-        this.gameEngine = GameEngine()
+        this.noteboardEngine = NoteboardEngine()
     }
 
     // onGameStart is called
@@ -33,9 +33,9 @@ class GameEngineTest {
     @Test
     fun `start -- good -- onGameStart is called`() {
         val listener: IGameListener = mock()
-        gameEngine.setGameListener(listener)
-        gameEngine.initialize(mockGameSettings())
-        gameEngine.start()
+        noteboardEngine.setGameListener(listener)
+        noteboardEngine.initialize(mockGameSettings())
+        noteboardEngine.start()
         verify(listener).onGameStart()
     }
 
@@ -43,34 +43,34 @@ class GameEngineTest {
     @Test
     fun `start -- good -- onNewFretLocation is called`() {
         val listener: IGameListener = mock()
-        gameEngine.setGameListener(listener)
-        gameEngine.initialize(mockGameSettings())
-        gameEngine.start()
+        noteboardEngine.setGameListener(listener)
+        noteboardEngine.initialize(mockGameSettings())
+        noteboardEngine.start()
         verify(listener).onNewNote(any(), any())
     }
 
     @Test(expected = GameSettingsNotSetException::class)
     fun `start -- bad -- Should not work without gameSettings initialized`() {
         val listener: IGameListener = mock()
-        gameEngine.setGameListener(listener)
+        noteboardEngine.setGameListener(listener)
 
-        gameEngine.start() // exception
+        noteboardEngine.start() // exception
     }
 
     @Test(expected = GameListenerNotSetException::class)
     fun `start -- bad -- Should not work without a game listener`() {
-        gameEngine.initialize(mockGameSettings())
+        noteboardEngine.initialize(mockGameSettings())
 
-        gameEngine.start() // exception
+        noteboardEngine.start() // exception
     }
 
     @Test(expected = GameAlreadyStartedException::class)
     fun `start -- bad -- Should not work after a game started`() {
-        gameEngine.setGameListener(mock())
-        gameEngine.initialize(mockGameSettings())
-        gameEngine.start()
+        noteboardEngine.setGameListener(mock())
+        noteboardEngine.initialize(mockGameSettings())
+        noteboardEngine.start()
 
-        gameEngine.start() // exception
+        noteboardEngine.start() // exception
     }
     //endregion
 
@@ -84,46 +84,46 @@ class GameEngineTest {
     @Test
     fun `stop -- good -- onGameStop is called`() {
         val listener: IGameListener = mock()
-        gameEngine.setGameListener(listener)
-        gameEngine.initialize(mockGameSettings())
-        gameEngine.start() // start the game first
-        gameEngine.stop()
+        noteboardEngine.setGameListener(listener)
+        noteboardEngine.initialize(mockGameSettings())
+        noteboardEngine.start() // start the game first
+        noteboardEngine.stop()
         verify(listener).onGameStop(any())
     }
 
     @Test(expected = GameSettingsNotSetException::class)
     fun `stop() -- bad -- Should not work without gameSettings initialized`() {
         val listener: IGameListener = mock()
-        gameEngine.setGameListener(listener)
+        noteboardEngine.setGameListener(listener)
 
-        gameEngine.stop() // exception
+        noteboardEngine.stop() // exception
     }
 
     @Test(expected = GameListenerNotSetException::class)
     fun `stop() -- bad -- Should not work without a game listener`() {
-        gameEngine.initialize(mockGameSettings())
+        noteboardEngine.initialize(mockGameSettings())
 
-        gameEngine.stop() // exception
+        noteboardEngine.stop() // exception
     }
 
     @Test(expected = GameNotStartedException::class)
     fun `stop() -- bad -- Should not work before a game started`() {
         val listener: IGameListener = mock()
-        gameEngine.setGameListener(listener)
-        gameEngine.initialize(mockGameSettings())
+        noteboardEngine.setGameListener(listener)
+        noteboardEngine.initialize(mockGameSettings())
 
-        gameEngine.stop() // exception
+        noteboardEngine.stop() // exception
     }
 
     @Test(expected = GameNotStartedException::class)
     fun `stop() -- bad -- Should not work after a game stopped`() {
         val listener: IGameListener = mock()
-        gameEngine.setGameListener(listener)
-        gameEngine.initialize(mockGameSettings())
-        gameEngine.start()
-        gameEngine.stop()
+        noteboardEngine.setGameListener(listener)
+        noteboardEngine.initialize(mockGameSettings())
+        noteboardEngine.start()
+        noteboardEngine.stop()
 
-        gameEngine.stop()  // exception
+        noteboardEngine.stop()  // exception
     }
     //endregion
 
@@ -140,9 +140,9 @@ class GameEngineTest {
     @Test
     fun `guess -- good -- onCorrectGuess is called on correct guess`() {
         val listener: IGameListener = mock()
-        gameEngine.setGameListener(listener)
-        gameEngine.initialize(mockGameSettings())
-        gameEngine.start()
+        noteboardEngine.setGameListener(listener)
+        noteboardEngine.initialize(mockGameSettings())
+        noteboardEngine.start()
 
         // Capture the prompted fretLocation
         argumentCaptor<FretLocation>().apply {
@@ -150,7 +150,7 @@ class GameEngineTest {
 
             // We can't test if we guessed correctly, because the picked note is random. Below is what it'd look like.
             // 'firstValue' is the fretLocation we have to guess
-            // gameEngine.guess(NoteName.C)
+            // noteboardEngine.guess(NoteName.C)
             // Guessed correctly, check if onCorrectGuess fired
             // verify(listener).onCorrectGuess(any())
         }
@@ -159,9 +159,9 @@ class GameEngineTest {
     @Test
     fun `guess -- good -- onIncorrectGuess is called on incorrect guess`() {
         val listener: IGameListener = mock()
-        gameEngine.setGameListener(listener)
-        gameEngine.initialize(mockGameSettings())
-        gameEngine.start()
+        noteboardEngine.setGameListener(listener)
+        noteboardEngine.initialize(mockGameSettings())
+        noteboardEngine.start()
 
         // Capture the prompted fretLocation
         argumentCaptor<FretLocation>().apply {
@@ -169,7 +169,7 @@ class GameEngineTest {
 
             // We can't test if we guessed incorrectly, because the picked note is random. Below is what it'd look like.
             // 'firstValue' is the fretLocation we have to guess
-            // gameEngine.guess(NoteName.A)
+            // noteboardEngine.guess(NoteName.A)
             // verify(listener).onIncorrectGuess(any(), any())
         }
     }
@@ -177,54 +177,54 @@ class GameEngineTest {
     @Test
     fun `guess -- good -- onAccuracyChange is called`() {
         val listener: IGameListener = mock()
-        gameEngine.setGameListener(listener)
-        gameEngine.initialize(mockGameSettings())
-        gameEngine.start() // start the game first
-        gameEngine.guess(NoteName.C)
+        noteboardEngine.setGameListener(listener)
+        noteboardEngine.initialize(mockGameSettings())
+        noteboardEngine.start() // start the game first
+        noteboardEngine.guess(NoteName.C)
         verify(listener).onAccuracyChange(any())
     }
 
     @Test
     fun `guess -- good -- onScoreChange is called`() {
         val listener: IGameListener = mock()
-        gameEngine.setGameListener(listener)
-        gameEngine.initialize(mockGameSettings())
-        gameEngine.start() // start the game first
-        gameEngine.guess(NoteName.C)
+        noteboardEngine.setGameListener(listener)
+        noteboardEngine.initialize(mockGameSettings())
+        noteboardEngine.start() // start the game first
+        noteboardEngine.guess(NoteName.C)
         verify(listener).onScoreChange(any())
     }
 
     @Test(expected = GameSettingsNotSetException::class)
     fun `guess -- bad -- Should not work without gameSettings initialized`() {
         val listener: IGameListener = mock()
-        gameEngine.setGameListener(listener)
+        noteboardEngine.setGameListener(listener)
 
-        gameEngine.guess(NoteName.C) // Randomly picked; could be any other note. // exception
+        noteboardEngine.guess(NoteName.C) // Randomly picked; could be any other note. // exception
     }
 
     @Test(expected = GameListenerNotSetException::class)
     fun `guess -- bad -- Should not work without a game listener`() {
-        gameEngine.initialize(mockGameSettings())
+        noteboardEngine.initialize(mockGameSettings())
 
-        gameEngine.guess(NoteName.C) // Randomly picked; could be any other note. // exception
+        noteboardEngine.guess(NoteName.C) // Randomly picked; could be any other note. // exception
     }
 
     @Test(expected = GameNotStartedException::class)
     fun `guess -- bad -- Should not work before a game started`() {
-        gameEngine.setGameListener(mock())
-        gameEngine.initialize(mockGameSettings())
+        noteboardEngine.setGameListener(mock())
+        noteboardEngine.initialize(mockGameSettings())
 
-        gameEngine.guess(NoteName.C) // exception
+        noteboardEngine.guess(NoteName.C) // exception
     }
 
     @Test(expected = GameNotStartedException::class)
     fun `guess -- bad -- Should not work after a game stopped`() {
-        gameEngine.setGameListener(mock())
-        gameEngine.initialize(mockGameSettings())
-        gameEngine.start()
-        gameEngine.stop()
+        noteboardEngine.setGameListener(mock())
+        noteboardEngine.initialize(mockGameSettings())
+        noteboardEngine.start()
+        noteboardEngine.stop()
 
-        gameEngine.guess(NoteName.C)  // exception
+        noteboardEngine.guess(NoteName.C)  // exception
     }
     //endregion
 
@@ -235,14 +235,14 @@ class GameEngineTest {
     @Test
     fun `setGameListener -- good -- should work if there's no listener set yet`() {
         val gameListener: IGameListener = mock()
-        gameEngine.setGameListener(gameListener)
+        noteboardEngine.setGameListener(gameListener)
     }
 
     @Test(expected = GameListenerAlreadySetException::class)
     fun `setGameListener -- bad -- should not work if there's already a listener set`() {
-        gameEngine.setGameListener(mock())
+        noteboardEngine.setGameListener(mock())
 
-        gameEngine.setGameListener(mock())  // exception
+        noteboardEngine.setGameListener(mock())  // exception
     }
     //endregion
 
@@ -254,19 +254,19 @@ class GameEngineTest {
     //region initialize
     @Test
     fun `initialize -- good -- Should work if the engine is not initialized yet`() {
-        gameEngine.initialize(mockGameSettings())
+        noteboardEngine.initialize(mockGameSettings())
     }
 
     @Test
     fun `initialize -- good -- Should work if the engine is already initialized`() {
-        gameEngine.initialize(mockGameSettings())
-        gameEngine.initialize(mockGameSettings())
+        noteboardEngine.initialize(mockGameSettings())
+        noteboardEngine.initialize(mockGameSettings())
     }
     //endregion
 
     //region Mock methods
     private fun mockGameSettings(): GameSettings {
-        return GameSettings(guitarFrets = 20)
+        return GameSettings(guitarFrets = 20, time = 30)
     }
     //endregion
 }
