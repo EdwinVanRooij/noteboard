@@ -1,4 +1,4 @@
-package io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.music
+package io.github.edwinvanrooij.noteboard.noteboardengine
 
 import io.github.edwinvanrooij.noteboard.noteboardengine.Note
 import io.github.edwinvanrooij.noteboard.noteboardengine.NoteName

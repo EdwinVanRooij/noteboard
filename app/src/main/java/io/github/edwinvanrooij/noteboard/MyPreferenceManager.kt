@@ -2,14 +2,14 @@ package io.github.edwinvanrooij.noteboard
 
 import android.content.Context
 import android.preference.PreferenceManager
-import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.GameSettings
+import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.FretsGameSettings
 import java.lang.ClassCastException
 
 class MyPreferenceManager(private val context: Context) {
 
     private val pm = PreferenceManager.getDefaultSharedPreferences(context)
 
-    fun getGameSettings(): GameSettings {
+    fun getGameSettings(): FretsGameSettings {
         // Get the preferred amount of frets
         val defaultFrets = 20
         val fretsResourceKeyId = R.string.key_options_game_frets
@@ -32,7 +32,7 @@ class MyPreferenceManager(private val context: Context) {
             putResource(timeResourceKeyId, defaultTime)
         }
 
-        return GameSettings(frets, time)
+        return FretsGameSettings(frets, time)
     }
 
     private fun getIntSafely(resourceKeyId: Int, default: Int): Int {

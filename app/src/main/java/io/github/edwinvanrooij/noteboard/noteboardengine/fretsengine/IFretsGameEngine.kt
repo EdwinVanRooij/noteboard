@@ -2,11 +2,11 @@ package io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine
 
 import io.github.edwinvanrooij.noteboard.noteboardengine.NoteName
 
-interface IGameEngine {
+interface IFretsGameEngine {
     /**
      * Initialize the engine with user-specific options.
      */
-    fun initialize(gameSettings: GameSettings)
+    fun initialize(fretsGameSettings: FretsGameSettings)
 
     /**
      * Starts a new game.
@@ -27,5 +27,5 @@ interface IGameEngine {
      * Sets a game listener on this game engine.
      * This game listeners deals with events generated from the Game Engine, such as onStart(), onQuit(), onNewNote(...), etc.
      */
-    fun setGameListener(gameListener: IGameListener)
+    fun setGameListener(fretsGameListener: IFretsGameListener)
 }

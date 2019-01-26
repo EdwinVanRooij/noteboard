@@ -11,10 +11,10 @@ import android.view.animation.ScaleAnimation
 import android.widget.TextView
 import android.widget.Toast
 import io.github.edwinvanrooij.noteboard.*
-import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.GameEngine
-import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.GameResults
-import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.GameSettings
-import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.IGameListener
+import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.FretsFretsGameEngine
+import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.FretsGameResults
+import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.FretsGameSettings
+import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.IFretsGameListener
 import io.github.edwinvanrooij.noteboard.noteboardengine.exceptions.GameNotStartedException
 import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.guitar.FretLocation
 import io.github.edwinvanrooij.noteboard.listeners.GameFragmentListener
@@ -28,13 +28,11 @@ import kotlinx.android.synthetic.main.fragment_game.*
  * A simple [Fragment] subclass.
  *
  */
-class GameFragment : Fragment(), IGameListener {
-
-    private lateinit var settings: GameSettings
+class FretsGameFragment : Fragment(), IFretsGameListener {
 
     private lateinit var gameFragmentListener: GameFragmentListener
 
-    private lateinit var gameEngine: GameEngine
+    private lateinit var fretsGameEngine: FretsFretsGameEngine
     private lateinit var soundManager: SoundManager
 
     private var previousText: String = ""
@@ -53,7 +51,6 @@ class GameFragment : Fragment(), IGameListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        settings = arguments.getSerializable(KEY_GAME_SETTINGS) as GameSettings
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_game, container, false)
@@ -61,11 +58,12 @@ class GameFragment : Fragment(), IGameListener {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val settings = arguments.getSerializable(KEY_GAME_SETTINGS) as FretsGameSettings
 
-        gameEngine = GameEngine()
-        gameEngine.initialize(settings)
+        fretsGameEngine = FretsFretsGameEngine()
+        fretsGameEngine.initialize(settings)
         timerSeconds = settings.time
-        gameEngine.setGameListener(this)
+        fretsGameEngine.setGameListener(this)
 
         soundManager = SoundManager(activity)
 
@@ -73,7 +71,7 @@ class GameFragment : Fragment(), IGameListener {
             soundManager.repeatLastNote()
         }
 
-        gameEngine.start()
+        fretsGameEngine.start()
         setGuessButtonListeners()
     }
 
@@ -111,8 +109,8 @@ class GameFragment : Fragment(), IGameListener {
         guessFeedbackRemovalThread!!.start()
     }
 
-    override fun onGameStop(results: GameResults) {
-        gameFragmentListener.onGameOver(results)
+    override fun onGameStop(resultsFrets: FretsGameResults) {
+        gameFragmentListener.onGameOver(resultsFrets)
     }
 
     override fun onNewNote(note: Note, location: FretLocation) {
@@ -154,7 +152,7 @@ class GameFragment : Fragment(), IGameListener {
                     Toast.makeText(activity, R.string.wait_before_display, Toast.LENGTH_SHORT).show()
                     return
                 }
-                gameEngine.guess(note)
+                fretsGameEngine.guess(note)
             } catch (e: GameNotStartedException) {
                 Toast.makeText(activity, R.string.game_not_started, Toast.LENGTH_SHORT).show()
             }
@@ -290,7 +288,7 @@ class GameFragment : Fragment(), IGameListener {
                                     currentTextView!!.visibility = View.INVISIBLE
                                 }
                                 try {
-                                    gameEngine.stop()
+                                    fretsGameEngine.stop()
                                 } catch (e: GameNotStartedException) {
                                     Toast.makeText(activity,
                                         R.string.game_not_started, Toast.LENGTH_SHORT).show()

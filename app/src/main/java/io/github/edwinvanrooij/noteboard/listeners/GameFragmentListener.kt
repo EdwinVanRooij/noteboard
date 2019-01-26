@@ -1,10 +1,10 @@
 package io.github.edwinvanrooij.noteboard.listeners
 
-import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.GameResults
+import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.FretsGameResults
 
 interface GameFragmentListener {
     /**
      * Executed when the game has finished.
      */
-    fun onGameOver(results: GameResults)
+    fun onGameOver(resultsFrets: FretsGameResults)
 }

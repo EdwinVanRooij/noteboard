@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.transition.Fade
 import android.widget.Toast
 import io.github.edwinvanrooij.noteboard.*
-import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.GameResults
+import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.FretsGameResults
 import io.github.edwinvanrooij.noteboard.listeners.GameFragmentListener
 import io.github.edwinvanrooij.noteboard.listeners.LandingFragmentListener
 import io.github.edwinvanrooij.noteboard.listeners.OptionsFragmentListener
@@ -19,7 +19,7 @@ class MainActivity : Activity(), GameFragmentListener,
     OptionsFragmentListener {
 
     private val landingFragment = LandingFragment()
-    private val gameFragment = GameFragment()
+    private val gameFragment = FretsGameFragment()
     private val resultsFragment = ResultsFragment()
     private val optionsFragment = OptionsFragment()
 
@@ -40,9 +40,9 @@ class MainActivity : Activity(), GameFragmentListener,
         showFragment(landingFragment)
     }
 
-    override fun onGameOver(results: GameResults) {
+    override fun onGameOver(resultsFrets: FretsGameResults) {
         val bundle = Bundle()
-        bundle.putSerializable(KEY_GAME_RESULTS, results)
+        bundle.putSerializable(KEY_GAME_RESULTS, resultsFrets)
         resultsFragment.arguments = bundle
 
         showFragment(resultsFragment)

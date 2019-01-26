@@ -4,7 +4,7 @@ import io.github.edwinvanrooij.noteboard.noteboardengine.Note
 import io.github.edwinvanrooij.noteboard.noteboardengine.NoteName
 import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.guitar.FretLocation
 
-interface IGameListener {
+interface IFretsGameListener {
 
     /**
      * Occurs when a new game starts.
@@ -14,7 +14,7 @@ interface IGameListener {
     /**
      * Occurs when a game has stopped.
      */
-    fun onGameStop(results: GameResults)
+    fun onGameStop(resultsFrets: FretsGameResults)
 
     /**
      * Occurs when a new [note] was picked, to be guessed at the given fret [location].

@@ -8,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import io.github.edwinvanrooij.noteboard.*
-import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.GameResults
+import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.FretsGameResults
 import io.github.edwinvanrooij.noteboard.listeners.ResultsFragmentListener
 import kotlinx.android.synthetic.main.fragment_results.*
 
@@ -22,13 +22,13 @@ class ResultsFragment : Fragment() {
 
     private lateinit var soundManager: SoundManager
 
-    private lateinit var results: GameResults
+    private lateinit var resultsFrets: FretsGameResults
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        results = arguments.getSerializable(KEY_GAME_RESULTS) as GameResults
+        resultsFrets = arguments.getSerializable(KEY_GAME_RESULTS) as FretsGameResults
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_results, container, false)
@@ -39,9 +39,9 @@ class ResultsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         soundManager = SoundManager(activity)
 
-        tvPointsValue.text = "${results.points}"
-        tvAccuracyValue.text = accuracyToString(results.accuracy)
-        tvScoreValue.text = "${results.score}"
+        tvPointsValue.text = "${resultsFrets.points}"
+        tvAccuracyValue.text = accuracyToString(resultsFrets.accuracy)
+        tvScoreValue.text = "${resultsFrets.score}"
 
         btnPlayAgain.setOnClickListener {
             soundManager.playButtonClick()
