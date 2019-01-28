@@ -4,7 +4,6 @@ import android.app.Activity
 import android.app.Fragment
 import android.os.Bundle
 import android.transition.Fade
-import android.widget.Toast
 import io.github.edwinvanrooij.noteboard.*
 import io.github.edwinvanrooij.noteboard.listeners.*
 import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.FretsGameResults
@@ -54,25 +53,21 @@ class MainActivity : Activity(),
     override fun onGameOver(results: OctavesGameResults) {
         val bundle = Bundle()
         bundle.putSerializable(KEY_GAME_RESULTS, results)
-        resultsFragment.arguments = bundle
-
+        landingFragment.arguments = bundle
         showFragment(resultsFragment)
     }
 
     override fun onGameOver(results: FretsGameResults) {
         val bundle = Bundle()
         bundle.putSerializable(KEY_GAME_RESULTS, results)
-        resultsFragment.arguments = bundle
-
+        landingFragment.arguments = bundle
         showFragment(resultsFragment)
     }
 
     override fun onStartClick() {
         val bundle = Bundle()
-        val settings = preferenceManager.getGameSettings()
-        bundle.putSerializable(KEY_GAME_SETTINGS, settings)
-        gameFragment.arguments = bundle
-
+        bundle.putSerializable(KEY_GAME_SETTINGS, preferenceManager.getGameSettings())
+        landingFragment.arguments = bundle
         showFragment(gameFragment)
     }
 

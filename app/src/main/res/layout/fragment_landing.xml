@@ -39,11 +39,11 @@
 
             <TextView
                 android:id="@+id/tvSelectedGame"
-                style="?android:attr/windowTitleStyle"
+                style="?android:attr/subtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/app_name"
-                android:textAlignment="center" />
+                android:textAlignment="viewEnd" />
 
         </LinearLayout>
 
