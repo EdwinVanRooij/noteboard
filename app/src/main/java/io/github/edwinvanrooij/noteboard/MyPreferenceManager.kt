@@ -3,13 +3,14 @@ package io.github.edwinvanrooij.noteboard
 import android.content.Context
 import android.preference.PreferenceManager
 import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.FretsGameSettings
+import io.github.edwinvanrooij.noteboard.noteboardengine.octavesengine.OctavesGameSettings
 import java.lang.ClassCastException
 
 class MyPreferenceManager(private val context: Context) {
 
     private val pm = PreferenceManager.getDefaultSharedPreferences(context)
 
-    fun getGameSettings(): FretsGameSettings {
+    fun getFretsGameSettings(): FretsGameSettings {
         // Get the preferred amount of frets
         val defaultFrets = 20
         val fretsPrefKey = context.getString(R.string.key_options_game_frets)
@@ -34,6 +35,21 @@ class MyPreferenceManager(private val context: Context) {
         }
 
         return FretsGameSettings(frets, time)
+    }
+
+    fun getOctavesGameSettings(): OctavesGameSettings {
+        // Get the preferred amount of time
+        val defaultTime = 30
+        val timePrefKey = context.getString(R.string.key_options_game_time)
+        var time: Int = getIntSafely(prefKey = timePrefKey, default = defaultTime)
+
+        // Time should be above 0
+        if (time < 0) {
+            time = defaultTime
+            putResource(timePrefKey, defaultTime)
+        }
+
+        return OctavesGameSettings(time)
     }
 
     private fun getIntSafely(prefKey: String, default: Int): Int {

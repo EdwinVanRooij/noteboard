@@ -198,6 +198,9 @@ class FretsGameFragment : Fragment(), IFretsGameListener {
     }
 
     private fun getTextViewByFretLocation(location: FretLocation): TextView? {
+        if (activity == null) {
+            return null
+        }
         when {
             location.stringNumber == 1 -> {
                 return getChildByFret(activity.findViewById(R.id.string1), location.fretNumber)
