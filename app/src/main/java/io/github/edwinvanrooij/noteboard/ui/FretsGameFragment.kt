@@ -17,7 +17,7 @@ import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.FretsGameSe
 import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.IFretsGameListener
 import io.github.edwinvanrooij.noteboard.noteboardengine.exceptions.GameNotStartedException
 import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.guitar.FretLocation
-import io.github.edwinvanrooij.noteboard.listeners.GameFragmentListener
+import io.github.edwinvanrooij.noteboard.listeners.FretsGameFragmentListener
 import io.github.edwinvanrooij.noteboard.noteboardengine.Note
 import io.github.edwinvanrooij.noteboard.noteboardengine.NoteName
 import io.github.edwinvanrooij.noteboard.noteboardengine.NoteName.*
@@ -30,7 +30,7 @@ import kotlinx.android.synthetic.main.fragment_game_frets.*
  */
 class FretsGameFragment : Fragment(), IFretsGameListener {
 
-    private lateinit var gameFragmentListener: GameFragmentListener
+    private lateinit var fretsGameFragmentListener: FretsGameFragmentListener
 
     private lateinit var fretsGameEngine: FretsGameEngine
     private lateinit var soundManager: SoundManager
@@ -108,8 +108,8 @@ class FretsGameFragment : Fragment(), IFretsGameListener {
         guessFeedbackRemovalThread!!.start()
     }
 
-    override fun onGameStop(resultsFrets: FretsGameResults) {
-        gameFragmentListener.onGameOver(resultsFrets)
+    override fun onGameStop(results: FretsGameResults) {
+        fretsGameFragmentListener.onGameOver(results)
     }
 
     override fun onNewNote(note: Note, location: FretLocation) {
@@ -318,7 +318,7 @@ class FretsGameFragment : Fragment(), IFretsGameListener {
         tvScore.text = score.toString()
     }
 
-    fun setGameFragmentListener(gameFragmentListener: GameFragmentListener) {
-        this.gameFragmentListener = gameFragmentListener
+    fun setGameFragmentListener(fretsGameFragmentListener: FretsGameFragmentListener) {
+        this.fretsGameFragmentListener = fretsGameFragmentListener
     }
 }

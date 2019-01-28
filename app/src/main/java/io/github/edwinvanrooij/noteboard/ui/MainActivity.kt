@@ -6,21 +6,21 @@ import android.os.Bundle
 import android.transition.Fade
 import android.widget.Toast
 import io.github.edwinvanrooij.noteboard.*
+import io.github.edwinvanrooij.noteboard.listeners.*
 import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.FretsGameResults
-import io.github.edwinvanrooij.noteboard.listeners.GameFragmentListener
-import io.github.edwinvanrooij.noteboard.listeners.LandingFragmentListener
-import io.github.edwinvanrooij.noteboard.listeners.OptionsFragmentListener
-import io.github.edwinvanrooij.noteboard.listeners.ResultsFragmentListener
+import io.github.edwinvanrooij.noteboard.noteboardengine.octavesengine.OctavesGameResults
 
 
-class MainActivity : Activity(), GameFragmentListener,
+class MainActivity : Activity(),
+    FretsGameFragmentListener,
+    OctavesGameFragmentListener,
     LandingFragmentListener,
     ResultsFragmentListener,
     OptionsFragmentListener {
 
     private val landingFragment = LandingFragment()
     private val gameFragment = FretsGameFragment()
-    private val resultsFragment = ResultsFragment()
+    private val resultsFragment = FretsResultsFragment()
     private val optionsFragment = OptionsFragment()
 
     private lateinit var preferenceManager: MyPreferenceManager
@@ -40,9 +40,17 @@ class MainActivity : Activity(), GameFragmentListener,
         showFragment(landingFragment)
     }
 
-    override fun onGameOver(resultsFrets: FretsGameResults) {
+    override fun onGameOver(results: OctavesGameResults) {
         val bundle = Bundle()
-        bundle.putSerializable(KEY_GAME_RESULTS, resultsFrets)
+        bundle.putSerializable(KEY_GAME_RESULTS, results)
+        resultsFragment.arguments = bundle
+
+        showFragment(resultsFragment)
+    }
+
+    override fun onGameOver(results: FretsGameResults) {
+        val bundle = Bundle()
+        bundle.putSerializable(KEY_GAME_RESULTS, results)
         resultsFragment.arguments = bundle
 
         showFragment(resultsFragment)

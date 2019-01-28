@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.fragment_results.*
 /**
  * A simple [Fragment] subclass.
  */
-class ResultsFragment : Fragment() {
+class OctavesResultsFragment : Fragment() {
 
     private lateinit var resultsFragmentListener: ResultsFragmentListener
 

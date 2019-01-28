@@ -1,32 +1,18 @@
 package io.github.edwinvanrooij.noteboard.ui
 
 
-import android.annotation.SuppressLint
 import android.app.Fragment
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.ScaleAnimation
-import android.widget.TextView
-import android.widget.Toast
 import io.github.edwinvanrooij.noteboard.*
-import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.FretsGameEngine
-import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.FretsGameResults
-import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.FretsGameSettings
-import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.IFretsGameListener
-import io.github.edwinvanrooij.noteboard.noteboardengine.exceptions.GameNotStartedException
-import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.guitar.FretLocation
-import io.github.edwinvanrooij.noteboard.listeners.GameFragmentListener
 import io.github.edwinvanrooij.noteboard.listeners.OctavesGameFragmentListener
 import io.github.edwinvanrooij.noteboard.noteboardengine.Note
-import io.github.edwinvanrooij.noteboard.noteboardengine.NoteName
-import io.github.edwinvanrooij.noteboard.noteboardengine.NoteName.*
 import io.github.edwinvanrooij.noteboard.noteboardengine.octavesengine.IOctavesGameListener
 import io.github.edwinvanrooij.noteboard.noteboardengine.octavesengine.OctavesGameEngine
 import io.github.edwinvanrooij.noteboard.noteboardengine.octavesengine.OctavesGameResults
 import io.github.edwinvanrooij.noteboard.noteboardengine.octavesengine.OctavesGameSettings
-import kotlinx.android.synthetic.main.fragment_game_octaves.*
 
 
 /**
@@ -85,5 +71,9 @@ class OctavesGameFragment : Fragment(), IOctavesGameListener {
 
     override fun onIncorrectGuess(correctNote: Note) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    fun setGameFragmentListener(gameFragmentListener: OctavesGameFragmentListener) {
+        this.gameFragmentListener = gameFragmentListener
     }
 }
