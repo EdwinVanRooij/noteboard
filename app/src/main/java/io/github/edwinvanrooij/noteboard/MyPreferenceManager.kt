@@ -12,46 +12,70 @@ class MyPreferenceManager(private val context: Context) {
     fun getGameSettings(): FretsGameSettings {
         // Get the preferred amount of frets
         val defaultFrets = 20
-        val fretsResourceKeyId = R.string.key_options_game_frets
-        var frets: Int = getIntSafely(resourceKeyId = fretsResourceKeyId, default = defaultFrets)
+        val fretsPrefKey = context.getString(R.string.key_options_game_frets)
+
+        var frets: Int = getIntSafely(prefKey = fretsPrefKey, default = defaultFrets)
 
         // Frets should be anything between 0 and 20, inclusive
         if (frets < 0 || frets > 20) {
             frets = defaultFrets
-            putResource(fretsResourceKeyId, defaultFrets)
+            putResource(fretsPrefKey, defaultFrets)
         }
 
         // Get the preferred amount of time
         val defaultTime = 30
-        val timeResourceKeyId = R.string.key_options_game_time
-        var time: Int = getIntSafely(resourceKeyId = timeResourceKeyId, default = defaultTime)
+        val timePrefKey = context.getString(R.string.key_options_game_time)
+        var time: Int = getIntSafely(prefKey = timePrefKey, default = defaultTime)
 
         // Time should be above 0
         if (time < 0) {
             time = defaultTime
-            putResource(timeResourceKeyId, defaultTime)
+            putResource(timePrefKey, defaultTime)
         }
 
         return FretsGameSettings(frets, time)
     }
 
-    private fun getIntSafely(resourceKeyId: Int, default: Int): Int {
-        val stringResource = pm.getString(context.getString(resourceKeyId), null)
+    private fun getIntSafely(prefKey: String, default: Int): Int {
+        val stringResource = pm.getString(prefKey, null)
 
         if (stringResource == null) {
-            putResource(resourceKeyId, default)
+            putResource(prefKey, default)
             return default
         }
 
         return try {
             stringResource.toInt()
         } catch (e: ClassCastException) {
-            putResource(resourceKeyId, default)
+            putResource(prefKey, default)
             default
         }
     }
 
-    private fun putResource(resourceKey: Int, default: Int) {
-        pm.edit().putString(context.getString(resourceKey), default.toString()).apply()
+    /**
+     * Saves a string value to SharedPreferences.
+     */
+    private fun putResource(prefKey: String, value: String) {
+        pm.edit().putString(prefKey, value).apply()
+    }
+
+    /**
+     * Saves an int value to SharedPreferences.
+     */
+    private fun putResource(prefKey: String, value: Int) {
+        pm.edit().putString(prefKey, value.toString()).apply()
+    }
+
+    fun setSelectedGame(game: Game) {
+        putResource(KEY_SELECTED_GAME, game.ordinal)
+    }
+
+    fun getSelectedGame(): Game {
+        val ordinal = getIntSafely(
+            KEY_SELECTED_GAME,
+            Game.FRETS.ordinal
+        ) // we'll use 'FRETS' game as the default, no particular reason
+
+        return Game.values()[ordinal]
     }
 }

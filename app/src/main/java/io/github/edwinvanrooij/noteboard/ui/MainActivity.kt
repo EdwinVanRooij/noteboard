@@ -16,12 +16,14 @@ class MainActivity : Activity(),
     OctavesGameFragmentListener,
     LandingFragmentListener,
     ResultsFragmentListener,
+    MoreGamesFragmentListener,
     OptionsFragmentListener {
 
     private val landingFragment = LandingFragment()
     private val gameFragment = FretsGameFragment()
     private val resultsFragment = FretsResultsFragment()
     private val optionsFragment = OptionsFragment()
+    private val moreGamesFragment = MoreGamesFragment()
 
     private lateinit var preferenceManager: MyPreferenceManager
 
@@ -30,6 +32,7 @@ class MainActivity : Activity(),
         gameFragment.setGameFragmentListener(this)
         resultsFragment.setResultsFragmentListener(this)
         optionsFragment.setOptionsFragmentListener(this)
+        moreGamesFragment.setMoreGamesFragmentListener(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +40,14 @@ class MainActivity : Activity(),
         setContentView(R.layout.activity_main)
 
         preferenceManager = MyPreferenceManager(this)
+
+        showLanding()
+    }
+
+    private fun showLanding() {
+        val bundle = Bundle()
+        bundle.putSerializable(KEY_SELECTED_GAME, preferenceManager.getSelectedGame())
+        landingFragment.arguments = bundle
         showFragment(landingFragment)
     }
 
@@ -65,12 +76,22 @@ class MainActivity : Activity(),
         showFragment(gameFragment)
     }
 
-    override fun onStatsClick() {
-        Toast.makeText(this, "Not implemented yet.", Toast.LENGTH_SHORT).show()
+    override fun onChoseFrets() {
+        preferenceManager.setSelectedGame(Game.FRETS)
+        showLanding()
+    }
+
+    override fun onChoseOctaves() {
+        preferenceManager.setSelectedGame(Game.OCTAVES)
+        showLanding()
+    }
+
+    override fun onMoreGamesClick() {
+        showFragment(moreGamesFragment)
     }
 
     override fun onOptionsDone() {
-        showFragment(landingFragment)
+        showLanding()
     }
 
     override fun onOptionsClick() {
@@ -78,7 +99,7 @@ class MainActivity : Activity(),
     }
 
     override fun onMenu() {
-        showFragment(landingFragment)
+        showLanding()
     }
 
     override fun onPlayAgain() {
@@ -99,4 +120,5 @@ class MainActivity : Activity(),
 
         fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
     }
+
 }
