@@ -11,8 +11,8 @@ android {
         applicationId "io.github.edwinvanrooij.noteboard"
         minSdkVersion 23
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0.0" // semantic versioning
+        versionCode 2
+        versionName "1.1.0" // semantic versioning
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
