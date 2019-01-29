@@ -23,7 +23,7 @@
         android:gravity="bottom"
         android:orientation="horizontal"
         android:weightSum="4"
-        tools:context=".ui.ResultsFragment">
+        tools:context=".ui.FretsResultsFragment">
 
         <Button
             android:id="@+id/btnMenu"

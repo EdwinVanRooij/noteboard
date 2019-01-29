@@ -4,32 +4,44 @@ import android.app.Activity
 import android.app.Fragment
 import android.os.Bundle
 import android.transition.Fade
-import android.widget.Toast
 import io.github.edwinvanrooij.noteboard.*
-import io.github.edwinvanrooij.noteboard.engine.GameResults
-import io.github.edwinvanrooij.noteboard.listeners.GameFragmentListener
-import io.github.edwinvanrooij.noteboard.listeners.LandingFragmentListener
-import io.github.edwinvanrooij.noteboard.listeners.OptionsFragmentListener
-import io.github.edwinvanrooij.noteboard.listeners.ResultsFragmentListener
+import io.github.edwinvanrooij.noteboard.listeners.*
+import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.FretsGameResults
+import io.github.edwinvanrooij.noteboard.noteboardengine.octavesengine.OctavesGameResults
+import java.lang.Exception
 
 
-class MainActivity : Activity(), GameFragmentListener,
+@Suppress("CascadeIf")
+class MainActivity : Activity(),
+    FretsGameFragmentListener,
+    OctavesGameFragmentListener,
     LandingFragmentListener,
     ResultsFragmentListener,
+    MoreGamesFragmentListener,
     OptionsFragmentListener {
 
     private val landingFragment = LandingFragment()
-    private val gameFragment = GameFragment()
-    private val resultsFragment = ResultsFragment()
     private val optionsFragment = OptionsFragment()
+    private val moreGamesFragment = MoreGamesFragment()
+
+    private val fretsGameFragment = FretsGameFragment()
+    private val octavesGameFragment = OctavesGameFragment()
+
+    private val fretsResultsFragment = FretsResultsFragment()
+    private val octavesResultsFragment = OctavesResultsFragment()
 
     private lateinit var preferenceManager: MyPreferenceManager
 
     init {
         landingFragment.setLandingFragmentListener(this)
-        gameFragment.setGameFragmentListener(this)
-        resultsFragment.setResultsFragmentListener(this)
         optionsFragment.setOptionsFragmentListener(this)
+        moreGamesFragment.setMoreGamesFragmentListener(this)
+
+        fretsGameFragment.setGameFragmentListener(this)
+        octavesGameFragment.setGameFragmentListener(this)
+
+        fretsResultsFragment.setResultsFragmentListener(this)
+        octavesResultsFragment.setResultsFragmentListener(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,32 +49,64 @@ class MainActivity : Activity(), GameFragmentListener,
         setContentView(R.layout.activity_main)
 
         preferenceManager = MyPreferenceManager(this)
+
+        showLanding()
+    }
+
+    private fun showLanding() {
+        val bundle = Bundle()
+        bundle.putSerializable(KEY_SELECTED_GAME, preferenceManager.getSelectedGame())
+        landingFragment.arguments = bundle
         showFragment(landingFragment)
     }
 
-    override fun onGameOver(results: GameResults) {
+    override fun onGameOver(results: OctavesGameResults) {
         val bundle = Bundle()
         bundle.putSerializable(KEY_GAME_RESULTS, results)
-        resultsFragment.arguments = bundle
+        octavesResultsFragment.arguments = bundle
+        showFragment(octavesResultsFragment)
+    }
 
-        showFragment(resultsFragment)
+    override fun onGameOver(results: FretsGameResults) {
+        val bundle = Bundle()
+        bundle.putSerializable(KEY_GAME_RESULTS, results)
+        fretsResultsFragment.arguments = bundle
+        showFragment(fretsResultsFragment)
     }
 
     override fun onStartClick() {
-        val bundle = Bundle()
-        val settings = preferenceManager.getGameSettings()
-        bundle.putSerializable(KEY_GAME_SETTINGS, settings)
-        gameFragment.arguments = bundle
-
-        showFragment(gameFragment)
+        val selectedGame = preferenceManager.getSelectedGame()
+        if (selectedGame == Game.FRETS) {
+            val bundle = Bundle()
+            bundle.putSerializable(KEY_GAME_SETTINGS, preferenceManager.getFretsGameSettings())
+            fretsGameFragment.arguments = bundle
+            showFragment(fretsGameFragment)
+        } else if (selectedGame == Game.OCTAVES) {
+            val bundle = Bundle()
+            bundle.putSerializable(KEY_GAME_SETTINGS, preferenceManager.getOctavesGameSettings())
+            octavesGameFragment.arguments = bundle
+            showFragment(octavesGameFragment)
+        } else {
+            throw Exception("Could not figure out which game to start at onStartClick")
+        }
     }
 
-    override fun onStatsClick() {
-        Toast.makeText(this, "Not implemented yet.", Toast.LENGTH_SHORT).show()
+    override fun onChoseFrets() {
+        preferenceManager.setSelectedGame(Game.FRETS)
+        showLanding()
+    }
+
+    override fun onChoseOctaves() {
+        preferenceManager.setSelectedGame(Game.OCTAVES)
+        showLanding()
+    }
+
+    override fun onMoreGamesClick() {
+        showFragment(moreGamesFragment)
     }
 
     override fun onOptionsDone() {
-        showFragment(landingFragment)
+        showLanding()
     }
 
     override fun onOptionsClick() {
@@ -70,11 +114,18 @@ class MainActivity : Activity(), GameFragmentListener,
     }
 
     override fun onMenu() {
-        showFragment(landingFragment)
+        showLanding()
     }
 
     override fun onPlayAgain() {
-        showFragment(gameFragment)
+        val selectedGame = preferenceManager.getSelectedGame()
+        if (selectedGame == Game.FRETS) {
+            showFragment(fretsGameFragment)
+        } else if (selectedGame == Game.OCTAVES) {
+            showFragment(octavesGameFragment)
+        } else {
+            throw Exception("Could not figure out which game to start at onPlayAgain")
+        }
     }
 
     private fun showFragment(fragment: Fragment) {
@@ -91,4 +142,5 @@ class MainActivity : Activity(), GameFragmentListener,
 
         fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit()
     }
+
 }

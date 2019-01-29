@@ -7,12 +7,12 @@ interface LandingFragmentListener {
     fun onStartClick()
 
     /**
-     * Executed when stats button was clicked.
-     */
-    fun onStatsClick()
-
-    /**
      * Executed when options button was clicked.
      */
     fun onOptionsClick()
+
+    /**
+     * Executed when more games button was clicked.
+     */
+    fun onMoreGamesClick()
 }

@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingTop="16dp"
     android:paddingLeft="64dp"
+    android:paddingTop="16dp"
     android:paddingRight="64dp"
     android:paddingBottom="16dp"
     tools:context=".ui.LandingFragment">
@@ -22,15 +22,30 @@
             android:layout_weight="1"
             android:src="@drawable/guitar_rtl" />
 
-        <TextView
-            android:id="@+id/tvTitle"
-            style="?android:attr/windowTitleStyle"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:padding="32dp"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/app_name"
-            android:textAlignment="center" />
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvTitle"
+                style="?android:attr/windowTitleStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/tvSelectedGame"
+                style="?android:attr/subtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textAlignment="viewEnd" />
+
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/right"
@@ -41,11 +56,11 @@
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:gravity="bottom">
+        android:gravity="bottom"
+        android:orientation="vertical">
 
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="0dp"-->
@@ -60,18 +75,18 @@
             android:text="@string/btn_play" />
 
         <Button
-            android:id="@+id/btnStats"
-            style="@android:style/Widget.Material.Button.Borderless.Colored"
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:text="@string/btn_stats" />
-
-        <Button
             android:id="@+id/btnOptions"
             style="@android:style/Widget.Material.Button.Borderless.Colored"
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:text="@string/btn_options" />
+
+        <Button
+            android:id="@+id/btnMoreGames"
+            style="@android:style/Widget.Material.Button.Borderless.Colored"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:text="@string/btn_more_games" />
 
     </LinearLayout>
 </LinearLayout>

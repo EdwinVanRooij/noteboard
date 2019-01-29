@@ -3,8 +3,8 @@ package io.github.edwinvanrooij.noteboard
 import android.content.Context
 import android.media.AudioManager
 import android.media.MediaPlayer
-import io.github.edwinvanrooij.noteboard.engine.music.Note
-import io.github.edwinvanrooij.noteboard.engine.music.NoteName.*
+import io.github.edwinvanrooij.noteboard.noteboardengine.Note
+import io.github.edwinvanrooij.noteboard.noteboardengine.NoteName.*
 import java.lang.Exception
 
 @Suppress("LiftReturnOrAssignment")
