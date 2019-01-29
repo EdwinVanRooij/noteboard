@@ -1,6 +1,7 @@
 package io.github.edwinvanrooij.noteboard.noteboardengine.octavesengine
 
 import io.github.edwinvanrooij.noteboard.noteboardengine.Note
+import io.github.edwinvanrooij.noteboard.noteboardengine.NoteName
 
 interface IOctavesGameListener {
     /**
@@ -34,7 +35,7 @@ interface IOctavesGameListener {
     fun onCorrectGuess(note: Note)
 
     /**
-     * Occurs when the user guessed last [correctNote] incorrectly.
+     * Occurs when the user guessed last [correctNote] incorrectly, by guessing [guessedNote].
      */
-    fun onIncorrectGuess(correctNote: Note)
+    fun onIncorrectGuess(correctNote: Note, guessedNote: NoteName)
 }

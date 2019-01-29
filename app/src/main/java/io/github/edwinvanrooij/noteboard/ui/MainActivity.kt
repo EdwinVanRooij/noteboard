@@ -4,7 +4,6 @@ import android.app.Activity
 import android.app.Fragment
 import android.os.Bundle
 import android.transition.Fade
-import android.widget.Toast
 import io.github.edwinvanrooij.noteboard.*
 import io.github.edwinvanrooij.noteboard.listeners.*
 import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.FretsGameResults
@@ -22,23 +21,27 @@ class MainActivity : Activity(),
     OptionsFragmentListener {
 
     private val landingFragment = LandingFragment()
-    private val resultsFragment = FretsResultsFragment()
     private val optionsFragment = OptionsFragment()
     private val moreGamesFragment = MoreGamesFragment()
 
     private val fretsGameFragment = FretsGameFragment()
     private val octavesGameFragment = OctavesGameFragment()
 
+    private val fretsResultsFragment = FretsResultsFragment()
+    private val octavesResultsFragment = OctavesResultsFragment()
+
     private lateinit var preferenceManager: MyPreferenceManager
 
     init {
         landingFragment.setLandingFragmentListener(this)
-        resultsFragment.setResultsFragmentListener(this)
         optionsFragment.setOptionsFragmentListener(this)
         moreGamesFragment.setMoreGamesFragmentListener(this)
 
         fretsGameFragment.setGameFragmentListener(this)
         octavesGameFragment.setGameFragmentListener(this)
+
+        fretsResultsFragment.setResultsFragmentListener(this)
+        octavesResultsFragment.setResultsFragmentListener(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -60,15 +63,15 @@ class MainActivity : Activity(),
     override fun onGameOver(results: OctavesGameResults) {
         val bundle = Bundle()
         bundle.putSerializable(KEY_GAME_RESULTS, results)
-        resultsFragment.arguments = bundle
-        showFragment(resultsFragment)
+        octavesResultsFragment.arguments = bundle
+        showFragment(octavesResultsFragment)
     }
 
     override fun onGameOver(results: FretsGameResults) {
         val bundle = Bundle()
         bundle.putSerializable(KEY_GAME_RESULTS, results)
-        resultsFragment.arguments = bundle
-        showFragment(resultsFragment)
+        fretsResultsFragment.arguments = bundle
+        showFragment(fretsResultsFragment)
     }
 
     override fun onStartClick() {

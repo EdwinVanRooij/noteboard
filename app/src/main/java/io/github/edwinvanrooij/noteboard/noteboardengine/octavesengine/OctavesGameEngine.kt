@@ -103,19 +103,19 @@ class OctavesGameEngine : IOctavesGameEngine {
             onCorrectGuess()
         } else {
             // Incorrect guess (note name does not equal guessed note name count as incorrect)
-            onIncorrectGuess()
+            onIncorrectGuess(noteName)
         }
     }
 
     /**
      * Occurs when the user guessed [currentNote] incorrectly.
      */
-    private fun onIncorrectGuess() {
+    private fun onIncorrectGuess(noteName: NoteName) {
         incorrectlyGuessedNotes.add(currentNote!!)
         // score remains unchanged
         gameListener.onScoreChange(score)
         updateAccuracy()
-        gameListener.onIncorrectGuess(correctNote = currentNote!!)
+        gameListener.onIncorrectGuess(correctNote = currentNote!!, guessedNote = noteName)
         executeNextNoteRoutine()
     }
 
