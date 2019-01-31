@@ -20,19 +20,34 @@ class MainActivity : Activity(),
     MoreGamesFragmentListener,
     OptionsFragmentListener {
 
-    private val landingFragment = LandingFragment()
-    private val optionsFragment = OptionsFragment()
-    private val moreGamesFragment = MoreGamesFragment()
+    private lateinit var landingFragment: LandingFragment
+    private lateinit var optionsFragment: OptionsFragment
+    private lateinit var moreGamesFragment: MoreGamesFragment
 
-    private val fretsGameFragment = FretsGameFragment()
-    private val octavesGameFragment = OctavesGameFragment()
+    private lateinit var fretsGameFragment: FretsGameFragment
+    private lateinit var octavesGameFragment: OctavesGameFragment
 
-    private val fretsResultsFragment = FretsResultsFragment()
-    private val octavesResultsFragment = OctavesResultsFragment()
+    private lateinit var fretsResultsFragment: FretsResultsFragment
+    private lateinit var octavesResultsFragment: OctavesResultsFragment
 
     private lateinit var preferenceManager: MyPreferenceManager
 
-    init {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        // Initialize all fragments
+        landingFragment = LandingFragment()
+        optionsFragment = OptionsFragment()
+        moreGamesFragment = MoreGamesFragment()
+
+        fretsGameFragment = FretsGameFragment()
+        octavesGameFragment = OctavesGameFragment()
+
+        fretsResultsFragment = FretsResultsFragment()
+        octavesResultsFragment = OctavesResultsFragment()
+
+        // Set all fragment listeners
         landingFragment.setLandingFragmentListener(this)
         optionsFragment.setOptionsFragmentListener(this)
         moreGamesFragment.setMoreGamesFragmentListener(this)
@@ -42,15 +57,26 @@ class MainActivity : Activity(),
 
         fretsResultsFragment.setResultsFragmentListener(this)
         octavesResultsFragment.setResultsFragmentListener(this)
-    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
+        // Init preference listener
         preferenceManager = MyPreferenceManager(this)
 
+        // Show landing fragment
         showLanding()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        landingFragment.onDestroy()
+        optionsFragment.onDestroy()
+        moreGamesFragment.onDestroy()
+
+        fretsGameFragment.onDestroy()
+        octavesGameFragment.onDestroy()
+
+        fretsResultsFragment.onDestroy()
+        octavesResultsFragment.onDestroy()
     }
 
     private fun showLanding() {

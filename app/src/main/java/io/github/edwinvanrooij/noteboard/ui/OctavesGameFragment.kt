@@ -220,4 +220,11 @@ class OctavesGameFragment : Fragment(), IOctavesGameListener {
     fun setGameFragmentListener(gameFragmentListener: OctavesGameFragmentListener) {
         this.gameFragmentListener = gameFragmentListener
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        guessFeedbackRemovalThread?.interrupt()
+        newNoteThread?.interrupt()
+    }
 }

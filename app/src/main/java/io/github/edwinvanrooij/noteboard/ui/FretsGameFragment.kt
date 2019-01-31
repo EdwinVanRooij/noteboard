@@ -324,4 +324,12 @@ class FretsGameFragment : Fragment(), IFretsGameListener {
     fun setGameFragmentListener(fretsGameFragmentListener: FretsGameFragmentListener) {
         this.fretsGameFragmentListener = fretsGameFragmentListener
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        guessFeedbackRemovalThread?.interrupt()
+        newNoteThread?.interrupt()
+        timerThread?.interrupt()
+    }
 }
