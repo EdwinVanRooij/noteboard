@@ -1,17 +1,25 @@
 package io.github.edwinvanrooij.noteboard.ui
 
 
+import android.Manifest
 import android.os.Bundle
 import android.app.Fragment
+import android.content.pm.PackageManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import io.github.edwinvanrooij.noteboard.Game
 import io.github.edwinvanrooij.noteboard.KEY_SELECTED_GAME
 import io.github.edwinvanrooij.noteboard.listeners.LandingFragmentListener
 import io.github.edwinvanrooij.noteboard.R
 import io.github.edwinvanrooij.noteboard.SoundManager
 import kotlinx.android.synthetic.main.fragment_landing.*
+import net.gotev.speech.GoogleVoiceTypingDisabledException
+import net.gotev.speech.Speech
+import net.gotev.speech.SpeechDelegate
+import net.gotev.speech.SpeechRecognitionNotAvailable
 
 
 /**

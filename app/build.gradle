@@ -35,6 +35,8 @@ dependencies {
     implementation 'com.github.markushi:circlebutton:1.1'
     implementation 'com.skyfishjy.ripplebackground:library:1.0.1'
 
+    implementation 'net.gotev:speech:1.4.0'
+
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }

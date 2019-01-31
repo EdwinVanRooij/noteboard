@@ -1,14 +1,23 @@
 package io.github.edwinvanrooij.noteboard.ui
 
+import android.Manifest
 import android.app.Activity
 import android.app.Fragment
+import android.app.PendingIntent.getActivity
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.transition.Fade
+import android.util.Log
+import android.widget.Toast
 import io.github.edwinvanrooij.noteboard.*
 import io.github.edwinvanrooij.noteboard.listeners.*
 import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.FretsGameResults
 import io.github.edwinvanrooij.noteboard.noteboardengine.octavesengine.OctavesGameResults
+import net.gotev.speech.Speech
 import java.lang.Exception
+import net.gotev.speech.GoogleVoiceTypingDisabledException
+import net.gotev.speech.SpeechRecognitionNotAvailable
+import net.gotev.speech.SpeechDelegate
 
 
 @Suppress("CascadeIf")
@@ -35,6 +44,8 @@ class MainActivity : Activity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        Log.i("speech", "speech recognition is now active")
+        println("Test")
 
         // Initialize all fragments
         landingFragment = LandingFragment()
@@ -57,13 +68,17 @@ class MainActivity : Activity(),
 
         fretsResultsFragment.setResultsFragmentListener(this)
         octavesResultsFragment.setResultsFragmentListener(this)
+        Log.i("speech", "speech recognition is now active")
 
         // Init preference listener
         preferenceManager = MyPreferenceManager(this)
 
         // Show landing fragment
         showLanding()
+
+        Speech.init(this, packageName)
     }
+
 
     override fun onDestroy() {
         super.onDestroy()
@@ -77,6 +92,8 @@ class MainActivity : Activity(),
 
         fretsResultsFragment.onDestroy()
         octavesResultsFragment.onDestroy()
+
+        Speech.getInstance().shutdown()
     }
 
     private fun showLanding() {

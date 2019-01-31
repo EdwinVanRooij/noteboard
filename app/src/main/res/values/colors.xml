@@ -19,6 +19,7 @@
 
     <color name="correct">#32CD32</color>
     <color name="incorrect">#DC443C</color>
+    <color name="neutral">#BDBDBD</color>
 
     <color name="black">#000</color>
 

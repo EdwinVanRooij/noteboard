@@ -1,25 +1,31 @@
 package io.github.edwinvanrooij.noteboard.ui
 
-
+import android.Manifest
 import android.app.Fragment
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.skyfishjy.library.RippleBackground
 import io.github.edwinvanrooij.noteboard.*
 import io.github.edwinvanrooij.noteboard.listeners.OctavesGameFragmentListener
 import io.github.edwinvanrooij.noteboard.noteboardengine.Note
+import io.github.edwinvanrooij.noteboard.noteboardengine.NoteName
+import io.github.edwinvanrooij.noteboard.noteboardengine.NoteName.*
+import io.github.edwinvanrooij.noteboard.noteboardengine.exceptions.GameNotStartedException
 import io.github.edwinvanrooij.noteboard.noteboardengine.octavesengine.IOctavesGameListener
 import io.github.edwinvanrooij.noteboard.noteboardengine.octavesengine.OctavesGameEngine
 import io.github.edwinvanrooij.noteboard.noteboardengine.octavesengine.OctavesGameResults
 import io.github.edwinvanrooij.noteboard.noteboardengine.octavesengine.OctavesGameSettings
 import kotlinx.android.synthetic.main.fragment_game_octaves.*
-import com.skyfishjy.library.RippleBackground
-import io.github.edwinvanrooij.noteboard.noteboardengine.NoteName
-import io.github.edwinvanrooij.noteboard.noteboardengine.NoteName.*
-import io.github.edwinvanrooij.noteboard.noteboardengine.exceptions.GameNotStartedException
-
+import kotlinx.android.synthetic.main.fragment_landing.*
+import net.gotev.speech.GoogleVoiceTypingDisabledException
+import net.gotev.speech.Speech
+import net.gotev.speech.SpeechDelegate
+import net.gotev.speech.SpeechRecognitionNotAvailable
 
 /**
  * A simple [Fragment] subclass.
@@ -39,6 +45,8 @@ class OctavesGameFragment : Fragment(), IOctavesGameListener {
 
     private val guessFeedbackRemovalDelay: Long = 2200L // in ms
     private var guessFeedbackRemovalThread: Thread? = null
+
+    private val speechRecognitionDelay: Long = 2300L // in ms
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,6 +70,9 @@ class OctavesGameFragment : Fragment(), IOctavesGameListener {
 
         rbg.setOnClickListener {
             soundManager.repeatLastNote()
+        }
+        ivSpeechCircle.setOnClickListener {
+            startListening()
         }
 
         gameEngine.start()
@@ -117,6 +128,11 @@ class OctavesGameFragment : Fragment(), IOctavesGameListener {
                     }
                     activity.runOnUiThread {
                         soundManager.playSound(note)
+                    }
+                    Thread.sleep(speechRecognitionDelay)
+
+                    activity.runOnUiThread {
+                        startListening()
                     }
                 } catch (e: InterruptedException) {
                 }
@@ -219,6 +235,62 @@ class OctavesGameFragment : Fragment(), IOctavesGameListener {
 
     fun setGameFragmentListener(gameFragmentListener: OctavesGameFragmentListener) {
         this.gameFragmentListener = gameFragmentListener
+    }
+
+    private fun startListening() {
+        val act = activity
+
+        // Request permission
+        if (context.checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(arrayOf(Manifest.permission.RECORD_AUDIO), 1)
+        }
+
+        ivSpeechCircle.drawable.setTint(resources.getColor(R.color.correct))
+
+        Log.i("speech", "speech recognition is now active")
+        try {
+            // you must have android.permission.RECORD_AUDIO granted at this point
+            Speech.getInstance().startListening(object : SpeechDelegate {
+                override fun onStartOfSpeech() {
+                    Log.i("speech", "speech recognition is now active")
+                }
+
+                override fun onSpeechRmsChanged(value: Float) {
+                    Log.d("speech", "rms is now: $value")
+                }
+
+                override fun onSpeechPartialResults(results: List<String>) {
+                    val str = StringBuilder()
+                    for (res in results) {
+                        str.append(res).append(" ")
+                    }
+
+                    Log.i("speech", "partial result: " + str.toString().trim { it <= ' ' })
+                }
+
+                override fun onSpeechResult(result: String) {
+                    Log.i("speech", "result: $result")
+                    ivSpeechCircle.drawable.setTint(resources.getColor(R.color.neutral))
+
+                    val note = textToNoteName(result)
+                    if (note == null) {
+                        Toast.makeText(act, "Invalid guess, found '$result'", Toast.LENGTH_SHORT).show()
+                    } else {
+                        gameEngine.guess(note)
+                    }
+                }
+            })
+        } catch (exc: SpeechRecognitionNotAvailable) {
+            Log.e("speech", "Speech recognition is not available on this device!")
+            // You can prompt the user if he wants to install Google App to have
+            // speech recognition, and then you can simply call:
+            //
+            // SpeechUtil.redirectUserToGoogleAppOnPlayStore(this);
+            //
+            // to redirect the user to the Google App page on Play Store
+        } catch (exc: GoogleVoiceTypingDisabledException) {
+            Log.e("speech", "Google voice typing must be enabled!")
+        }
     }
 
     override fun onDestroy() {
