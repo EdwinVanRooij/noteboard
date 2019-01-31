@@ -12,7 +12,7 @@ class MyPreferenceManager(private val context: Context) {
 
     fun getFretsGameSettings(): FretsGameSettings {
         // Get the preferred amount of frets
-        val defaultFrets = 20
+        val defaultFrets = 15
         val fretsPrefKey = context.getString(R.string.key_options_game_frets)
 
         var frets: Int = getIntSafely(prefKey = fretsPrefKey, default = defaultFrets)
