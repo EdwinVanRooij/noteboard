@@ -22,6 +22,8 @@
     <color name="neutral">#BDBDBD</color>
 
     <color name="black">#000</color>
+    <color name="dark_grey">#222</color>
+    <color name="light_grey">#ddd</color>
 
     <color name="green1">#fff</color>
     <color name="green2">#fff</color>

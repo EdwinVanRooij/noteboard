@@ -21,7 +21,6 @@ import io.github.edwinvanrooij.noteboard.noteboardengine.octavesengine.OctavesGa
 import io.github.edwinvanrooij.noteboard.noteboardengine.octavesengine.OctavesGameResults
 import io.github.edwinvanrooij.noteboard.noteboardengine.octavesengine.OctavesGameSettings
 import kotlinx.android.synthetic.main.fragment_game_octaves.*
-import kotlinx.android.synthetic.main.fragment_landing.*
 import net.gotev.speech.GoogleVoiceTypingDisabledException
 import net.gotev.speech.Speech
 import net.gotev.speech.SpeechDelegate
