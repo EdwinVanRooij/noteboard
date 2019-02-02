@@ -239,7 +239,7 @@ class OctavesGameFragment : Fragment(), IOctavesGameListener {
 
     private fun startListening() {
         val act: Activity? = activity
-        if (act == null || context == null) {
+        if (act == null || context == null || ivSpeechCircle == null || resources == null) {
             return
         }
 
