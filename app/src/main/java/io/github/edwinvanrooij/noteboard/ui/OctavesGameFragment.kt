@@ -1,6 +1,7 @@
 package io.github.edwinvanrooij.noteboard.ui
 
 import android.Manifest
+import android.app.Activity
 import android.app.Fragment
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -237,7 +238,10 @@ class OctavesGameFragment : Fragment(), IOctavesGameListener {
     }
 
     private fun startListening() {
-        val act = activity
+        val act: Activity? = activity
+        if (act == null || context == null) {
+            return
+        }
 
         // Request permission
         if (context.checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
