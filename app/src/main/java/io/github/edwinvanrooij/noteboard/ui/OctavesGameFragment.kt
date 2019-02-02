@@ -3,6 +3,7 @@ package io.github.edwinvanrooij.noteboard.ui
 import android.Manifest
 import android.app.Activity
 import android.app.Fragment
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -26,6 +27,9 @@ import net.gotev.speech.GoogleVoiceTypingDisabledException
 import net.gotev.speech.Speech
 import net.gotev.speech.SpeechDelegate
 import net.gotev.speech.SpeechRecognitionNotAvailable
+import android.media.AudioManager
+import android.content.Context.AUDIO_SERVICE
+
 
 /**
  * A simple [Fragment] subclass.
@@ -35,6 +39,8 @@ class OctavesGameFragment : Fragment(), IOctavesGameListener {
 
     private lateinit var gameFragmentListener: OctavesGameFragmentListener
 
+    private lateinit var mAudioManager: AudioManager
+
     private lateinit var gameEngine: OctavesGameEngine
     private lateinit var soundManager: SoundManager
 
@@ -42,6 +48,9 @@ class OctavesGameFragment : Fragment(), IOctavesGameListener {
 
     private val newNoteDelay: Long = 2500L // in ms
     private var newNoteThread: Thread? = null
+
+    private val guessDelay: Long = 200L // in ms
+    private var guessThread: Thread? = null
 
     private val guessFeedbackRemovalDelay: Long = 2200L // in ms
     private var guessFeedbackRemovalThread: Thread? = null
@@ -67,6 +76,7 @@ class OctavesGameFragment : Fragment(), IOctavesGameListener {
         gameEngine.setGameListener(this)
 
         soundManager = SoundManager(activity)
+        mAudioManager = activity.getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
         rbg.setOnClickListener {
             soundManager.repeatLastNote()
@@ -237,11 +247,35 @@ class OctavesGameFragment : Fragment(), IOctavesGameListener {
         this.gameFragmentListener = gameFragmentListener
     }
 
+    /**
+     * Mute audio in order to get rid of the android speech recognition 'beep' sound(s).
+     */
+    private fun muteAudio() {
+        mAudioManager.setStreamMute(AudioManager.STREAM_NOTIFICATION, true)
+        mAudioManager.setStreamMute(AudioManager.STREAM_ALARM, true)
+        mAudioManager.setStreamMute(AudioManager.STREAM_MUSIC, true)
+        mAudioManager.setStreamMute(AudioManager.STREAM_RING, true)
+        mAudioManager.setStreamMute(AudioManager.STREAM_SYSTEM, true)
+    }
+
+    /**
+     * Enable audio again after the android speech recognition 'beep' sound(s) played.
+     */
+    private fun unmuteAudio() {
+        mAudioManager.setStreamMute(AudioManager.STREAM_NOTIFICATION, false)
+        mAudioManager.setStreamMute(AudioManager.STREAM_ALARM, false)
+        mAudioManager.setStreamMute(AudioManager.STREAM_MUSIC, false)
+        mAudioManager.setStreamMute(AudioManager.STREAM_RING, false)
+        mAudioManager.setStreamMute(AudioManager.STREAM_SYSTEM, false)
+    }
+
     private fun startListening() {
         val act: Activity? = activity
         if (act == null || context == null || ivSpeechCircle == null || resources == null) {
             return
         }
+
+        muteAudio()
 
         // Request permission
         if (context.checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
@@ -279,7 +313,22 @@ class OctavesGameFragment : Fragment(), IOctavesGameListener {
                     if (note == null) {
                         Toast.makeText(act, "Invalid guess, found '$result'", Toast.LENGTH_SHORT).show()
                     } else {
-                        gameEngine.guess(note)
+                        guessThread = object : Thread() {
+                            override fun run() {
+                                try {
+                                    Thread.sleep(guessDelay)
+                                    if (activity == null) {
+                                        return
+                                    }
+                                    activity.runOnUiThread {
+                                        unmuteAudio()
+                                        gameEngine.guess(note)
+                                    }
+                                } catch (e: InterruptedException) {
+                                }
+                            }
+                        }
+                        guessThread!!.start()
                     }
                 }
             })
@@ -301,5 +350,6 @@ class OctavesGameFragment : Fragment(), IOctavesGameListener {
 
         guessFeedbackRemovalThread?.interrupt()
         newNoteThread?.interrupt()
+        guessThread?.interrupt()
     }
 }
