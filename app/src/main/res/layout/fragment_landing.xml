@@ -1,132 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:scrolling_image_view="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+             xmlns:scrolling_image_view="http://schemas.android.com/apk/res-auto"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content">
 
     <com.q42.android.scrollingimageview.ScrollingImageView
-        android:id="@+id/scrolling_background4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        scrolling_image_view:speed="1dp"
-        scrolling_image_view:src="@drawable/notes_colorful_transparent_6blur_1" />
+            android:id="@+id/scrolling_background4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            scrolling_image_view:speed="1dp"
+            scrolling_image_view:src="@drawable/notes_colorful_transparent_6blur_1"/>
 
     <com.q42.android.scrollingimageview.ScrollingImageView
-        android:id="@+id/scrolling_background5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        scrolling_image_view:speed="1.5dp"
-        scrolling_image_view:src="@drawable/notes_colorful_transparent_6blur_2" />
+            android:id="@+id/scrolling_background5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            scrolling_image_view:speed="1.5dp"
+            scrolling_image_view:src="@drawable/notes_colorful_transparent_6blur_2"/>
 
     <com.q42.android.scrollingimageview.ScrollingImageView
-        android:id="@+id/scrolling_background6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        scrolling_image_view:speed="2dp"
-        scrolling_image_view:src="@drawable/notes_colorful_transparent_6blur_3" />
+            android:id="@+id/scrolling_background6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            scrolling_image_view:speed="2dp"
+            scrolling_image_view:src="@drawable/notes_colorful_transparent_6blur_3"/>
 
     <com.q42.android.scrollingimageview.ScrollingImageView
-        android:id="@+id/scrolling_background7"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        scrolling_image_view:speed="2.5dp"
-        scrolling_image_view:src="@drawable/notes_colorful_transparent_6blur_4" />
+            android:id="@+id/scrolling_background7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            scrolling_image_view:speed="2.5dp"
+            scrolling_image_view:src="@drawable/notes_colorful_transparent_6blur_4"/>
 
     <com.q42.android.scrollingimageview.ScrollingImageView
-        android:id="@+id/scrolling_background8"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        scrolling_image_view:speed="3dp"
-        scrolling_image_view:src="@drawable/notes_colorful_transparent_6blur_5" />
+            android:id="@+id/scrolling_background8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            scrolling_image_view:speed="3dp"
+            scrolling_image_view:src="@drawable/notes_colorful_transparent_6blur_5"/>
 
     <com.q42.android.scrollingimageview.ScrollingImageView
-        android:id="@+id/scrolling_background9"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        scrolling_image_view:speed="1dp"
-        scrolling_image_view:src="@drawable/notes_colorful_transparent_6blur_6" />
+            android:id="@+id/scrolling_background9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            scrolling_image_view:speed="1dp"
+            scrolling_image_view:src="@drawable/notes_colorful_transparent_6blur_6"/>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingLeft="64dp"
-        android:paddingTop="16dp"
-        android:paddingRight="64dp"
-        android:paddingBottom="16dp"
-        tools:context=".ui.LandingFragment">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="end"
-            android:orientation="vertical"
-            android:paddingTop="16dp"
-            android:paddingBottom="16dp"
-            android:weightSum="1">
-
-            <TextView
-                android:id="@+id/tvTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-medium"
-                android:shadowColor="@color/light_grey"
-                android:shadowDx="-5.00"
-                android:shadowDy="5.00"
-                android:shadowRadius="1.00"
-                android:text="@string/app_name"
-                android:textAlignment="center"
-                android:textSize="64sp" />
-
-            <TextView
-                android:id="@+id/tvSelectedGame"
-                style="?android:attr/subtitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-light"
-                android:shadowColor="@color/light_grey"
-                android:shadowDx="-1.00"
-                android:shadowDy="1.00"
-                android:shadowRadius="1.00"
-                android:text="@string/app_name"
-                android:textSize="22sp" />
-        </LinearLayout>
-
-        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="64dp"
+            android:paddingTop="8dp"
+            android:paddingRight="64dp"
+            android:paddingBottom="8dp"
+            tools:context=".ui.LandingFragment">
 
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="0dp"-->
-            <!--android:layout_weight="1"-->
-            <!--android:gravity="bottom"-->
-            <!--style="@android:style/Widget.Material.Button.Colored"-->
-            <Button
-                android:id="@+id/btnStart"
-                style="@android:style/Widget.Material.Button.Colored"
-                android:layout_width="match_parent"
-                android:layout_height="64dp"
-                android:text="@string/btn_play" />
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="end"
+                android:orientation="vertical"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:weightSum="1">
 
-            <Button
-                android:id="@+id/btnOptions"
-                style="@android:style/Widget.Material.Button.Borderless.Colored"
-                android:layout_width="match_parent"
-                android:layout_height="64dp"
-                android:text="@string/btn_options" />
+            <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:shadowColor="@color/light_grey"
+                    android:shadowDx="-5.00"
+                    android:shadowDy="5.00"
+                    android:shadowRadius="1.00"
+                    android:text="@string/app_name"
+                    android:textAlignment="center"
+                    android:textSize="64sp"/>
 
-            <Button
-                android:id="@+id/btnMoreGames"
-                style="@android:style/Widget.Material.Button.Borderless.Colored"
-                android:layout_width="match_parent"
-                android:layout_height="64dp"
-                android:text="@string/btn_more_games" />
-
+            <TextView
+                    android:id="@+id/tvSelectedGame"
+                    style="?android:attr/subtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:shadowColor="@color/light_grey"
+                    android:shadowDx="-1.00"
+                    android:shadowDy="1.00"
+                    android:shadowRadius="1.00"
+                    android:text="@string/app_name"
+                    android:textSize="16sp"/>
         </LinearLayout>
+
+        <ScrollView
+                android:layout_gravity="center"
+                android:layout_width="256dp"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                <Button
+                        android:id="@+id/btnStart"
+                        style="@android:style/Widget.Material.Button.Colored"
+                        android:layout_width="match_parent"
+                        android:layout_height="64dp"
+                        android:text="@string/btn_play"/>
+
+                <Button
+                        android:id="@+id/btnOptions"
+                        style="@android:style/Widget.Material.Button.Borderless.Colored"
+                        android:layout_width="match_parent"
+                        android:layout_height="64dp"
+                        android:text="@string/btn_options"/>
+
+                <Button
+                        android:id="@+id/btnMoreGames"
+                        style="@android:style/Widget.Material.Button.Borderless.Colored"
+                        android:layout_width="match_parent"
+                        android:layout_height="64dp"
+                        android:text="@string/btn_more_games"/>
+
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
 </FrameLayout>
 

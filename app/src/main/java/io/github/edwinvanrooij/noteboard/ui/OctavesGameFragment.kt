@@ -49,13 +49,13 @@ class OctavesGameFragment : Fragment(), IOctavesGameListener {
     private val newNoteDelay: Long = 2500L // in ms
     private var newNoteThread: Thread? = null
 
-    private val guessDelay: Long = 200L // in ms
-    private var guessThread: Thread? = null
+//    private val guessDelay: Long = 200L // in ms
+//    private var guessThread: Thread? = null
 
     private val guessFeedbackRemovalDelay: Long = 2200L // in ms
     private var guessFeedbackRemovalThread: Thread? = null
 
-    private val speechRecognitionDelay: Long = 2300L // in ms
+//    private val speechRecognitionDelay: Long = 2300L // in ms
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -81,9 +81,9 @@ class OctavesGameFragment : Fragment(), IOctavesGameListener {
         rbg.setOnClickListener {
             soundManager.repeatLastNote()
         }
-        ivSpeechCircle.setOnClickListener {
-            startListening()
-        }
+//        ivSpeechCircle.setOnClickListener {
+//            startListening()
+//        }
 
         gameEngine.start()
         setGuessButtonListeners()
@@ -139,11 +139,10 @@ class OctavesGameFragment : Fragment(), IOctavesGameListener {
                     activity.runOnUiThread {
                         soundManager.playSound(note)
                     }
-                    Thread.sleep(speechRecognitionDelay)
-
-                    activity.runOnUiThread {
-                        startListening()
-                    }
+//                    Thread.sleep(speechRecognitionDelay)
+//                    activity.runOnUiThread {
+//                        startListening()
+//                    }
                 } catch (e: InterruptedException) {
                 }
             }
@@ -247,109 +246,109 @@ class OctavesGameFragment : Fragment(), IOctavesGameListener {
         this.gameFragmentListener = gameFragmentListener
     }
 
-    /**
-     * Mute audio in order to get rid of the android speech recognition 'beep' sound(s).
-     */
-    private fun muteAudio() {
-        mAudioManager.setStreamMute(AudioManager.STREAM_NOTIFICATION, true)
-        mAudioManager.setStreamMute(AudioManager.STREAM_ALARM, true)
-        mAudioManager.setStreamMute(AudioManager.STREAM_MUSIC, true)
-        mAudioManager.setStreamMute(AudioManager.STREAM_RING, true)
-        mAudioManager.setStreamMute(AudioManager.STREAM_SYSTEM, true)
-    }
+//    /**
+//     * Mute audio in order to get rid of the android speech recognition 'beep' sound(s).
+//     */
+//    private fun muteAudio() {
+//        mAudioManager.setStreamMute(AudioManager.STREAM_NOTIFICATION, true)
+//        mAudioManager.setStreamMute(AudioManager.STREAM_ALARM, true)
+//        mAudioManager.setStreamMute(AudioManager.STREAM_MUSIC, true)
+//        mAudioManager.setStreamMute(AudioManager.STREAM_RING, true)
+//        mAudioManager.setStreamMute(AudioManager.STREAM_SYSTEM, true)
+//    }
+//
+//    /**
+//     * Enable audio again after the android speech recognition 'beep' sound(s) played.
+//     */
+//    private fun unmuteAudio() {
+//        mAudioManager.setStreamMute(AudioManager.STREAM_NOTIFICATION, false)
+//        mAudioManager.setStreamMute(AudioManager.STREAM_ALARM, false)
+//        mAudioManager.setStreamMute(AudioManager.STREAM_MUSIC, false)
+//        mAudioManager.setStreamMute(AudioManager.STREAM_RING, false)
+//        mAudioManager.setStreamMute(AudioManager.STREAM_SYSTEM, false)
+//    }
 
-    /**
-     * Enable audio again after the android speech recognition 'beep' sound(s) played.
-     */
-    private fun unmuteAudio() {
-        mAudioManager.setStreamMute(AudioManager.STREAM_NOTIFICATION, false)
-        mAudioManager.setStreamMute(AudioManager.STREAM_ALARM, false)
-        mAudioManager.setStreamMute(AudioManager.STREAM_MUSIC, false)
-        mAudioManager.setStreamMute(AudioManager.STREAM_RING, false)
-        mAudioManager.setStreamMute(AudioManager.STREAM_SYSTEM, false)
-    }
-
-    private fun startListening() {
-        val act: Activity? = activity
-        if (act == null || context == null || ivSpeechCircle == null || resources == null) {
-            return
-        }
-
-        muteAudio()
-
-        // Request permission
-        if (context.checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(arrayOf(Manifest.permission.RECORD_AUDIO), 1)
-        }
-
-        ivSpeechCircle.drawable.setTint(resources.getColor(R.color.correct))
-
-        Log.i("speech", "speech recognition is now active")
-        try {
-            // you must have android.permission.RECORD_AUDIO granted at this point
-            Speech.getInstance().startListening(object : SpeechDelegate {
-                override fun onStartOfSpeech() {
-                    Log.i("speech", "speech recognition is now active")
-                }
-
-                override fun onSpeechRmsChanged(value: Float) {
-                    Log.d("speech", "rms is now: $value")
-                }
-
-                override fun onSpeechPartialResults(results: List<String>) {
-                    val str = StringBuilder()
-                    for (res in results) {
-                        str.append(res).append(" ")
-                    }
-
-                    Log.i("speech", "partial result: " + str.toString().trim { it <= ' ' })
-                }
-
-                override fun onSpeechResult(result: String) {
-                    Log.i("speech", "result: $result")
-                    ivSpeechCircle.drawable.setTint(resources.getColor(R.color.neutral))
-
-                    val note = textToNoteName(result)
-                    if (note == null) {
-                        Toast.makeText(act, "Invalid guess, found '$result'", Toast.LENGTH_SHORT).show()
-                    } else {
-                        guessThread = object : Thread() {
-                            override fun run() {
-                                try {
-                                    Thread.sleep(guessDelay)
-                                    if (activity == null) {
-                                        return
-                                    }
-                                    activity.runOnUiThread {
-                                        unmuteAudio()
-                                        gameEngine.guess(note)
-                                    }
-                                } catch (e: InterruptedException) {
-                                }
-                            }
-                        }
-                        guessThread!!.start()
-                    }
-                }
-            })
-        } catch (exc: SpeechRecognitionNotAvailable) {
-            Log.e("speech", "Speech recognition is not available on this device!")
-            // You can prompt the user if he wants to install Google App to have
-            // speech recognition, and then you can simply call:
-            //
-            // SpeechUtil.redirectUserToGoogleAppOnPlayStore(this);
-            //
-            // to redirect the user to the Google App page on Play Store
-        } catch (exc: GoogleVoiceTypingDisabledException) {
-            Log.e("speech", "Google voice typing must be enabled!")
-        }
-    }
+//    private fun startListening() {
+//        val act: Activity? = activity
+//        if (act == null || context == null || ivSpeechCircle == null || resources == null) {
+//            return
+//        }
+//
+//        muteAudio()
+//
+//        // Request permission
+//        if (context.checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+//            requestPermissions(arrayOf(Manifest.permission.RECORD_AUDIO), 1)
+//        }
+//
+//        ivSpeechCircle.drawable.setTint(resources.getColor(R.color.correct))
+//
+//        Log.i("speech", "speech recognition is now active")
+//        try {
+//            // you must have android.permission.RECORD_AUDIO granted at this point
+//            Speech.getInstance().startListening(object : SpeechDelegate {
+//                override fun onStartOfSpeech() {
+//                    Log.i("speech", "speech recognition is now active")
+//                }
+//
+//                override fun onSpeechRmsChanged(value: Float) {
+//                    Log.d("speech", "rms is now: $value")
+//                }
+//
+//                override fun onSpeechPartialResults(results: List<String>) {
+//                    val str = StringBuilder()
+//                    for (res in results) {
+//                        str.append(res).append(" ")
+//                    }
+//
+//                    Log.i("speech", "partial result: " + str.toString().trim { it <= ' ' })
+//                }
+//
+//                override fun onSpeechResult(result: String) {
+//                    Log.i("speech", "result: $result")
+//                    ivSpeechCircle.drawable.setTint(resources.getColor(R.color.neutral))
+//
+//                    val note = textToNoteName(result)
+//                    if (note == null) {
+//                        Toast.makeText(act, "Invalid guess, found '$result'", Toast.LENGTH_SHORT).show()
+//                    } else {
+//                        guessThread = object : Thread() {
+//                            override fun run() {
+//                                try {
+//                                    Thread.sleep(guessDelay)
+//                                    if (activity == null) {
+//                                        return
+//                                    }
+//                                    activity.runOnUiThread {
+//                                        unmuteAudio()
+//                                        gameEngine.guess(note)
+//                                    }
+//                                } catch (e: InterruptedException) {
+//                                }
+//                            }
+//                        }
+//                        guessThread!!.start()
+//                    }
+//                }
+//            })
+//        } catch (exc: SpeechRecognitionNotAvailable) {
+//            Log.e("speech", "Speech recognition is not available on this device!")
+//            // You can prompt the user if he wants to install Google App to have
+//            // speech recognition, and then you can simply call:
+//            //
+//            // SpeechUtil.redirectUserToGoogleAppOnPlayStore(this);
+//            //
+//            // to redirect the user to the Google App page on Play Store
+//        } catch (exc: GoogleVoiceTypingDisabledException) {
+//            Log.e("speech", "Google voice typing must be enabled!")
+//        }
+//    }
 
     override fun onDestroy() {
         super.onDestroy()
 
         guessFeedbackRemovalThread?.interrupt()
         newNoteThread?.interrupt()
-        guessThread?.interrupt()
+//        guessThread?.interrupt()
     }
 }
