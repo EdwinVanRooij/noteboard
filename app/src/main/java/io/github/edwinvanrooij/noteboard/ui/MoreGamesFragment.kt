@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import io.github.edwinvanrooij.noteboard.*
 import io.github.edwinvanrooij.noteboard.listeners.MoreGamesFragmentListener
 import io.github.edwinvanrooij.noteboard.listeners.OctavesGameFragmentListener
@@ -21,15 +22,15 @@ import kotlinx.android.synthetic.main.fragment_more_games.*
  * A simple [Fragment] subclass.
  *
  */
-class MoreGamesFragment : Fragment() {
+class MoreGamesFragment : Fragment(), MoreGamesAdapterListener {
 
     private lateinit var moreGamesFragmentListener: MoreGamesFragmentListener
 
     private lateinit var soundManager: SoundManager
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_more_games, container, false)
@@ -39,14 +40,29 @@ class MoreGamesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         soundManager = SoundManager(activity)
 
-        btnFrets.setOnClickListener {
+        btnMenu.setOnClickListener {
             soundManager.playButtonClick()
-            this.moreGamesFragmentListener.onChoseFrets()
+            this.moreGamesFragmentListener.onMenu()
         }
-        btnOctaves.setOnClickListener {
-            soundManager.playButtonClick()
-            this.moreGamesFragmentListener.onChoseOctaves()
-        }
+
+        // Init ListView
+        val games = arrayListOf(
+                Game.FRETS,
+                Game.OCTAVES
+        )
+        val adapter = MoreGamesAdapter(context, games)
+        adapter.setMoreGamesAdapterListener(this)
+        lvGames.adapter = adapter
+    }
+
+    override fun onChoseFrets() {
+        soundManager.playButtonClick()
+        moreGamesFragmentListener.onChoseFrets()
+    }
+
+    override fun onChoseOctaves() {
+        soundManager.playButtonClick()
+        moreGamesFragmentListener.onChoseOctaves()
     }
 
     fun setMoreGamesFragmentListener(moreGamesFragmentListener: MoreGamesFragmentListener) {

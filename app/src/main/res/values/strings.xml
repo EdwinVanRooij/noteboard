@@ -64,6 +64,7 @@
     <string name="btn_more_games">More Games</string>
     <string name="btn_frets">Frets!</string>
     <string name="btn_octaves">Octaves!</string>
+    <string name="btn_choose">Choose!</string>
 
 
 </resources>

@@ -1,30 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="4dp">
 
-    <LinearLayout
+    <ListView
+        android:id="@+id/lvGames"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="bottom"
-        android:orientation="vertical">
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="4"
+        tools:context=".ui.FretsResultsFragment">
 
         <Button
-            android:id="@+id/btnFrets"
-            style="@android:style/Widget.Material.Button.Colored"
-            android:layout_width="match_parent"
+            android:id="@+id/btnMenu"
+            style="@android:style/Widget.Material.Button.Borderless.Colored"
+            android:layout_width="0dp"
             android:layout_height="64dp"
-            android:text="@string/btn_frets" />
-
-        <Button
-            android:id="@+id/btnOctaves"
-            style="@android:style/Widget.Material.Button.Colored"
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:text="@string/btn_octaves" />
+            android:layout_weight="1"
+            android:text="@string/btn_menu" />
 
     </LinearLayout>
 </LinearLayout>

@@ -1,6 +1,9 @@
-package io.github.edwinvanrooij.noteboard.listeners
+package io.github.edwinvanrooij.noteboard.ui
 
-interface MoreGamesFragmentListener {
+import io.github.edwinvanrooij.noteboard.noteboardengine.fretsengine.FretsGameResults
+
+interface MoreGamesAdapterListener {
+
     /**
      * Executed when the user selected the game Frets.
      */
@@ -10,9 +13,4 @@ interface MoreGamesFragmentListener {
      * Executed when the user selected the game Frets.
      */
     fun onChoseOctaves()
-
-    /**
-     * Executed when the user wants back to the menu.
-     */
-    fun onMenu()
 }
